@@ -18,7 +18,7 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 
 그럼, 시작합니다!
 
-# Table of Contents
+# 목차
 
 <!-- Generated using "markdown-toc -i README.md --maxdepth 3"-->
 
@@ -136,17 +136,18 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 
 **참고:** 여기에 있는 모든 예제들은 파이썬 3.5.2 인터렉티브 인터프리터에서 테스트 되었고 추가적으로 명시되어 있지 않는 이상 모든 버전에서 작동할 것입니다. 
 
-# Usage
+# 사용방법
 
-A nice way to get the most out of these examples, in my opinion, is to read them chronologically, and for every example:
-- Carefully read the initial code for setting up the example. If you're an experienced Python programmer, you'll successfully anticipate what's going to happen next most of the time.
-- Read the output snippets and,
-  + Check if the outputs are the same as you'd expect.
+예제들을 순서대로 읽어내려가는 것을 권장하고 각 예제마다:
+- 예제의 코드를 잘 읽어보세요. 만약 파이썬 고인물이라면 대부분 결과가 어떻게 될 지 미리 알고 있을 것입니다. 
+- 결과를 읽고,
+  + 예상한 결과와 실제 결과가 맞는지 확인해 보세요.
   + Make sure if you know the exact reason behind the output being the way it is.
-    - If the answer is no (which is perfectly okay), take a deep breath, and read the explanation (and if you still don't understand, shout out! and create an issue [here](https://github.com/satwikkansal/wtfPython)).
-    - If yes, give a gentle pat on your back, and you may skip to the next example.
+  + 결과와 그 작동원리에 대한 정확한 원리를 알고 있나요?
+	- 만약 아니라면 (상관 없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfPython)에 이슈를 작성해주세요).
+	- 알고 있다면, 자신을 한번 토닥여주고 다음 예제로 넘어가세요.
 
-PS: You can also read WTFPython at the command line using the [pypi package](https://pypi.python.org/pypi/wtfpython),
+추신: [pypi 패키지](https://pypi.python.org/pypi/wtfpython)를 사용하면 command line에서도 이 문서를 읽을 수 있습니다.
 ```sh
 $ pip install wtfpython -U
 $ wtfpython
