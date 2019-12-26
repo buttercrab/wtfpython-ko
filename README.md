@@ -142,7 +142,6 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 - 예제의 코드를 잘 읽어보세요. 만약 파이썬 고인물이라면 대부분 결과가 어떻게 될 지 미리 알고 있을 것입니다. 
 - 결과를 읽고,
   + 예상한 결과와 실제 결과가 맞는지 확인해 보세요.
-  + Make sure if you know the exact reason behind the output being the way it is.
   + 결과와 그 작동원리에 대한 정확한 원리를 알고 있나요?
 	- 만약 아니라면 (상관 없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfPython)에 이슈를 작성해주세요).
 	- 알고 있다면, 자신을 한번 토닥여주고 다음 예제로 넘어가세요.
