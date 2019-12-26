@@ -1,22 +1,22 @@
 <p align="center"><img src="/images/logo.png" alt=""></p>
 <h1 align="center">What the f*ck Python! 😱</h1>
-<p align="center">Exploring and understanding Python through surprising snippets.</p>
+<p align="center">놀라운 예제들을 통해서 파이썬 탐험하고 이해하기</p>
 
 Translations: [Chinese 中文](https://github.com/leisurelicht/wtfpython-cn) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
 
-Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/3.0/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
+Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/master/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
 
-Python, being a beautifully designed high-level and interpreter-based programming language, provides us with many features for the programmer's comfort. But sometimes, the outcomes of a Python snippet may not seem obvious at first sight.
+아름답게 디자인되고 고급(high-level)언어이자 인터프리터 언어인 파이썬은 프로그래머의 편의를 위한 기능이 많습니다. 하지만 몇몇 파이썬 예제들의 결과가 한 눈에 보기에는 이상할 수 있습니다.
 
-Here's a fun project attempting to explain what exactly is happening under the hood for some counter-intuitive snippets and lesser-known features in Python.
+이 문서는 파이썬의 덜 알려지고 비직관적인 예제들이 실제로 어떻게 작동하는지 정확히 설명합니다.
 
-While some of the examples you see below may not be WTFs in the truest sense, but they'll reveal some of the interesting parts of Python that you might be unaware of. I find it a nice way to learn the internals of a programming language, and I believe that you'll find it interesting too!
+여기에 있는 몇몇 예제들이 WTF까지는 아닐 수도 있지만 잘 모를수도 있는 파이썬의 흥미로운 부분들이 밝혀집니다. 이러한 예제들이 파이썬의 작동 방식에 대해서 이해하는 것에 대해 좋은 학습 방법이라고 생각합니다.
 
-If you're an experienced Python programmer, you can take it as a challenge to get most of them right in the first attempt. You may have already experienced some of them before, and I might be able to revive sweet old memories of yours! :sweat_smile:
+만약 파이썬의 고인물이라면 한 번 예제들을 한 번에 맞춰보세요. 아마 이미 예제들을 접해본 적이 있을 것이고 옛날 추억이 떠오르지 않을까요? :sweat_smile:
 
-PS: If you're a returning reader, you can learn about the new modifications [here](https://github.com/satwikkansal/wtfpython/releases/).
+추신: 예전에 읽어봤다면 수정사항은 [여기서](https://github.com/satwikkansal/wtfpython/releases/) 확인할 수 있습니다.
 
-So, here we go...
+그럼, 시작합니다!
 
 # Table of Contents
 
