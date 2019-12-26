@@ -6,13 +6,13 @@ Translations: [Chinese 中文](https://github.com/leisurelicht/wtfpython-cn) | [
 
 Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/master/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
 
-아름답게 디자인되고 고급(high-level)언어이자 인터프리터 언어인 파이썬은 프로그래머의 편의를 위한 기능이 많습니다. 하지만 몇몇 파이썬 예제들의 결과가 한 눈에 보기에는 이상할 수 있습니다.
+아름답게 디자인되고 고급(high-level)언어이자 인터프리터 언어인 파이썬은 프로그래머의 편의를 위한 기능이 많습니다. 하지만 몇몇 파이썬 예제들의 결과가 한눈에 보기에는 이상할 수 있습니다.
 
 이 문서는 파이썬의 덜 알려지고 비직관적인 예제들이 실제로 어떻게 작동하는지 정확히 설명합니다.
 
-여기에 있는 몇몇 예제들이 WTF까지는 아닐 수도 있지만 잘 모를수도 있는 파이썬의 흥미로운 부분들이 밝혀집니다. 이러한 예제들이 파이썬의 작동 방식에 대해서 이해하는 것에 대해 좋은 학습 방법이라고 생각합니다.
+여기에 있는 몇몇 예제들이 WTF까지는 아닐 수도 있지만 잘 모를 수도 있는 파이썬의 흥미로운 부분들이 밝혀집니다. 이러한 예제들이 파이썬의 작동 방식에 대해서 이해하는 것에 대해 좋은 학습 방법이라고 생각합니다.
 
-만약 파이썬의 고인물이라면 한 번 예제들을 한 번에 맞춰보세요. 아마 이미 예제들을 접해본 적이 있을 것이고 옛날 추억이 떠오르지 않을까요? :sweat_smile:
+만약 파이썬의 고인물이라면 예제들을 한 번에 맞춰보세요. 아마 이미 예제들을 접해본 적이 있을 것이고 옛날 추억이 떠오르지 않을까요? :sweat_smile:
 
 추신: 예전에 읽어봤다면 수정사항은 [여기서](https://github.com/satwikkansal/wtfpython/releases/) 확인할 수 있습니다.
 
@@ -101,41 +101,40 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 
 <!-- tocstop -->
 
-# Structure of the Examples
+# 예제의 구성
 
-All the examples are structured like below:
+모든 예제들은 아래와 같은 구조로 이루어져 있습니다. 
 
-> ### ▶ Some fancy Title
+> ### ▶ 빛나는 제목
 >
 > ```py
-> # Set up the code.
-> # Preparation for the magic...
+> # 예제 세팅
+> # 마법같은 일을 기대하세요...
 > ```
 >
-> **Output (Python version(s)):**
+> **결과 (유효한 파이썬 버전들):**
 >
 > ```py
-> >>> triggering_statement
-> Some unexpected output
+> >>> 입력
+> 놀라운 결과
 > ```
-> (Optional): One line describing the unexpected output.
+> 놀라운 결과에 대한 한 줄 설명이 있을 수도 있습니다.
 >
 >
-> #### 💡 Explanation:
+> #### 💡 설명:
 >
-> * Brief explanation of what's happening and why is it happening.
+> * 무엇이 일어나고 있는지와 왜 일어나는지에 대한 간략한 설명
 > ```py
-> # Set up code
-> # More examples for further clarification (if necessary)
+> # 설명을 도울 예제
 > ```
-> **Output (Python version(s)):**
+> **결과 (유효한 파이썬 버전들):**
 >
 > ```py
-> >>> trigger # some example that makes it easy to unveil the magic
-> # some justified output
+> >>> 입력 # 놀라운 결과의 이해를 돕기 위한 예제
+> # 이해 가능한 결과
 > ```
 
-**Note:** All the examples are tested on Python 3.5.2 interactive interpreter, and they should work for all the Python versions unless explicitly specified before the output.
+**참고:** 여기에 있는 모든 예제들은 파이썬 3.5.2 인터렉티브 인터프리터에서 테스트 되었고 추가적으로 명시되어 있지 않는 이상 모든 버전에서 작동할 것입니다. 
 
 # Usage
 
