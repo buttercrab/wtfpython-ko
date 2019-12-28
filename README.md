@@ -103,13 +103,13 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 
 # 예제의 구성
 
-모든 예제들은 아래와 같은 구조로 이루어져 있습니다. 
+모든 예제는 아래와 같은 구조로 이루어져 있습니다. 
 
 > ### ▶ 빛나는 제목
 >
 > ```py
 > # 예제 세팅
-> # 마법같은 일을 기대하세요...
+> # 마법 같은 일을 기대하세요...
 > ```
 >
 > **결과 (유효한 파이썬 버전들):**
@@ -134,16 +134,16 @@ Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal
 > # 이해 가능한 결과
 > ```
 
-**참고:** 여기에 있는 모든 예제들은 파이썬 3.5.2 인터렉티브 인터프리터에서 테스트 되었고 추가적으로 명시되어 있지 않는 이상 모든 버전에서 작동할 것입니다. 
+**참고:** 여기에 있는 모든 예제는 파이썬 3.5.2 인터렉티브 인터프리터에서 테스트 되었고 추가적으로 명시되어 있지 않은 이상 모든 버전에서 작동할 것입니다. 
 
 # 사용방법
 
-예제들을 순서대로 읽어내려가는 것을 권장하고 각 예제마다:
-- 예제의 코드를 잘 읽어보세요. 만약 파이썬 고인물이라면 대부분 결과가 어떻게 될 지 미리 알고 있을 것입니다. 
+예제들을 순서대로 읽어내려가는 것을 권장하고 예제마다:
+- 예제의 코드를 잘 읽어보세요. 만약 파이썬 고인물이라면 대부분 결과가 어떻게 될지 미리 알고 있을 것입니다. 
 - 결과를 읽고,
   + 예상한 결과와 실제 결과가 맞는지 확인해 보세요.
   + 결과와 그 작동원리에 대한 정확한 원리를 알고 있나요?
-	- 만약 아니라면 (상관 없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfPython)에 이슈를 작성해주세요).
+	- 만약 아니라면 (상관없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfPython)에 이슈를 작성해주세요).
 	- 알고 있다면, 자신을 한번 토닥여주고 다음 예제로 넘어가세요.
 
 추신: [pypi 패키지](https://pypi.python.org/pypi/wtfpython)를 사용하면 command line에서도 이 문서를 읽을 수 있습니다.
@@ -153,21 +153,21 @@ $ wtfpython
 ```
 ---
 
-# 👀 Examples
+# 👀 예제
 
-## Section: Strain your brain!
+## "머리가 아플수도 있어요!" 단원
 
-### ▶ First things first! *
+### ▶ 먼저 처음 것들부터 *
 
 <!-- Example ID: d3d73936-3cf1-4632-b5ab-817981338863 -->
 <!-- read-only -->
 
-For some reason, the Python 3.8's "Walrus" operator (`:=`) has become quite popular. Let's check it out,
+어떤 이유에서인지, 파이썬 3.8의 Walrus 연산자 (`:=`) 가 꽤 알려지게 되었습니다. 확인해봅시다.
 
 1\.
 
 ```py
-# Python version 3.8+
+# 파이썬 3.8+
 
 >>> a = "wtf_walrus"
 >>> a
@@ -179,7 +179,7 @@ File "<stdin>", line 1
       ^
 SyntaxError: invalid syntax
 
->>> (a := "wtf_walrus") # This works though
+>>> (a := "wtf_walrus") # 이건 잘 작동하네요
 >>> a
 'wtf_walrus'
 ```
@@ -187,7 +187,7 @@ SyntaxError: invalid syntax
 2 \.
 
 ```py
-# Python version 3.8+
+# 파이썬 3.8+
 
 >>> a = 6, 9
 >>> a
@@ -197,19 +197,19 @@ SyntaxError: invalid syntax
 >>> a
 6
 
->>> a, b = 6, 9 # Typcial unpacking
+>>> a, b = 6, 9 # 전형적인 언패킹
 >>> a, b
 (6, 9)
->>> (a, b = 16, 19) # Oops
+>>> (a, b = 16, 19) # 이런
   File "<stdin>", line 1
     (a, b = 6, 9)
           ^
 SyntaxError: invalid syntax
 
->>> (a, b := 16, 19) # This prints out a weird 3-tuple
+>>> (a, b := 16, 19) # 이것은 이상한 3-튜플을 출력합니다.
 (6, 16, 19)
 
->>> a # a is still unchanged?
+>>> a # a가 아직도 안 바뀌었네요?
 6
 
 >>> b
@@ -218,33 +218,33 @@ SyntaxError: invalid syntax
 
 
 
-#### 💡 Explanation
+#### 💡 설명
 
-**Quick walrus operator refresher**
+**간단한 walrus 연산자 설명**
 
-The Walrus operator (`:=`) was introduced in Python 3.8, it can be useful in situations where you'd want to assign values to variables within an expression.
+walrus 연산자 (`:=`) 는 파이썬 3.8에서 소개되었으며, 변수에 할당하면서 연산을 하고 싶을 때 유용하게 쓰일 수 있습니다. 
 
 ```py
 def some_func():
-        # Assume some expensive computation here
+		# 많은 계산을 하는 함수라고 가정합시다.
         # time.sleep(1000)
         return 5
 
-# So instead of,
+# 그래서 
 if some_func():
-        print(some_func()) # Which is bad practice since computation is happening twice
+        print(some_func()) # 같은 계산이 두 번 이루어지므로 안 좋은 방법입니다.
 
-# or
+# 또는 
 a = some_func()
 if a:
     print(a)
 
-# Now you can concisely write
+# 대신에 이렇게 간단하게 쓸 수 있습니다.
 if a := some_func():
         print(a)
 ```
 
-**Output (> 3.8):**
+**출력 결과 (> 3.8):**
 
 ```py
 5
@@ -252,15 +252,16 @@ if a := some_func():
 5
 ```
 
-This saved one line of code, and implicitly prevented invoking `some_func` twice.
+이 연산자는 한줄의 코드를 아끼고 `some_func`를 두 번 호출하는 것을 방지할 수 있습니다.
 
-- Unparenthesized "assignment expression" (use of walrus operator), is restricted at the top level, hence the `SyntaxError` in the `a := "wtf_walrus"` statement of the first snippet. Parenthesizing it worked as expected and assigned `a`.  
+- (walrus 연산자를 사용한) 괄호로 묶이지 않은 "할당문(assignment expression)"은 컴파일러의 상위 단계에서 제한되므로 첫 번째 줄 `a := "wtf_walrus"`에서 `SyntaxError`가 발생합니다. 괄호로 묶게 되면 예상했던 대로 작동하고 `a`에 값을 할당하게 됩니다. 
 
-- As usual, parenthesizing of an expression containing `=` operator is not allowed. Hence the syntax error in `(a, b = 6, 9)`. 
+- 정상적으로, `=` 연산자를 포함한 표현식에서는 괄호로 둘러싸는 것이 허용되지 않기 때문에, `(a, b = 6, 9)` 에서 syntax error가 발생합니다. 
 
-- The syntax of the Walrus operator is of the form `NAME: expr`, where `NAME` is a valid identifier, and `expr` is a valid expression. Hence, iterable packing and unpacking are not supported which means, 
+- walrus 연산자는 `Name`이 유효한 식별자(identifier)이고 `expr`이 유효한 표현식 일 때, `Name := expr`로 사용됩니다. 따라서 패킹과 언패킹은 지원되지 않습니다. 그러므로,
 
   - `(a := 6, 9)` is equivalent to `((a := 6), 9)` and ultimately `(a, 9) ` (where `a`'s value is 6')
+  - `(a := 6, 9)`는 `((a := 6), 9)`와 같고 결국 `(a, 9)` (`a`의 값이 6 일때) 와 같게 됩니다.
 
     ```py
     >>> (a := 6, 9) == ((a := 6), 9)
@@ -268,11 +269,11 @@ This saved one line of code, and implicitly prevented invoking `some_func` twice
     >>> x = (a := 696, 9)
     >>> x
     (696, 9)
-    >>> x[0] is a # Both reference same memory location
+    >>> x[0] is a # 둘 다 메모리의 같은 위치를 가리키고 있습니다.
     True
     ```
 
-  - Similarly, `(a, b := 16, 19)` is equivalent to `(a, (b := 16), 19)` which is nothing but a 3-tuple. 
+  - 비슷하게, `(a, b := 16, 19)`는 `(a, (b := 16), 19)`와 같게 되고 이는 단순한 3-튜플과 같습니다.
 
 ---
 
