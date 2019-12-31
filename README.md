@@ -16,6 +16,8 @@
 
 추신: 예전에 읽어봤다면 수정사항은 [여기서](https://github.com/satwikkansal/wtfpython/releases/) 확인할 수 있습니다.
 
+추신: [옮긴이의 말]을 읽는 것을 추천합니다.
+
 그럼, 시작합니다!
 
 # 목차
