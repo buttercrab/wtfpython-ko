@@ -2,7 +2,7 @@
 <h1 align="center">What the f*ck Python! 😱</h1>
 <p align="center">놀라운 예제들을 통해서 파이썬 탐험하고 이해하기</p>
 
-<p align="center">[영어](https://github.com/satwikkansal/wtfpython) | [중국어 中文](https://github.com/leisurelicht/wtfpython-cn)</p>
+<p align="center"><a href="https://github.com/satwikkansal/wtfpython">영어</a> | <a href="https://github.com/leisurelicht/wtfpython-cn">중국어 中文</a></p>
 
 Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/master/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
 
