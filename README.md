@@ -252,11 +252,11 @@ if a := some_func():
 5
 ```
 
-이 연산자는 한줄의 코드를 아끼고 `some_func`를 두 번 호출하는 것을 방지할 수 있습니다.
+이 연산자는 한 줄의 코드를 아끼고 `some_func`를 두 번 호출하는 것을 방지할 수 있습니다.
 
 - (walrus 연산자를 사용한) 괄호로 묶이지 않은 "할당문(assignment expression)"은 컴파일러의 상위 단계에서 제한되므로 첫 번째 줄 `a := "wtf_walrus"`에서 `SyntaxError`가 발생합니다. 괄호로 묶게 되면 예상했던 대로 작동하고 `a`에 값을 할당하게 됩니다. 
 
-- 정상적으로, `=` 연산자를 포함한 표현식에서는 괄호로 둘러싸는 것이 허용되지 않기 때문에, `(a, b = 6, 9)` 에서 syntax error가 발생합니다. 
+- 정상적으로, `=` 연산자를 포함한 표현식에서는 괄호로 둘러싸는 것이 허용되지 않기 때문에, `(a, b = 6, 9)`에서 syntax error가 발생합니다. 
 
 - walrus 연산자는 `Name`이 유효한 식별자(identifier)이고 `expr`이 유효한 표현식 일 때, `Name := expr`로 사용됩니다. 따라서 패킹과 언패킹은 지원되지 않습니다. 그러므로,
 
@@ -311,7 +311,7 @@ False
 True
 
 >>> a = "wtf!"; b = "wtf!"
->>> a is b # 어디서 실행시키는지에 따라 True 혹은 False가 출력될것입니다. (파이썬 쉘 / ipython / 파이썬 스크립트)
+>>> a is b # 어디서 실행시키는지에 따라 True 혹은 False가 출력될 것입니다. (파이썬 쉘 / ipython / 파이썬 스크립트)
 False
 ```
 
@@ -335,21 +335,20 @@ True
 False
 ```
 
-말이 되죠?
+말이 되는 거 같죠?
 
 #### 💡 설명:
 + 첫 번째와 두 번째 코드에서의 결과는 새로운 객체를 항상 만드는 것보다 이미 존재하고 바뀌지 않는 객체를 사용하려고 하는 CPython 최적화 때문에 그렇습니다. (문자열 interning이라고 부릅니다) 
-+ interning이 되고 난 다음, 많은 변수들은 같은 메모리에 위치한 문자열을 가리키고 있을 겁니다. (메모리를 줄이게 됩니다)
++ interning이 되고 난 다음, 많은 변수는 같은 메모리에 있는 문자열을 가리키고 있을 겁니다. (메모리를 줄이게 됩니다)
 + 위의 코드들을 보면, 문자열은 알아서 interning이 됩니다. 구현 방식에 따라서 알아서 interning이 될 것인지 결정됩니다. 알아서 interning이 될 것인지 예측해볼 몇 가지 규칙이 있습니다:
   * 길이가 0과 1인 모든 문자열은 interning이 됩니다.
   * 문자열은 컴파일 시간에 interning이 됩니다. (`'wtf'`은 interning이 되지만 `''.join(['w', 't', 'f'])`은 interning이 되지 않습니다)
   * 아스키 문자, 숫자, 언더바 이외의 문자로 이루어져 있으면 interning이 되지 않습니다. 그래서 `'wtf!'`이 `!` 때문에 interning이 되지 않았습니다. CPython에서의 구현은 [여기](https://github.com/python/cpython/blob/3.6/Objects/codeobject.c#L19)서 확인할 수 있습니다.
   ![image](/images/string-intern/string_intern.png)
-+ `a`와 `b`가 같은 줄에서 `"wtf!"`의 값으로 할당된다면, 파이썬 인터프리터가 새로운 객체를 만들고 두 번째 변수도 가리키게 만듭니다. 그런데 만약 이 작업을 다른 줄에서 한다면, 파이썬 인터프리터는 이미 `"wtf!"`가 오브젝트로 존재한다는 사실을 모릅니다 (왜냐하면 `"wtf!"`는 interning이 되지 않았기 때문입니다). interning은 컴파일 시간에 작동하는 최적화입니다. 이 최적화는 CPython 3.7.x 버전들에는 적용되지 않았습니다. (더 많은 정보는 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인하세요).
++ `a`와 `b`가 같은 줄에서 `"wtf!"`의 값으로 할당된다면, 파이썬 인터프리터가 새로운 객체를 만들고 두 번째 변수도 가리키게 만듭니다. 그런데 만약 이 작업을 다른 줄에서 한다면, 파이썬 인터프리터는 이미 `"wtf!"`가 객체로 존재한다는 사실을 모릅니다 (왜냐하면 `"wtf!"`는 interning이 되지 않았기 때문입니다). interning은 컴파일 시간에 작동하는 최적화입니다. 이 최적화는 CPython 3.7.x 버전들에는 적용되지 않았습니다. (더 많은 정보는 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인하세요).
 + IPython과 같은 인터랙티브 환경에서는 하나의 컴파일 유닛(unit)이 하나의 표현식이고 모듈일 때는 모듈 전체일 때도 있습니다. `a, b = "wtf!", "wtf!"`은 하나의 표현식이지만 `a = "wtf!"; b = "wtf!"`은 한 줄에 있는 두 개의 표현식입니다. 그러면 위 예제들의 결과를 설명할 수 있습니다. 
-+ 네번째 출력 결과의 갑작스러운 변화는 [핍홀 최적화](https://en.wikipedia.org/wiki/Peephole_optimization)에 의한 것입니다. 즉 `'a'*20`은 런타임에 클럭수를 줄이기 위해 컴파일 시간에 `aaaaaaaaaaaaaaaaaaaa`로바뀝니다. 핍홀 최적화는 문자열의 길이가 20 이하일 때만 일어납니다 (`'a'*10**10`의 결과로 `.pyc`파일의 크기를 생각해보세요). [여기](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288)에 그에 대한 구현이 있습니다. 
-+ Note: In Python 3.7, Constant folding was moved out from peephole optimizer to the new AST optimizer with some change in logic as well, so the third snippet doesn't work for Python 3.7. You can read more about the change [here](https://bugs.python.org/issue11549).
-+ 참고: 파이썬 3.7에서는 새로운 AST 최적화 새로운 로직으로 핍홀 최적화가 빠졌습니다. 그래서 세번째 코드가 파이썬 3.7에서는 작동하지 않았습니다. [여기](https://bugs.python.org/issue11549)에서 더 자세히 알아보세요.
++ 네 번째 출력 결과의 갑작스러운 변화는 [핍홀 최적화](https://en.wikipedia.org/wiki/Peephole_optimization)에 의한 것입니다. 즉 `'a'*20`은 실행 시간에 클록수를 줄이기 위해 컴파일 시간에 `aaaaaaaaaaaaaaaaaaaa`로바뀝니다. 핍홀 최적화는 문자열의 길이가 20 이하일 때만 일어납니다 (`'a'*10**10`의 결과로 `.pyc`파일의 크기를 생각해보세요). [여기](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288)에 그에 대한 구현이 있습니다. 
++ 참고: 파이썬 3.7에서는 새로운 AST 최적화 새로운 로직으로 핍홀 최적화가 빠졌습니다. 그래서 세 번째 코드가 파이썬 3.7에서는 작동하지 않았습니다. [여기](https://bugs.python.org/issue11549)에서 더 자세히 알아보세요.
 
 ---
 
