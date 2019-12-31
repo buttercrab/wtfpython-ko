@@ -260,7 +260,6 @@ if a := some_func():
 
 - walrus 연산자는 `Name`이 유효한 식별자(identifier)이고 `expr`이 유효한 표현식 일 때, `Name := expr`로 사용됩니다. 따라서 패킹과 언패킹은 지원되지 않습니다. 그러므로,
 
-  - `(a := 6, 9)` is equivalent to `((a := 6), 9)` and ultimately `(a, 9) ` (where `a`'s value is 6')
   - `(a := 6, 9)`는 `((a := 6), 9)`와 같고 결국 `(a, 9)` (`a`의 값이 6 일때) 와 같게 됩니다.
 
     ```py
@@ -277,7 +276,7 @@ if a := some_func():
 
 ---
 
-### ▶ Strings can be tricky sometimes
+### ▶ 문자열은 가끔 헷갈려요
 
 <!-- Example ID: 30f1d3fc-e267-4b30-84ef-4d9e7091ac1a --->
 1\.
@@ -286,7 +285,7 @@ if a := some_func():
 >>> a = "some_string"
 >>> id(a)
 140420665652016
->>> id("some" + "_" + "string") # Notice that both the ids are same.
+>>> id("some" + "_" + "string") # 두 id가 같네요
 140420665652016
 ```
 
@@ -308,26 +307,26 @@ False
 
 ```py
 >>> a, b = "wtf!", "wtf!"
->>> a is b # All versions except 3.7.x
+>>> a is b # 3.7.x 버전을 제외하고 모든 버전에서 이렇게 작동합니다.
 True
 
 >>> a = "wtf!"; b = "wtf!"
->>> a is b # This will print True or False depending on where you're invoking it (python shell / ipython / as a script)
+>>> a is b # 어디서 실행시키는지에 따라 True 혹은 False가 출력될것입니다. (파이썬 쉘 / ipython / 파이썬 스크립트)
 False
 ```
 
 ```py
-# This time in file some_file.py
+# 이번에는 some_file.py 파일에서 실행시켜봅시다.
 a = "wtf!"
 b = "wtf!"
 print(a is b)
 
-# prints True when the module is invoked!
+# 모듈을 실행시키면 True를 출력하네요.
 ```
 
 4\.
 
-**Output (< Python3.7 )**
+**출력 결과 (< 3.7 )**
 
 ```py
 >>> 'a' * 20 is 'aaaaaaaaaaaaaaaaaaaa'
@@ -336,20 +335,21 @@ True
 False
 ```
 
-Makes sense, right?
+말이 되죠?
 
-#### 💡 Explanation:
-+ The behavior in first and second snippets is due to a CPython optimization (called string interning) that tries to use existing immutable objects in some cases rather than creating a new object every time.
-+ After being "interned," many variables may reference the same string object in memory (saving memory thereby).
-+ In the snippets above, strings are implicitly interned. The decision of when to implicitly intern a string is implementation-dependent. There are some rules that can be used to guess if a string will be interned or not:
-  * All length 0 and length 1 strings are interned.
-  * Strings are interned at compile time (`'wtf'` will be interned but `''.join(['w', 't', 'f']` will not be interned)
-  * Strings that are not composed of ASCII letters, digits or underscores, are not interned. This explains why `'wtf!'` was not interned due to `!`. CPython implementation of this rule can be found [here](https://github.com/python/cpython/blob/3.6/Objects/codeobject.c#L19)
+#### 💡 설명:
++ 첫 번째와 두 번째 코드에서의 결과는 새로운 객체를 항상 만드는 것보다 이미 존재하고 바뀌지 않는 객체를 사용하려고 하는 CPython 최적화 때문에 그렇습니다. (문자열 interning이라고 부릅니다) 
++ interning이 되고 난 다음, 많은 변수들은 같은 메모리에 위치한 문자열을 가리키고 있을 겁니다. (메모리를 줄이게 됩니다)
++ 위의 코드들을 보면, 문자열은 알아서 interning이 됩니다. 구현 방식에 따라서 알아서 interning이 될 것인지 결정됩니다. 알아서 interning이 될 것인지 예측해볼 몇 가지 규칙이 있습니다:
+  * 길이가 0과 1인 모든 문자열은 interning이 됩니다.
+  * 문자열은 컴파일 시간에 interning이 됩니다. (`'wtf'`은 interning이 되지만 `''.join(['w', 't', 'f'])`은 interning이 되지 않습니다)
+  * 아스키 문자, 숫자, 언더바 이외의 문자로 이루어져 있으면 interning이 되지 않습니다. 그래서 `'wtf!'`이 `!` 때문에 interning이 되지 않았습니다. CPython에서의 구현은 [여기](https://github.com/python/cpython/blob/3.6/Objects/codeobject.c#L19)서 확인할 수 있습니다.
   ![image](/images/string-intern/string_intern.png)
-+ When `a` and `b` are set to `"wtf!"` in the same line, the Python interpreter creates a new object, then references the second variable at the same time. If you do it on separate lines, it doesn't "know" that there's already `wtf!` as an object (because `"wtf!"` is not implicitly interned as per the facts mentioned above). It's a compile-time optimization. This optimization doesn't apply to 3.7.x versions of CPython (check this [issue](https://github.com/satwikkansal/wtfpython/issues/100) for more discussion).
-+ A compile unit in an interactive environment like IPython consists of a single statement, whereas it consists of the entire module in case of modules. `a, b = "wtf!", "wtf!"` is single statement, whereas `a = "wtf!"; b = "wtf!"` are two statements in a single line. This explains why the identities are different in `a = "wtf!"; b = "wtf!"`, and also explain why they are same when invoked in `some_file.py`
-+ The abrupt change in the output of the fourth snippet is due to a [peephole optimization](https://en.wikipedia.org/wiki/Peephole_optimization) technique known as Constant folding. This means the expression `'a'*20` is replaced by `'aaaaaaaaaaaaaaaaaaaa'` during compilation to save a  few clock cycles during runtime. Constant folding only occurs for strings having a length of less than 20. (Why? Imagine the size of `.pyc` file generated as a result of the expression `'a'*10**10`). [Here's](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288) the implementation source for the same.
-+ Note: In Python 3.7, Constant folding was moved out from peephole optimizer to the new AST optimizer with some change in logic as well, so the third snippet doesn't work for Python 3.7. You can read more about the change [here](https://bugs.python.org/issue11549). 
++ `a`와 `b`가 같은 줄에서 `"wtf!"`의 값으로 할당된다면, 파이썬 인터프리터가 새로운 객체를 만들고 두 번째 변수도 가리키게 만듭니다. 그런데 만약 이 작업을 다른 줄에서 한다면, 파이썬 인터프리터는 이미 `"wtf!"`가 오브젝트로 존재한다는 사실을 모릅니다 (왜냐하면 `"wtf!"`는 interning이 되지 않았기 때문입니다). interning은 컴파일 시간에 작동하는 최적화입니다. 이 최적화는 CPython 3.7.x 버전들에는 적용되지 않았습니다. (더 많은 정보는 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인하세요).
++ IPython과 같은 인터랙티브 환경에서는 하나의 컴파일 유닛(unit)이 하나의 표현식이고 모듈일 때는 모듈 전체일 때도 있습니다. `a, b = "wtf!", "wtf!"`은 하나의 표현식이지만 `a = "wtf!"; b = "wtf!"`은 한 줄에 있는 두 개의 표현식입니다. 그러면 위 예제들의 결과를 설명할 수 있습니다. 
++ 네번째 출력 결과의 갑작스러운 변화는 [핍홀 최적화](https://en.wikipedia.org/wiki/Peephole_optimization)에 의한 것입니다. 즉 `'a'*20`은 런타임에 클럭수를 줄이기 위해 컴파일 시간에 `aaaaaaaaaaaaaaaaaaaa`로바뀝니다. 핍홀 최적화는 문자열의 길이가 20 이하일 때만 일어납니다 (`'a'*10**10`의 결과로 `.pyc`파일의 크기를 생각해보세요). [여기](https://github.com/python/cpython/blob/3.6/Python/peephole.c#L288)에 그에 대한 구현이 있습니다. 
++ Note: In Python 3.7, Constant folding was moved out from peephole optimizer to the new AST optimizer with some change in logic as well, so the third snippet doesn't work for Python 3.7. You can read more about the change [here](https://bugs.python.org/issue11549).
++ 참고: 파이썬 3.7에서는 새로운 AST 최적화 새로운 로직으로 핍홀 최적화가 빠졌습니다. 그래서 세번째 코드가 파이썬 3.7에서는 작동하지 않았습니다. [여기](https://bugs.python.org/issue11549)에서 더 자세히 알아보세요.
 
 ---
 
