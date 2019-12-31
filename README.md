@@ -1,5 +1,13 @@
+<style>
+  .title:after {
+   content: 'What the f*ck Python! 😱';
+  }
+  .title:hover:after {
+    content: '파이썬 이런 씨X! 😱";
+  }
+</style>
 <p align="center"><img src="/images/logo.png" alt=""></p>
-<h1 align="center">What the f*ck Python! 😱</h1>
+<h1 align="center" class="title">What the f*ck Python! 😱</h1>
 <p align="center">놀라운 예제들을 통해서 파이썬 탐험하고 이해하기</p>
 
 Translations: [Chinese 中文](https://github.com/leisurelicht/wtfpython-cn) | [Add translation](https://github.com/satwikkansal/wtfpython/issues/new?title=Add%20translation%20for%20[LANGUAGE]&body=Expected%20time%20to%20finish:%20[X]%20weeks.%20I%27ll%20start%20working%20on%20it%20from%20[Y].)
