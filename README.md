@@ -2,9 +2,9 @@
 <h1 align="center">What the f*ck Python! 😱</h1>
 <p align="center">놀라운 예제들을 통해서 파이썬 탐험하고 이해하기</p>
 
-<p align="center"><a href="https://github.com/satwikkansal/wtfpython">영어</a> | <a href="https://github.com/leisurelicht/wtfpython-cn">중국어 中文</a></p>
+<p align="center"><a href="https://github.com/satwikkansal/wtfpython">영어 English(원문)</a> | <a href="https://github.com/leisurelicht/wtfpython-cn">중국어 中文</a></p>
 
-Other modes: [Interactive](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/master/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
+다른 읽는 방법: [인터랙티브](https://colab.research.google.com/github/satwikkansal/wtfpython/blob/master/irrelevant/wtf.ipynb) | [CLI](https://pypi.python.org/pypi/wtfpython)
 
 아름답게 디자인되고 고급(high-level)언어이자 인터프리터 언어인 파이썬은 프로그래머의 편의를 위한 기능이 많습니다. 하지만 몇몇 파이썬 예제들의 결과가 한눈에 보기에는 이상할 수 있습니다.
 
