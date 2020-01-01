@@ -386,19 +386,17 @@ complex
 
 #### 💡 설명
 
-* 파이썬 딕셔너리(dictionary)는 두 키가 같은지 판별하기 위해 해시 값을 사용합니다. 
-* Immutable objects with the same value always have the same hash in Python.
-* 파이썬에서 같은 값을 같고 있는 고정된 객체는 항상 같은 해시 값을 가집니다.
+* 파이썬 딕셔너리(dictionary)는 두 키가 같은지 판별하기 위해 해시값을 사용합니다. 
+* 파이썬에서 같은 값을 같는 고정된 객체는 항상 같은 해시값을 가집니다.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **참고:** 다른 값을 가지고 있는 객체도 같은 해시 값을 가질 수 있습니다. ([해시 충돌](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EC%B6%A9%EB%8F%8C)이라고 알려져 있습니다)
-* `some_dict[5] = "Python"`이 실행되면, 파이썬은 `5`와 `5.0`을 같은 키로 인식하므로 기존 값인 "Ruby"가 "Python"로 덮여쓰여집니다. 
-* This StackOverflow [answer](https://stackoverflow.com/a/32211042/4354153) explains the rationale behind it.
-* 이 스택오버플로우 [답변](https://stackoverflow.com/a/32211042/4354153)이 이유를 설명합니다.
+  **참고:** 다른 값을 가지고 있는 객체도 같은 해시값을 가질 수 있습니다. ([해시 충돌](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EC%B6%A9%EB%8F%8C)이라고 알려져 있습니다)
+* `some_dict[5] = "Python"`이 실행되면, 파이썬은 `5`와 `5.0`을 같은 키로 인식하므로 기존 값인 "Ruby"가 "Python"로 덮여 쓰입니다. 
+* 이 스택 오버플로우 [답변](https://stackoverflow.com/a/32211042/4354153)이 이유를 설명합니다.
 
 ---
 
