@@ -354,7 +354,7 @@ False
 
 ---
 
-### ▶ Hash brownies
+### ▶ [해시 브라우니](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%8A%A4)
 <!-- Example ID: eb17db53-49fd-4b61-85d6-345c5ca213ff --->
 1\.
 ```py
@@ -364,12 +364,12 @@ some_dict[5.0] = "Ruby"
 some_dict[5] = "Python"
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> some_dict[5.5]
 "JavaScript"
->>> some_dict[5.0] # "Python" destroyed the existence of "Ruby"?
+>>> some_dict[5.0] # "Python"이 "Ruby"를 사라지게 했네요.
 "Python"
 >>> some_dict[5] 
 "Python"
@@ -381,22 +381,24 @@ complex
 "Python"
 ```
 
-So, why is Python all over the place?
+그래서, 왜 파이썬이 여기저기서 발견되나요?
 
 
-#### 💡 Explanation
+#### 💡 설명
 
-* Python dictionaries check for equality and compare the hash value to determine if two keys are the same.
+* 파이썬 딕셔너리(dictionary)는 두 키가 같은지 판별하기 위해 해시 값을 사용합니다. 
 * Immutable objects with the same value always have the same hash in Python.
+* 파이썬에서 같은 값을 같고 있는 고정된 객체는 항상 같은 해시 값을 가집니다.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **Note:** Objects with different values may also have same hash (known as [hash collision](https://en.wikipedia.org/wiki/Collision_(computer_science))).
-* When the statement `some_dict[5] = "Python"` is executed, the existing value "Ruby" is overwritten with "Python" because Python recognizes `5` and `5.0` as the same keys of the dictionary `some_dict`.
+  **참고:** 다른 값을 가지고 있는 객체도 같은 해시 값을 가질 수 있습니다. ([해시 충돌](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EC%B6%A9%EB%8F%8C)이라고 알려져 있습니다)
+* `some_dict[5] = "Python"`이 실행되면, 파이썬은 `5`와 `5.0`을 같은 키로 인식하므로 기존 값인 "Ruby"가 "Python"로 덮여쓰여집니다. 
 * This StackOverflow [answer](https://stackoverflow.com/a/32211042/4354153) explains the rationale behind it.
+* 이 스택오버플로우 [답변](https://stackoverflow.com/a/32211042/4354153)이 이유를 설명합니다.
 
 ---
 
