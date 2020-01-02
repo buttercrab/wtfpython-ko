@@ -400,7 +400,7 @@ complex
 
 ---
 
-### ▶ Deep down, we're all the same.
+### ▶ 깊이 들어가면 우리는 다 똑같아.
 <!-- Example ID: 8f99a35f-1736-43e2-920d-3b78ec35da9b --->
 ```py
 class WTF:
@@ -409,29 +409,29 @@ class WTF:
 
 **Output:**
 ```py
->>> WTF() == WTF() # two different instances can't be equal
+>>> WTF() == WTF() # 두 인스턴스는 같을 수 없습니다
 False
->>> WTF() is WTF() # identities are also different
+>>> WTF() is WTF() # 메모리 위에서도 다르네요
 False
->>> hash(WTF()) == hash(WTF()) # hashes _should_ be different as well
+>>> hash(WTF()) == hash(WTF()) # 해시는 _당연히_ 같아야 합니다
 True
 >>> id(WTF()) == id(WTF())
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* When `id` was called, Python created a `WTF` class object and passed it to the `id` function. The `id` function takes its `id` (its memory location), and throws away the object. The object is destroyed.
-* When we do this twice in succession, Python allocates the same memory location to this second object as well. Since (in CPython) `id` uses the memory location as the object id, the id of the two objects is the same.
-* So, the object's id is unique only for the lifetime of the object. After the object is destroyed, or before it is created, something else can have the same id.
-* But why did the `is` operator evaluated to `False`? Let's see with this snippet.
+* `id`가 호출되었을때, 파이썬에서 `WTF` 객체를 만들고 `id` 함수로 넘겨줍니다. `id` 함수는 그 객체의 아이디(`id`, 메모리 상의 위치)를 가져오고 객체를 버립니다. 객체는 파괴됩니다.
+* 만약 이것을 두번 한다면, 파이썬은 두 번째 객체도 같은 메모리에 할당하게 됩니다. (CPython에서는) `id`가 메모리의 위치를 객체의 아이디로 쓰기 때문에 두 아이디는 같게 됩니다.
+* 그래서 객체의 아이디는 객체가 파괴되지 않는한 고유합니다. 객체가 파괴된 후 또는 생성되기 이전에는 다른 것이 같은 아이디를 가질 수도 있습니다.
+* 그러면 왜 `is` 연산자는 `False`라고 출력했을까요? 이 코드를 보세요.
   ```py
   class WTF(object):
     def __init__(self): print("I")
     def __del__(self): print("D")
   ```
 
-  **Output:**
+  **출력 결과:**
   ```py
   >>> WTF() is WTF()
   I
@@ -446,7 +446,7 @@ True
   D
   True
   ```
-  As you may observe, the order in which the objects are destroyed is what made all the difference here.
+  여러분도 보셨다 싶이 객체들이 만들어지고 파괴되는 순서가 다르게 됩니다.
 
 ---
 
