@@ -16,7 +16,7 @@
 
 추신: 예전에 읽어봤다면 수정사항은 [여기서](https://github.com/satwikkansal/wtfpython/releases/) 확인할 수 있습니다.
 
-추신: [옮긴이의 말](https://github.com/buttercrab/wtfpython-ko/blob/3.0/translator.md)을 읽는 것을 추천합니다.
+추신 2: [옮긴이의 말](https://github.com/buttercrab/wtfpython-ko/blob/3.0/translator.md)을 읽는 것을 추천합니다.
 
 그럼, 시작합니다!
 
@@ -450,7 +450,7 @@ True
 
 ---
 
-### ▶ Disorder within order *
+### ▶ 질서 속의 무질서 *
 <!-- Example ID: 91bff1f8-541d-455a-9de4-6cd8ff00ea66 --->
 ```py
 from collections import OrderedDict
@@ -466,36 +466,36 @@ another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
 
 class DictWithHash(dict):
     """
-    A dict that also implements __hash__ magic.
+	__hash__ 마법을 구현하는 dict
     """
     __hash__ = lambda self: 0
 
 class OrderedDictWithHash(OrderedDict):
     """
-    An OrderedDict that also implements __hash__ magic.
+	__hash__ 마법을 구현하는 OrderedDict
     """
     __hash__ = lambda self: 0
 ```
 
-**Output**
+**출력 결과**
 ```py
->>> dictionary == ordered_dict # If a == b
+>>> dictionary == ordered_dict # 만약 a == b 이고,
 True
->>> dictionary == another_ordered_dict # and b == c
+>>> dictionary == another_ordered_dict # b == c 이면
 True
->>> ordered_dict == another_ordered_dict # the why isn't c == a ??
+>>> ordered_dict == another_ordered_dict # 왜 c == a 가 아닐까요?
 False
 
-# We all know that a set consists of only unique elements,
-# let's try making a set of these dictionaries and see what happens...
+# 집합(set)은 유일한 원소들만 가지고 있으므로,
+# 위의 딕션어리로 집합을 만들고 어떤 일이 일어나는지 알아봅시다.
 
 >>> len({dictionary, ordered_dict, another_ordered_dict})
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: unhashable type: 'dict'
 
-# Makes sense since dict don't have __hash__ implemented, let's use
-# our wrapper classes.
+# 딕션어리는 __hash__가 구현되어있지 않으므로 그런것 같네요. 
+# 그러면 위에서 만든 래퍼(wrapper) 클래스를 써봅시다.
 >>> dictionary = DictWithHash()
 >>> dictionary[1] = 'a'; dictionary[2] = 'b';
 >>> ordered_dict = OrderedDictWithHash()
@@ -504,22 +504,22 @@ TypeError: unhashable type: 'dict'
 >>> another_ordered_dict[2] = 'b'; another_ordered_dict[1] = 'a';
 >>> len({dictionary, ordered_dict, another_ordered_dict})
 1
->>> len({ordered_dict, another_ordered_dict, dictionary}) # changing the order
+>>> len({ordered_dict, another_ordered_dict, dictionary}) # 순서를 바꿔봅시다.
 2
 ```
 
-What is going on here?
+무슨 일이 벌어지고 있는거죠?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The reason why intransitive equality didn't hold among `dictionary`, `ordered_dict` and `another_ordered_dict` is because of the way `__eq__` method is implemented in `OrderedDict` class. From the [docs](https://docs.python.org/3/library/collections.html#ordereddict-objects)
-  
-    > Equality tests between OrderedDict objects are order-sensitive and are implemented as `list(od1.items())==list(od2.items())`. Equality tests between `OrderedDict` objects and other Mapping objects are order-insensitive like regular dictionaries.
-- The reason for this equality is behavior is that it allows `OrderedDict` objects to be directly substituted anywhere a regular dictionary is used.
+- `dictionary` 그리고 `ordered_dict`, `another_ordered_dict`가 자동적으로 같지 않은 이유는 `OrderedDict` 클래스에서 `__eq__` 메소드가 구현된 방식 때문입니다. [도큐먼트](https://docs.python.org/3/library/collections.html#ordereddict-objects)에서 
+	> OrderedDict 오브젝트이 같음을 확인하는 방법은 순서와 관련이 있고 `list(od1.items())==list(od2.items())`로 구현되어 있습니다. `OrderedDict` 오프젝트와 다른 매핑 오프젝트들의 같음을 확인하는 방법은 순서와 상관있습니다.
+- 위와 같이 동작하는 이유는 `OrderedDict` 오브젝트가 바로 보통의 딕셔너리가 사용되는 곳에 사용될 수 있게 하기 위해서 입니다. 
 - Okay, so why did changing the order affect the lenght of the generated `set` object? The answer is the lack of intransitive equality only. Since sets are "unordered" collections of unique elements, the order in which elements are inserted shouldn't matter. But in this case, it does matter. Let's break it down a bit,
+- 그러면 왜 `set` 오브젝트에서 순서를 바꾼것이 왜 길이에 영향을 미친 것일까요? 답은 같음을 확인하는 함수의 부족에 있습니다. 집합(set)은 유일한 원소들의 순서를 고려하지 않은 자료구조이므로, 각 원소를 삽입하는 순서는 상관이 없어야 합니다. 하지만 이 경우에는 상관이 있네요. 한번 깊이 들어가 봅시다.
     ```py
     >>> some_set = set()
-    >>> some_set.add(dictionary) # these are the mapping objects from the snippets above
+    >>> some_set.add(dictionary) # 이것들은 위의 코드에서의 매핑 오브젝트들입니다
     >>> ordered_dict in some_set
     True
     >>> some_set.add(ordered_dict)
@@ -544,7 +544,7 @@ What is going on here?
     >>> len(another_set)
     2
     ```
-    So the inconsistency is due to `another_ordered_dict in another_set` being `False` because `ordered_dict` was already present in `another_set` and as observed before, `ordered_dict == another_ordered_dict` is `False`.
+	그래서 `ordered_dict == another_ordered_dict`이 `False`이고 `ordered_dict`이 `another_set`안에 들어있었으므로 `another_ordered_dict in another_set`이 `False`인 모순으로 인해서 생긴일 입니다.
 
 ---
 
