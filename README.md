@@ -547,7 +547,7 @@ TypeError: unhashable type: 'dict'
 
 ---
 
-### ▶ Keep trying... *
+### ▶ 계속 시도해 보세요... *
 <!-- Example ID: b4349443-e89f-4d25-a109-82616be9d41a --->
 ```py
 def some_func():
@@ -578,7 +578,7 @@ def one_more_func(): # A gotcha!
         print("Zero division error ocurred", e)
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> some_func()
@@ -599,11 +599,11 @@ Iteration 0
 
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- When a `return`, `break` or `continue` statement is executed in the `try` suite of a "try…finally" statement, the `finally` clause is also executed on the way out.
-- The return value of a function is determined by the last `return` statement executed. Since the `finally` clause always executes, a `return` statement executed in the `finally` clause will always be the last one executed.
-- The caveat here is, if the finally clause executes a `return` or `break` statement, the temporarily saved exception is discarded.
+- `return` 또는 `break`, `continue`가 "try-finally" 에서의 `try`문 안에서 실행된다면, `finally` 구문도 끝나기 전에 실행됩니다.
+- 함수의 리턴값은 마지막 리턴문에 의해 결정됩니다. `finally` 구문이 항상 마지막에 실행되므로, `finally` 안에 있는 리턴문이 실행됩니다.
+- 여기서 주의할 점은 만약 `finally` 구문 안에서 `return`이나 `break`이 있을 때 임시로 저장된 예외가 없어집니다.
 
 ---
 
