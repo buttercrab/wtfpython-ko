@@ -608,7 +608,7 @@ Iteration 0
 ---
 
 
-### ▶ For what?
+### ▶ 무엇을 위해서(for)?
 <!-- Example ID: 64a9dccf-5083-4bc9-98aa-8aeecde4f210 --->
 ```py
 some_string = "wtf"
@@ -617,27 +617,27 @@ for i, some_dict[i] in enumerate(some_string):
     i = 10
 ```
 
-**Output:**
+**출력결과:**
 ```py
->>> some_dict # An indexed dict appears.
+>>> some_dict # 딕셔너리가 나타나네요
 {0: 'w', 1: 't', 2: 'f'}
 ```
 
-####  💡 Explanation:
+####  💡 설명:
 
-* A `for` statement is defined in the [Python grammar](https://docs.python.org/3/reference/grammar.html) as:
+* `for` 문은 [파이썬 문법](https://docs.python.org/3/reference/grammar.html)에서 정의되어 있습니다:
   ```
   for_stmt: 'for' exprlist 'in' testlist ':' suite ['else' ':' suite]
   ```
-  Where `exprlist` is the assignment target. This means that the equivalent of `{exprlist} = {next_value}` is **executed for each item** in the iterable.
-  An interesting example that illustrates this:
+  `exprlist`는 할당되는 부분입니다. 이는 `{exprlist} = {next_value}`와 같다는 말이고 **각각의 원소에 대해 실행됩니다.** 
+  아래에 재미있는 예제가 있습니다.
   ```py
   for i in range(4):
       print(i)
       i = 10
   ```
 
-  **Output:**
+  **출력 결과:**
   ```
   0
   1
@@ -645,13 +645,13 @@ for i, some_dict[i] in enumerate(some_string):
   3
   ```
 
-  Did you expect the loop to run just once?
+  반복문이 한번만 돌기를 기대했나요?
 
-  **💡 Explanation:**
+  **💡 설명:**
 
-  - The assignment statement `i = 10` never affects the iterations of the loop because of the way for loops work in Python. Before the beginning of every iteration, the next item provided by the iterator (`range(4)` this case) is unpacked and assigned the target list variables (`i` in this case).
+  - 반복문이 파이썬에서 특별하게 작동하기 때문에 할당문 `i = 10`은 절대로 반복문에 영향을 끼치지 않습니다. 매번 반복하기 전에 반복자(iterator)에 의해 제공된 값(위 경우는 `range(4)`)들이 변수(위 경우는 `i`)에 할당됩니다. 
 
-* The `enumerate(some_string)` function yields a new value `i` (a counter going up) and a character from the `some_string` in each iteration. It then sets the (just assigned) `i` key of the dictionary `some_dict` to that character. The unrolling of the loop can be simplified as:
+* `enumerate(some_string)` 함수는 매 반복마다 새로운 값 `i` (하나씩 올라가는 카운터)와 `some_string`에 있는 문자 하나씩을 yeild합니다. 그리고 딕셔너리 `some_dict`에 키가 `i`인 값을 그 문자로 지정합니다. 반복문을 풀어보면 아래처럼 나올 수 있습니다:
   ```py
   >>> i, some_dict[i] = (0, 'w')
   >>> i, some_dict[i] = (1, 't')
