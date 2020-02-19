@@ -1,3 +1,6 @@
+## 번역
+번역에 참여하고 싶으시면 [디스코드](https://discord.gg/Xp6QGQ)에 들어오세요!
+
 <p align="center"><img src="/images/logo.png" alt=""></p>
 <h1 align="center">What the f*ck Python! 😱</h1>
 <p align="center">놀라운 예제들을 통해서 파이썬 탐험하고 이해하기</p>
