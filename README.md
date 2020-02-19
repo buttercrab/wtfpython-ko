@@ -651,7 +651,7 @@ for i, some_dict[i] in enumerate(some_string):
 
   - 반복문이 파이썬에서 특별하게 작동하기 때문에 할당문 `i = 10`은 절대로 반복문에 영향을 끼치지 않습니다. 매번 반복하기 전에 반복자(iterator)에 의해 제공된 값(위 경우는 `range(4)`)들이 변수(위 경우는 `i`)에 할당됩니다. 
 
-* `enumerate(some_string)` 함수는 반복마다 새로운 값 `i` (하나씩 올라가는 카운터)와 `some_string`에 있는 문자 하나씩을 yeild 합니다. 그리고 딕셔너리 `some_dict`에 키가 `i`인 값을 그 문자로 지정합니다. 반복문을 풀어보면 아래처럼 나올 수 있습니다:
+* `enumerate(some_string)` 함수는 반복마다 새로운 값 `i` (하나씩 올라가는 카운터)와 `some_string`에 있는 문자 하나씩을 yield 합니다. 그리고 딕셔너리 `some_dict`에 키가 `i`인 값을 그 문자로 지정합니다. 반복문을 풀어보면 아래처럼 나올 수 있습니다:
   ```py
   >>> i, some_dict[i] = (0, 'w')
   >>> i, some_dict[i] = (1, 't')
