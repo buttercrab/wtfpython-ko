@@ -29,80 +29,96 @@
 
 <!-- toc -->
 
-- [Structure of the Examples](#structure-of-the-examples)
-    + [▶ Some fancy Title](#-some-fancy-title)
-- [Usage](#usage)
-- [👀 Examples](#-examples)
-  * [Section: Strain your brain!](#section-strain-your-brain)
-    + [▶ First things first! *](#-first-things-first-)
-    + [▶ Strings can be tricky sometimes](#-strings-can-be-tricky-sometimes)
-    + [▶ Hash brownies](#-hash-brownies)
-    + [▶ Deep down, we're all the same.](#-deep-down-were-all-the-same)
-    + [▶ Disorder within order *](#-disorder-within-order-)
-    + [▶ Keep trying... *](#-keep-trying-)
-    + [▶ For what?](#-for-what)
-    + [▶ Evaluation time discrepancy](#-evaluation-time-discrepancy)
-    + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
-    + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
-    + [▶ A tic-tac-toe where X wins in the first attempt!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
-    + [▶ The sticky output function](#-the-sticky-output-function)
-    + [▶ The chicken-egg problem *](#-the-chicken-egg-problem-)
-    + [▶ Subclass relationships](#-subclass-relationships)
-    + [▶ All-true-ation *](#-all-true-ation-)
-    + [▶ The surprising comma](#-the-surprising-comma)
-    + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
-    + [▶ not knot!](#-not-knot)
-    + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
-    + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
-    + [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
-    + [▶ Non-reflexive class method *](#-non-reflexive-class-method-)
-    + [▶ yielding None](#-yielding-none)
-    + [▶ Yielding from... return! *](#-yielding-from-return-)
-    + [▶ Nan-reflexivity *](#-nan-reflexivity-)
-    + [▶ Mutating the immutable!](#-mutating-the-immutable)
-    + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
-    + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
-    + [▶ Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
-  * [Section: Slippery Slopes](#section-slippery-slopes)
-    + [▶ Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
-    + [▶ Stubborn `del` operation](#-stubborn-del-operation)
-    + [▶ The out of scope variable](#-the-out-of-scope-variable)
-    + [▶ Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
-    + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
-    + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
-    + [▶ Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
-    + [▶ Catching the Exceptions](#-catching-the-exceptions)
-    + [▶ Same operands, different story!](#-same-operands-different-story)
-    + [▶ Be careful with chained operations](#-be-careful-with-chained-operations)
-    + [▶ Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
-    + [▶ Needles in a Haystack *](#-needles-in-a-haystack-)
-    + [▶ Splitsies *](#-splitsies-)
-    + [▶ Wild imports *](#-wild-imports-)
-    + [▶ All sorted? *](#-all-sorted-)
-    + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
-  * [Section: The Hidden treasures!](#section-the-hidden-treasures)
-    + [▶ Okay Python, Can you make me fly?](#-okay-python-can-you-make-me-fly)
-    + [▶ `goto`, but why?](#-goto-but-why)
-    + [▶ Brace yourself!](#-brace-yourself)
-    + [▶ Let's meet Friendly Language Uncle For Life](#-lets-meet-friendly-language-uncle-for-life)
-    + [▶ Even Python understands that love is complicated](#-even-python-understands-that-love-is-complicated)
-    + [▶ Yes, it exists!](#-yes-it-exists)
-    + [▶ Ellipsis *](#-ellipsis-)
-    + [▶ Inpinity](#-inpinity)
-    + [▶ Let's mangle](#-lets-mangle)
-  * [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
-    + [▶ Skipping lines?](#-skipping-lines)
-    + [▶ Teleportation](#-teleportation)
-    + [▶ Well, something is fishy...](#-well-something-is-fishy)
-  * [Section: Miscellaneous](#section-miscellaneous)
-    + [▶ `+=` is faster](#--is-faster)
-    + [▶ Let's make a giant string!](#-lets-make-a-giant-string)
-    + [▶ Minor Ones *](#-minor-ones-)
+- [목차](#%eb%aa%a9%ec%b0%a8)
+- [예제의 구성](#%ec%98%88%ec%a0%9c%ec%9d%98-%ea%b5%ac%ec%84%b1)
+- [사용방법](#%ec%82%ac%ec%9a%a9%eb%b0%a9%eb%b2%95)
+- [👀 예제](#%f0%9f%91%80-%ec%98%88%ec%a0%9c)
+  - ["머리가 아플수도 있어요!" 단원](#%22%eb%a8%b8%eb%a6%ac%ea%b0%80-%ec%95%84%ed%94%8c%ec%88%98%eb%8f%84-%ec%9e%88%ec%96%b4%ec%9a%94%22-%eb%8b%a8%ec%9b%90)
+    - [▶ 먼저 처음 것들부터 *](#%e2%96%b6-%eb%a8%bc%ec%a0%80-%ec%b2%98%ec%9d%8c-%ea%b2%83%eb%93%a4%eb%b6%80%ed%84%b0)
+      - [💡 설명](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85)
+    - [▶ 문자열은 가끔 헷갈려요](#%e2%96%b6-%eb%ac%b8%ec%9e%90%ec%97%b4%ec%9d%80-%ea%b0%80%eb%81%94-%ed%97%b7%ea%b0%88%eb%a0%a4%ec%9a%94)
+      - [💡 설명:](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-1)
+    - [▶ 해시 브라우니](#%e2%96%b6-%ed%95%b4%ec%8b%9c-%eb%b8%8c%eb%9d%bc%ec%9a%b0%eb%8b%88)
+      - [💡 설명](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-2)
+    - [▶ 깊이 들어가면 우리는 다 똑같아.](#%e2%96%b6-%ea%b9%8a%ec%9d%b4-%eb%93%a4%ec%96%b4%ea%b0%80%eb%a9%b4-%ec%9a%b0%eb%a6%ac%eb%8a%94-%eb%8b%a4-%eb%98%91%ea%b0%99%ec%95%84)
+      - [💡 설명:](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-3)
+    - [▶ 질서 속의 무질서 *](#%e2%96%b6-%ec%a7%88%ec%84%9c-%ec%86%8d%ec%9d%98-%eb%ac%b4%ec%a7%88%ec%84%9c)
+      - [💡 설명:](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-4)
+    - [▶ 계속 시도해 보세요... *](#%e2%96%b6-%ea%b3%84%ec%86%8d-%ec%8b%9c%eb%8f%84%ed%95%b4-%eb%b3%b4%ec%84%b8%ec%9a%94)
+      - [💡 설명:](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-5)
+    - [▶ 무엇을 위해서(for)?](#%e2%96%b6-%eb%ac%b4%ec%97%87%ec%9d%84-%ec%9c%84%ed%95%b4%ec%84%9cfor)
+      - [💡 설명:](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-6)
+    - [▶ 실행되는 시간의 차이](#%e2%96%b6-%ec%8b%a4%ed%96%89%eb%90%98%eb%8a%94-%ec%8b%9c%ea%b0%84%ec%9d%98-%ec%b0%a8%ec%9d%b4)
+      - [💡 설명](#%f0%9f%92%a1-%ec%84%a4%eb%aa%85-7)
+    - [▶ How not to use `is` operator](#%e2%96%b6-how-not-to-use-is-operator)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation)
+    - [▶ `is not ...` is not `is (not ...)`](#%e2%96%b6-is-not--is-not-is-not)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-1)
+    - [▶ A tic-tac-toe where X wins in the first attempt!](#%e2%96%b6-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-2)
+    - [▶ The sticky output function](#%e2%96%b6-the-sticky-output-function)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-3)
+    - [▶ The chicken-egg problem *](#%e2%96%b6-the-chicken-egg-problem)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-4)
+    - [▶ Subclass relationships](#%e2%96%b6-subclass-relationships)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-5)
+    - [▶ All-true-ation *](#%e2%96%b6-all-true-ation)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-6)
+- [A simple example to count the number of booleans and](#a-simple-example-to-count-the-number-of-booleans-and)
+- [integers in an iterable of mixed data types.](#integers-in-an-iterable-of-mixed-data-types)
+- [prints nothing](#prints-nothing)
+- [so far so good, let's zip the remaining](#so-far-so-good-lets-zip-the-remaining)
+- [This time let's initialize x first](#this-time-lets-initialize-x-first)
+- [An assert statement with an assertion failure message.](#an-assert-statement-with-an-assertion-failure-message)
+- [No AssertionError is raised](#no-assertionerror-is-raised)
+- [is same as](#is-same-as)
+- [but](#but)
+- [isn't the same as](#isnt-the-same-as)
+- [File: module.py](#file-modulepy)
+    - [▶ Midnight time doesn't exist?](#%e2%96%b6-midnight-time-doesnt-exist)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-7)
+  - [---](#hr)
+  - [Section: The Hidden treasures!](#section-the-hidden-treasures)
+    - [▶ Okay Python, Can you make me fly?](#%e2%96%b6-okay-python-can-you-make-me-fly)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-8)
+    - [▶ `goto`, but why?](#%e2%96%b6-goto-but-why)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-9)
+    - [▶ Brace yourself!](#%e2%96%b6-brace-yourself)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-10)
+    - [▶ Let's meet Friendly Language Uncle For Life](#%e2%96%b6-lets-meet-friendly-language-uncle-for-life)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-11)
+    - [▶ Even Python understands that love is complicated](#%e2%96%b6-even-python-understands-that-love-is-complicated)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-12)
+    - [▶ Yes, it exists!](#%e2%96%b6-yes-it-exists)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-13)
+    - [▶ Ellipsis *](#%e2%96%b6-ellipsis)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-14)
+    - [▶ Inpinity](#%e2%96%b6-inpinity)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-15)
+    - [▶ Let's mangle](#%e2%96%b6-lets-mangle)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-16)
+  - [---](#hr-1)
+  - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
+    - [▶ Skipping lines?](#%e2%96%b6-skipping-lines)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-17)
+    - [▶ Teleportation](#%e2%96%b6-teleportation)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-18)
+    - [▶ Well, something is fishy...](#%e2%96%b6-well-something-is-fishy)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-19)
+  - [---](#hr-2)
+  - [Section: Miscellaneous](#section-miscellaneous)
+    - [▶ `+=` is faster](#%e2%96%b6--is-faster)
+      - [💡 Explanation:](#%f0%9f%92%a1-explanation-20)
+    - [▶ Let's make a giant string!](#%e2%96%b6-lets-make-a-giant-string)
+      - [💡 Explanation](#%f0%9f%92%a1-explanation-21)
+    - [▶ Minor Ones *](#%e2%96%b6-minor-ones)
+  - [---](#hr-3)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
-- [🎓 License](#-license)
-  * [Surprise your friends as well!](#surprise-your-friends-as-well)
-  * [More content like this?](#more-content-like-this)
+      - [Some nice Links!](#some-nice-links)
+- [🎓 License](#%f0%9f%8e%93-license)
+  - [Surprise your friends as well!](#surprise-your-friends-as-well)
+  - [More content like this?](#more-content-like-this)
 
 <!-- tocstop -->
 
@@ -490,14 +506,14 @@ True
 False
 
 # 집합(set)은 유일한 원소들만 가지고 있으므로,
-# 위의 딕션어리로 집합을 만들고 어떤 일이 일어나는지 알아봅시다.
+# 위의 딕셔너리로 집합을 만들고 어떤 일이 일어나는지 알아봅시다.
 
 >>> len({dictionary, ordered_dict, another_ordered_dict})
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: unhashable type: 'dict'
 
-# 딕션어리는 __hash__가 구현되어있지 않으므로 그런것 같네요. 
+# 딕셔너리는 __hash__가 구현되어있지 않으므로 그런것 같네요. 
 # 그러면 위에서 만든 래퍼(wrapper) 클래스를 써봅시다.
 >>> dictionary = DictWithHash()
 >>> dictionary[1] = 'a'; dictionary[2] = 'b';
@@ -566,13 +582,13 @@ def another_func():
         finally:
             print("Finally!")
 
-def one_more_func(): # A gotcha!
+def one_more_func(): # 알았다!
     try:
         for i in range(3):
             try:
                 1 / i
             except ZeroDivisionError:
-                # Let's throw it here and handle it outside for loop
+				# 여기서 에러를 발생시키고 반복문 밖에서 다뤄보도록 하죠
                 raise ZeroDivisionError("A trivial divide by zero error")
             finally:
                 print("Iteration", i)
@@ -664,20 +680,20 @@ for i, some_dict[i] in enumerate(some_string):
 
 ---
 
-### ▶ Evaluation time discrepancy
+### ▶ 실행되는 시간의 차이
 <!-- Example ID: 6aa11a4b-4cf1-467a-b43a-810731517e98 --->
 1\.
 ```py
 array = [1, 8, 15]
-# A typical generator expresion
+# 전형적인 제너레이터(generator) 예제입니다
 gen = (x for x in array if array.count(x) > 0)
 array = [2, 8, 22]
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
->>> print(list(gen)) # Where did the other values go?
+>>> print(list(gen)) # 다른 값들은 어디갔나요?
 [8]
 ```
 
@@ -693,7 +709,7 @@ gen_2 = (x for x in array_2)
 array_2[:] = [1,2,3,4,5]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> print(list(gen_1))
 [1, 2, 3, 4]
@@ -713,22 +729,23 @@ array_3 = [4, 5, 6]
 array_4 = [400, 500, 600]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> print(list(gen))
 [401, 501, 601, 402, 502, 602, 403, 503, 603]
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
-- In a [generator](https://wiki.python.org/moin/Generators) expression, the `in` clause is evaluated at declaration time, but the conditional clause is evaluated at runtime.
-- So before runtime, `array` is re-assigned to the list `[2, 8, 22]`, and since out of `1`, `8` and `15`, only the count of `8` is greater than `0`, the generator only yields `8`.
-- The differences in the output of `g1` and `g2` in the second part is due the way variables `array_1` and `array_2` are re-assigned values.
-- In the first case, `array_1` is binded to the new object `[1,2,3,4,5]` and since the `in` clause is evaluated at the declaration time it still refers to the old object `[1,2,3,4]` (which is not destroyed).
-- In the second case, the slice assignment to `array_2` updates the same old object `[1,2,3,4]` to `[1,2,3,4,5]`. Hence both the `g2` and `array_2` still have reference to the same object (which has now been updated to `[1,2,3,4,5]`).
+- [제너레이터](https://wiki.python.org/moin/Generators)에서는 `in` 부분은 선언할 때 실행되지만 조건문은런타임에 실행됩니다. 
+- 그래서 런타임 이전에, `array` 가 `[2, 8, 22]`로 재할당 되고 `1`, `8`, `15` 중에 `8`이 개수가 `0`보다 크므로 제너레이터는 오직 `8`만 yield합니다.
+- 두번쨰 예제의 `gen_1`와 `gen_2`의 출력 결과가 다른 이유는 `array_1`와 `array_2`가 재할당되는 방법이 다르기 때문입니다.
+- 첫번째 경우에는, `array_1`이 새로운 객체인 `[1, 2, 3, 4, 5]`가 할당되고 `in` 부분은 선언할때 계산되기 때문에 계속 이전 객체인 `[1, 2, 3, 4]`를 가지고 있습니다.
+- 두번째 경우에는, `array_2`에 슬라이스 객체가 할당될때 이전의 객체인 `[1, 2, 3, 4]`를 `[1, 2, 3, 4, 5]`로 변화시킵니다. 따라서 `g2`와 `array_2` 모두 같은 (새롭게 `[1, 2, 3, 4, 5]`로 업데이트된)객체를 가리키고 있습니다. 
 - Okay, going by the logic discussed so far, shouldn't be the value of `list(g)` in the third snippet be `[11, 21, 31, 12, 22, 32, 13, 23, 33]`? (because `array_3` and `array_4` are going to behave just like `array_1`). The reason why (only) `array_4` values got updated is explained in [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)
+- 좋아요, 그런데 지금까지의 로직을 살펴보면, 세번째 예제의 `list(g)`의 값이 `[11, 21, 31, 12, 22, 32, 13, 23, 33]` 가 되어야 하는 것이 아닌가요? (왜냐하면 `array_3`와 `array_4`가 `array_1`처럼 행동할테니까요). (오직) `array_4`의 값만이 업데이트되는 이유는 [PEP-289](https://www.python.org/dev/peps/pep-0289/#the-details)에서 설명되어 있습니다
   
-    > Only the outermost for-expression is evaluated immediately, the other expressions are deferred until the generator is run.
+    > for 구문의 가장 바깥쪽 부분만 바로 계산되고, 다른 구문들은 제너레이터가 실행될때까지 참조되는 것이 없습니다.
 
 ---
 
