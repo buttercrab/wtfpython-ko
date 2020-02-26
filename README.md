@@ -94,9 +94,9 @@
     + [▶ Skipping lines?](#-skipping-lines)
     + [▶ Teleportation](#-teleportation)
     + [▶ Well, something is fishy...](#-well-something-is-fishy)
-  * [Section: Miscellaneous](#section-miscellaneous)
-    + [▶ `+=` is faster](#--is-faster)
-    + [▶ Let's make a giant string!](#-lets-make-a-giant-string)
+  * ["기타 등등" 단원](#기타-등등-단원)
+    + [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
+    + [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
     + [▶ Minor Ones *](#-minor-ones-)
 - [기여하기](#기여하기)
 - [감사의 말](#감사의-말)
@@ -3304,9 +3304,9 @@ def convert_list_to_string(l, iters):
 #### 💡 설명
 
 - 이 링크에서 [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) 에 대해 더 읽을 수 있습니다. 그것들은 코드 조각들의 실행 시간을 측정하는데 사용됩니다.
-- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 불변(immutable)하기 때문에 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 2차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
+- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 immutable 하기 때문에 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 2차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
 - 그러므로, `.format.` 또는 `%` 문법을 사용하는것을 권고합니다 (하지만, 매우 짧은 문자열들의 경우 `+` 보다 약간 느립니다.).
-- 더 좋은 방법으로, 반복 가능한(iterable) 객체의 형태로 사용가능한 컨텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
+- 더 좋은 방법으로, iterable 객체의 형태로 사용가능한 컨텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
 - `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행시간이 2차적으로 증가하지 않았습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 였다면 실행시간이 2차적으로 증가했을 것입니다.
   ```py
   def add_string_with_plus(iters):
@@ -3320,24 +3320,24 @@ def convert_list_to_string(l, iters):
   >>> %timeit -n100 add_string_with_plus(10000) # Quadratic increase in execution time
   9 ms ± 298 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
   ```
-- 거대한 문자열을 구성하고 만드는 많은 방법들은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적이다. 이에 따라서,
+- 거대한 문자열을 구성하고 만드는 많은 방법들은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따라서,
 
     > 어떤 문제던지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 한다.
 
 ---
 
-### ▶ Minor Ones *
+### ▶ 사소한 것들 *
 <!-- Example ID: f885cb82-f1e4-4daa-9ff3-972b14cb1324 --->
-* `join()` is a string operation instead of list operation. (sort of counter-intuitive at first usage)
+* `join()` 은 리스트 연산 대신에 문자열 연산입니다. (처음 사용할 때 다소 직관적이지 않습니다.)
 
-  **💡 Explanation:** If `join()` is a method on a string, then it can operate on any iterable (list, tuple, iterators). If it were a method on a list, it'd have to be implemented separately by every type. Also, it doesn't make much sense to put a string-specific method on a generic `list` object API.
+  **💡 설명:** 만약 `join()`이 문자열의 메소드라면, iterable 자료형 (리스트(list), 튜플(tuple), 반복자(iterators)) 에서 동작할 수 있습니다. 만약 그것이 리스트의 메소드라면, 모든 타입에 대해 각각 실행해야 할 것입니다. 또한, 제네릭 `list` 객체 API에 문자열-방식 의 메소드를 붙이는 것은 별로 말이 되지 않습니다.
   
-* Few weird looking but semantically correct statements:
-  + `[] = ()` is a semantically correct statement (unpacking an empty `tuple` into an empty `list`)
-  + `'a'[0][0][0][0][0]` is also a semantically correct statement as strings are [sequences](https://docs.python.org/3/glossary.html#term-sequence)(iterables supporting element access using integer indices) in Python.
-  + `3 --0-- 5 == 8` and `--5 == 5` are both semantically correct statements and evaluate to `True`.
+* 몇개의 이상하게 보이지만 의미상 올바른 문장들:
+  + `[] = ()` 은 의미상 올바른 문장입니다. (빈 `tuple` 을 빈 `list` 안으로 풀어 넣다(unpacking))
+  + `'a'[0][0][0][0][0]` 은 파이썬에서 문자열들이 [순서](https://docs.python.org/ko/3/glossary.html#term-sequence) (반복 가능(iterables)하고 인덱스로 요소에 접근이 가능하다) 이므로 의미상 올바른 문장입니다.
+  + `3 --0-- 5 == 8` 과 `--5 == 5` 둘다 의미상 올바른 문장이며 결과값은 `True`입니다.
 
-* Given that `a` is a number, `++a` and `--a` are both valid Python statements but don't behave the same way as compared with similar statements in languages like C, C++, or Java.
+* `a`가 숫자라고 생각할 때, `++a` 와 `--b` 둘다 파이썬에서 올바른 문장이지만 C, C++, 또는 Java 같은 언어에서 유사한 문장과는 같은 행동을 하지 않습니다.
   ```py
   >>> a = 5
   >>> a
@@ -3348,27 +3348,27 @@ def convert_list_to_string(l, iters):
   5
   ```
 
-  **💡 Explanation:**
-  + There is no `++` operator in Python grammar. It is actually two `+` operators.
-  + `++a` parses as `+(+a)` which translates to `a`. Similarly, the output of the statement `--a` can be justified.
-  + This StackOverflow [thread](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) discusses the rationale behind the absence of increment and decrement operators in Python.
+  **💡 설명:**
+  + 파이썬 문법에는 `++` 연산자가 없습니다. 이것은 실제로 두개의 `+` 연산자 입니다.
+  + `++a` 는 `a`로 번역되는 `+(+a)` 로 분석됩니다. 마찬가지로, `--a` 라는 문장의 결과도 옳게 됩니다.
+  + 이 StackOverflow [스레드](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) 파이썬에서 증가 및 감소 연산자가 없는 이유에 대해 토론합니다.
 
-* You must be aware of the Walrus operator in Python. But have you ever heard about *the space-invader operator*?
+* 파이썬의 Walrus 연산자에 대해 알고 있을겁니다. 그런데 *space-invader 연산자* 에 대해 들어보셧나요?
   ```py
   >>> a = 42
   >>> a -=- 1
   >>> a
   43
   ```
-  It is used as an alternative incrementation operator, together with another one
+  다른 증가 연산자와 함께, 대체 증가 연산자로 사용됩니다.
   ```py
   >>> a +=+ 1
   >>> a
   >>> 44
   ```
-  **💡 Explanation:** This prank comes from [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en). The space invader operator is actually just a malformatted `a -= (-1)`. Which is equivalent to `a = a - (- 1)`. Similar for the `a += (+ 1)` case.
+  **💡 설명:** 이 장난은 [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en) 에서 왔습니다. space-invader 연산자는 실제로 `a -= (-1)` 의 잘못된 형식입니다. `a = a - (- 1)` 의 경우에 해당됩니다. `a += (+ 1)` 의 경우도 비슷한 방식입니다.
   
-* Python has an undocumented [converse implication](https://en.wikipedia.org/wiki/Converse_implication) operator. 
+* 파이썬은 문서화되지 않은 [converse implication](https://en.wikipedia.org/wiki/Converse_implication) 연산자를 가지고 있습니다. 
      
      ```py
      >>> False ** False == True
@@ -3381,9 +3381,9 @@ def convert_list_to_string(l, iters):
      True
      ```
 
-     **💡 Explanation:** If you replace `False` and `True` by 0 and 1 and do the maths, the truth table is equivalent to a converse implication operator. ([Source](https://github.com/cosmologicon/pywat/blob/master/explanation.md#the-undocumented-converse-implication-operator))
+     **💡 설명:** 만약 `False` 와 `True` 을 0 과 1로 대체하고 계산을 해보면, 진리표는 converse implication 연산자와 같습니다. ([Source](https://github.com/cosmologicon/pywat/blob/master/explanation.md#the-undocumented-converse-implication-operator))
      
-* Since we are talking operators, there's also `@` operator for matrix multiplication (don't worry, this time it's for real).
+* 우리는 계속 연산자들을 말하고 있기 때문에, 행렬 곱셈을 위한 `@` 연산자도 있습니다. (걱정 마세요, 이번엔 진짜입니다).
 
      ```py
      >>> import numpy as np
@@ -3391,16 +3391,16 @@ def convert_list_to_string(l, iters):
      46
      ```
 
-     **💡 Explanation:** The `@` operator was added in Python 3.5 keeping sthe cientific community in mind. Any object can overload `__matmul__` magic method to define behavior for this operator.
+     **💡 설명:** 파이썬 3.5 부터 `@` 연산자를 추가해 과학계를 염두에 두었습니다. 어떤 객체던 `__matmul__` 의 마법 메소드를 오버로드해 이 연산자의 행동을 정의할 수 있습니다.
 
-* From Python 3.8 onwards you can use a typical f-string syntax like `f'{some_var=}` for quick debugging. Example,
+* 파이썬 3.8 이상에서는 `f'{some_var=}` 와 같은 일반적인 f-string 구문을 사용하여 빠른 디버깅을 할 수 있습니다. 예를 들어,
     ```py
     >>> some_string = "wtfpython"
     >>> f'{some_string=}'
     "string='wtfpython'"
     ``` 
 
-* Python uses 2 bytes for local variable storage in functions. In theory, this means that only 65536 variables can be defined in a function. However, python has a handy solution built in that can be used to store more than 2^16 variable names. The following code demonstrates what happens in the stack when more than 65536 local variables are defined (Warning: This code prints around 2^18 lines of text, so be prepared!):
+* 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수들만 정의될 수 있는 것을 의미합니다. 하지만, 파이썬은 2^16개 이상의 변수 이름들을 저장하는데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
      
      ```py
      import dis
@@ -3414,9 +3414,9 @@ def convert_list_to_string(l, iters):
     print(dis.dis(f))
     ```
      
-* Multiple Python threads won't run your *Python code* concurrently (yes, you heard it right!). It may seem intuitive to spawn several threads and let them execute your Python code concurrently, but, because of the [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) in Python, all you're doing is making your threads execute on the same core turn by turn. Python threads are good for IO-bound tasks, but to achieve actual parallelization in Python for CPU-bound tasks, you might want to use the Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) module.
+* 여러 파이썬 스레드들이 동시에 *파이썬 코드* 를 실행하지 않습니다 (예, 제대로 들으셨습니다!). 여러개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있습니다, 하지만, 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에, 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것 뿐입니다. 파이썬의 쓰레드는 IO-bound 작업들에 적합합니다, 그러나 CPU-bound 작업들에 대해서 실제로 병렬화를 달성합니다, 당신은 Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하길 원할 수 있습니다.
 
-* Sometimes, the `print` method might not print values immediately. For example,
+* 때때로, `print` 메소드는 값을 바로 출력하지 못할 수 있습니다. 예를 들어,
 
      ```py
      # File some_file.py
@@ -3426,16 +3426,16 @@ def convert_list_to_string(l, iters):
      time.sleep(3)
      ```
 
-     This will print the `wtfpython` after 10 seconds due to the `end` argument because the output buffer is flushed either after encountering `\n` or when the program finishes execution. We can force the buffer to flush by passing `flush=True` argument.
+     출력 버퍼가 `\n` 에 도달 한 후 또는 프로그램의 실행이 끝날 때 출력 버퍼가 플러시 되기 때문에 `end` 인자로 인하여 10초 뒤에 `wtfpython` 을 출력합니다. `flush=True` 인자를 전달하여 버퍼를 강제로 플러시 할 수도 있습니다.
 
-* List slicing with out of the bounds indices throws no errors
+* 범위를 벗어난 리스트 슬라이싱은 에러를 던지지 않습니다.
   ```py
   >>> some_list = [1, 2, 3, 4, 5]
   >>> some_list[111:]
   []
   ```
 
-* Slicing an iterable not always creates a new object. For example,
+* iterable 을 슬라이싱 하면 항상 새로운 객체가 생성되는 것은 아닙니다. 예를 들어,
     ```py
     >>> some_str = "wtfpython"
     >>> some_list = ['w', 't', 'f', 'p', 'y', 't', 'h', 'o', 'n']
@@ -3445,9 +3445,9 @@ def convert_list_to_string(l, iters):
     True
     ```
 
-* `int('١٢٣٤٥٦٧٨٩')` returns `123456789` in Python 3. In Python, Decimal characters include digit characters, and all characters that can be used to form decimal-radix numbers, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. Here's an [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) related to this behavior of Python.
+* 파이썬 3 에서 `int('١٢٣٤٥٦٧٨٩')` 는 `123456789` 을 반환합니다. 파이썬에서, 십진수 문자들에는 숫자 문자들과 십진법 숫자들을 형성하는데 사용될 수 있는 모든 문자들이 포함됩니다, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. 이 파이썬의 동작과 관련된 [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) 입니다.
 
-* You can seperate numeric literals with underscores (for better readablity) from Python 3 onwards.
+* 파이썬 3 이상에서는 밑줄 (더 나은 가독성을 위해) 로 숫자 리터럴을 분리할 수 있습니다.
 
      ```py
      >>> six_million = 6_000_000
@@ -3458,7 +3458,7 @@ def convert_list_to_string(l, iters):
      4027435774
      ```
 
-* `'abc'.count('') == 4`. Here's an approximate implementation of `count` method, which would make the things more clear
+* `'abc'.count('') == 4`. 다음은 더 명확하게 만들어 주는 `count` 메소드의 비슷한 구현입니다.
   ```py
   def count(s, sub):
       result = 0
@@ -3466,9 +3466,9 @@ def convert_list_to_string(l, iters):
           result += (s[i:i + len(sub)] == sub)
       return result
   ```
-  The behavior is due to the matching of empty substring(`''`) with slices of length 0 in the original string.
+  그 동작은 원래 문자열에서 길이가 0인 슬라이스들에 빈 substring(`''`)이 일치하기 때문입니다.
 
-**That's all folks!**
+**여기까지입니다!**
 
 ---
 ---
