@@ -98,11 +98,11 @@
     + [▶ `+=` is faster](#--is-faster)
     + [▶ Let's make a giant string!](#-lets-make-a-giant-string)
     + [▶ Minor Ones *](#-minor-ones-)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
+- [기여하기](#기여하기)
+- [감사의 말](#감사의-말)
 - [🎓 License](#-license)
-  * [Surprise your friends as well!](#surprise-your-friends-as-well)
-  * [More content like this?](#more-content-like-this)
+  * [친구들을 놀래켜보세요!](#친구들을-놀래켜보세요)
+  * [비슷한 것들을 찾고 있나요?](#비슷한-것들을-찾고-있나요)
 
 <!-- tocstop -->
 
@@ -3473,25 +3473,25 @@ Let's increase the number of iterations by a factor of 10.
 ---
 ---
 
-# Contributing
+# 기여하기
 
-A few ways in which you can contribute to wtfpython,
+wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
-- Suggesting new examples
-- Helping with translation (See [issues labeled translation](https://github.com/satwikkansal/wtfpython/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation))
-- Minor corrections like pointing out outdated snippets, typos, formatting errors, etc.
-- Identifying gaps (things like inadequate explanation, redundant examples, etc.)
-- Any creative suggestions to make this project more fun and useful
+- 새로운 예제들 추천
+- 번역 돕기 ([issues labeled translation](https://github.com/satwikkansal/wtfpython/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation) 을 보세요.)
+- 오래된 정보, 오타, 서식 오류 등의 작은 수정들
+- 차이점들 식별 (불충분한 설명, 중복된 예제 등등.)
+- 이 프로젝트를 더욱 재미있고 유용하게 만들기 위한 창의적인 제안들
 
-Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more details. Feel free to create a new [issue](https://github.com/satwikkansal/wtfpython/issues/new) to discuss things.
+더 많은 정보들은 [CONTRIBUTING.md](/CONTRIBUTING.md) 을 보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new) 를 만들어 토론해보세요.
 
-PS: Please don't reach out with backlinking requests, no links will be added unless they're highly relevant to the project.
+추신: 역링크 요청으로 연락하지 마세요. 프로젝트와 관련이 높지 않으면 링크를 추가하지 않습니다.
 
-# Acknowledgements
+# 감사의 말
 
-The idea and design for this collection were initially inspired by Denys Dovhan's awesome project [wtfjs](https://github.com/denysdovhan/wtfjs). The overwhelming support by Pythonistas gave it the shape it is in right now.
+이 항목들의 아이디어와 디자인은 Denys Dovhan's 의 멋진 프로젝트 [wtfjs](https://github.com/denysdovhan/wtfjs) 에서 영감을 받았습니다. Pythonista들의 압도적인 지지는 그것의 현재의 모습을 주었습니다. 
 
-#### Some nice Links!
+#### 몇개의 멋진 링크들!
 * https://www.youtube.com/watch?v=sH4XF6pKKmk
 * https://www.reddit.com/r/Python/comments/3cu6ej/what_are_some_wtf_things_about_python
 * https://sopython.com/wiki/Common_Gotchas_In_Python
@@ -3511,13 +3511,13 @@ The idea and design for this collection were initially inspired by Denys Dovhan'
 [license-url]: http://www.wtfpl.net
 [license-image]: https://img.shields.io/badge/License-WTFPL%202.0-lightgrey.svg?style=flat-square
 
-## Surprise your friends as well!
+## 친구들을 놀래켜보세요!
 
-If you like wtfpython, you can use these quick links to share it with your friends,
+만약 wtfpython이 마음에 드셧다면, 친구들에게 빠르게 공유하기 위한 퀵 링크들을 사용할 수 있어요.
 
-[Twitter](https://twitter.com/intent/tweet?url=https://github.com/satwikkansal/wtfpython&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hastags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/satwikkansal&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fsatwikkansal%2Fwtfpython&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)  
+[Twitter](https://twitter.com/intent/tweet?url=https://github.com/buttercrab/wtfpython-ko&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hastags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/buttercrab&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fbuttercrab%2Fwtfpython-ko&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)  
 
-## More content like this?
+## 비슷한 것들을 찾고 있나요?
 
-If you're interested in more content like this, you can share your email [here](https://satwikkansal.xyz/content-like-wtfpython/).
-*PS: On a sidenote, consider [buying me a meal](https://ko-fi.com/satwikkansal) or [planting a tree](https://teamtrees.org/).*
+만약 이것과 비슷한 내용들에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
+*추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/) 을 고려해보세요.*
