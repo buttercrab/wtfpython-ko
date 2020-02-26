@@ -3212,10 +3212,9 @@ Shouldn't that be 100?
 ---
 ---
 
-## Section: Miscellaneous
+## "기타 등등" 단원
 
-
-### ▶ `+=` is faster
+### ▶ `+=` 가 더 빨라요
 <!-- Example ID: bfd19c60-a807-4a26-9598-4912b86ddb36 --->
 
 ```py
@@ -3227,12 +3226,12 @@ Shouldn't that be 100?
 0.012188911437988281
 ```
 
-#### 💡 Explanation:
-+ `+=` is faster than `+` for concatenating more than two strings because the first string (example, `s1` for `s1 += s2 + s3`) is not destroyed while calculating the complete string.
+#### 💡 설명:
++ 두개 이상의 연결된 문자열에 대해서 `+=` 가 `+` 보다 빠릅니다. 왜냐하면 첫 문자열 (예를 들어, `s1 += s2 + s3`의 `s1`) 은 전체 문자열이 계산되는 동안에 파괴되지 않습니다.
 
 ---
 
-### ▶ Let's make a giant string!
+### ▶ 거대한 문자열을 만들어봐요!
 <!-- Example ID: c7a07424-63fe-4504-9842-8f3d334f28fc --->
 ```py
 def add_string_with_plus(iters):
@@ -3264,7 +3263,7 @@ def convert_list_to_string(l, iters):
     assert len(s) == 3*iters
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 # Executed in ipython shell using %timeit for better readablity of results.
@@ -3285,7 +3284,7 @@ def convert_list_to_string(l, iters):
 10.1 µs ± 1.06 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 ```
 
-Let's increase the number of iterations by a factor of 10.
+반복 횟수를 10배로 늘렷습니다.
 
 ```py
 >>> NUM_ITERS = 10000
@@ -3302,12 +3301,13 @@ Let's increase the number of iterations by a factor of 10.
 86.3 µs ± 2 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 ```
 
-#### 💡 Explanation
-- You can read more about [timeit](https://docs.python.org/3/library/timeit.html) or [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) on these links. They are used to measure the execution time of code pieces.
-- Don't use `+` for generating long strings — In Python, `str` is immutable, so the left and right strings have to be copied into the new string for every pair of concatenations. If you concatenate four strings of length 10, you'll be copying (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90 characters instead of just 40 characters. Things get quadratically worse as the number and size of the string increases (justified with the execution times of `add_bytes_with_plus` function)
-- Therefore, it's advised to use `.format.` or `%` syntax (however, they are slightly slower than `+` for very short strings).
-- Or better, if already you've contents available in the form of an iterable object, then use `''.join(iterable_object)` which is much faster.
-- Unlike `add_bytes_with_plus` because of the `+=` optimizations discussed in the previous example, `add_string_with_plus` didn't show a quadratic increase in execution time. Had the statement been `s = s + "x" + "y" + "z"` instead of `s += "xyz"`, the increase would have been quadratic.
+#### 💡 설명
+
+- 이 링크에서 [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) 에 대해 더 읽을 수 있습니다. 그것들은 코드 조각들의 실행 시간을 측정하는데 사용됩니다.
+- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 불변(immutable)하기 때문에 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 2차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
+- 그러므로, `.format.` 또는 `%` 문법을 사용하는것을 권고합니다 (하지만, 매우 짧은 문자열들의 경우 `+` 보다 약간 느립니다.).
+- 더 좋은 방법으로, 반복 가능한(iterable) 객체의 형태로 사용가능한 컨텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
+- `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행시간이 2차적으로 증가하지 않았습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 였다면 실행시간이 2차적으로 증가했을 것입니다.
   ```py
   def add_string_with_plus(iters):
       s = ""
@@ -3320,9 +3320,9 @@ Let's increase the number of iterations by a factor of 10.
   >>> %timeit -n100 add_string_with_plus(10000) # Quadratic increase in execution time
   9 ms ± 298 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
   ```
-- So many ways to format and create a giant string are somewhat in contrast to the [Zen of Python](https://www.python.org/dev/peps/pep-0020/), according to which,
-  
-    > There should be one-- and preferably only one --obvious way to do it.
+- 거대한 문자열을 구성하고 만드는 많은 방법들은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적이다. 이에 따라서,
+
+    > 어떤 문제던지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 한다.
 
 ---
 
