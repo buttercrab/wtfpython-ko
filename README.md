@@ -3518,6 +3518,9 @@ If you like wtfpython, you can use these quick links to share it with your frien
 [Twitter](https://twitter.com/intent/tweet?url=https://github.com/satwikkansal/wtfpython&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hastags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/satwikkansal&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fsatwikkansal%2Fwtfpython&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)  
 
 ## More content like this?
+## 비슷한 것들을 찾고 있나요?
 
+만약 이것과 비슷한 것들에 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
+*PS: 각주로, 저에게 [밥을 사주는 것을 고려하거나](https://ko-fi.com/satwikkansal) 또는 [나무를 심는것을 고려해보세요](https://teamtrees.org/).*
 If you're interested in more content like this, you can share your email [here](https://satwikkansal.xyz/content-like-wtfpython/).
 *PS: On a sidenote, consider [buying me a meal](https://ko-fi.com/satwikkansal) or [planting a tree](https://teamtrees.org/).*
