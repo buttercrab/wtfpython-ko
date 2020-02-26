@@ -98,11 +98,11 @@
     + [▶ `+=` is faster](#--is-faster)
     + [▶ Let's make a giant string!](#-lets-make-a-giant-string)
     + [▶ Minor Ones *](#-minor-ones-)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
+- [기여하기](#기여하기)
+- [감사의 말](#감사의-말)
 - [🎓 License](#-license)
-  * [Surprise your friends as well!](#surprise-your-friends-as-well)
-  * [More content like this?](#more-content-like-this)
+  * [친구들을 놀래켜보세요!](#친구들을-놀래켜보세요)
+  * [비슷한 것들을 찾고 있나요?](#비슷한-것들을-찾고-있나요)
 
 <!-- tocstop -->
 
@@ -3473,30 +3473,21 @@ Let's increase the number of iterations by a factor of 10.
 ---
 ---
 
-# Contributing
 # 기여하기
 
-A few ways in which you can contribute to wtfpython,
 wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
-- Suggesting new examples
 - 새로운 예제들 추천
-- Helping with translation (See [issues labeled translation](https://github.com/satwikkansal/wtfpython/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation))
 - 번역 돕기 ([issues labeled translation](https://github.com/satwikkansal/wtfpython/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation) 을 보세요.)
-- Minor corrections like pointing out outdated snippets, typos, formatting errors, etc.
-- 오래된 정보, 오타, 서식 오류 등의 작은 수정들.
-- Identifying gaps (things like inadequate explanation, redundant examples, etc.)
+- 오래된 정보, 오타, 서식 오류 등의 작은 수정들
 - 차이점들 식별 (불충분한 설명, 중복된 예제 등등.)
-- Any creative suggestions to make this project more fun and useful
 - 이 프로젝트를 더욱 재미있고 유용하게 만들기 위한 창의적인 제안들
 
-Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for more details. Feel free to create a new [issue](https://github.com/satwikkansal/wtfpython/issues/new) to discuss things.
 더 많은 정보들은 [CONTRIBUTING.md](/CONTRIBUTING.md) 을 보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new) 를 만들어 토론해보세요.
 
-PS: Please don't reach out with backlinking requests, no links will be added unless they're highly relevant to the project.
 추신: 역링크 요청으로 연락하지 마세요. 프로젝트와 관련이 높지 않으면 링크를 추가하지 않습니다.
 
-# 감사의 글
+# 감사의 말
 
 이 항목들의 아이디어와 디자인은 Denys Dovhan's 의 멋진 프로젝트 [wtfjs](https://github.com/denysdovhan/wtfjs) 에서 영감을 받았습니다. Pythonista들의 압도적인 지지는 그것의 현재의 모습을 주었습니다. 
 
