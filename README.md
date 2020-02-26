@@ -3520,4 +3520,4 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 ## 비슷한 것들을 찾고 있나요?
 
 만약 이것과 비슷한 내용들에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
-*추신: 각주로, 저에게 [밥을 사주는 것을 고려하거나](https://ko-fi.com/satwikkansal) 또는 [나무를 심는것을 고려해보세요](https://teamtrees.org/).*
+*추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/) 을 고려해보세요.*
