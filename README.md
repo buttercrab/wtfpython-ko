@@ -3227,7 +3227,7 @@ Shouldn't that be 100?
 ```
 
 #### 💡 설명:
-+ 두개 이상의 연결된 문자열에 대해서 `+=` 가 `+` 보다 빠릅니다. 왜냐하면 첫 문자열 (예를 들어, `s1 += s2 + s3`의 `s1`) 은 전체 문자열이 계산되는 동안에 파괴되지 않습니다.
++ 두 개 이상의 연결된 문자열에 대해서 `+=` 가 `+` 보다 빠릅니다. 왜냐하면 첫 문자열 (예를 들어, `s1 += s2 + s3`의 `s1`)은 전체 문자열이 계산되는 동안에 파괴되지 않습니다.
 
 ---
 
@@ -3266,8 +3266,8 @@ def convert_list_to_string(l, iters):
 **출력 결과:**
 
 ```py
-# Executed in ipython shell using %timeit for better readablity of results.
-# You can also use the timeit module in normal python shell/scriptm=, example usage below
+# 결과의 더 좋은 가독성을 위해 %timeit을 사용하여 ipython shell에서 실행됩니다.
+# 일반 파이썬 shell/scriptm= 에서 timeit 모듈을 사용할 수 있습니다. 아래와 같은 방식입니다.
 # timeit.timeit('add_string_with_plus(10000)', number=1000, globals=globals())
 
 >>> NUM_ITERS = 1000
