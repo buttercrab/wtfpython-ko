@@ -3284,7 +3284,7 @@ def convert_list_to_string(l, iters):
 10.1 µs ± 1.06 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 ```
 
-반복 횟수를 10배로 늘렷습니다.
+반복 횟수를 10배로 늘렸습니다.
 
 ```py
 >>> NUM_ITERS = 10000
@@ -3303,11 +3303,11 @@ def convert_list_to_string(l, iters):
 
 #### 💡 설명
 
-- 이 링크에서 [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) 에 대해 더 읽을 수 있습니다. 그것들은 코드 조각들의 실행 시간을 측정하는데 사용됩니다.
-- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 immutable 하기 때문에 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 2차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
-- 그러므로, `.format.` 또는 `%` 문법을 사용하는것을 권고합니다 (하지만, 매우 짧은 문자열들의 경우 `+` 보다 약간 느립니다.).
-- 더 좋은 방법으로, iterable 객체의 형태로 사용가능한 컨텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
-- `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행시간이 2차적으로 증가하지 않았습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 였다면 실행시간이 2차적으로 증가했을 것입니다.
+- 이 링크에서 [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) 에 대해 더 읽을 수 있습니다. 그것들은 코드 조각들의 실행 시간을 측정하는 데 사용됩니다.
+- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 immutable 하므로 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 이차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
+- 그러므로, `.format.` 또는 `%` 문법을 사용하는 것을 권고합니다. (하지만, 매우 짧은 문자열들의 경우 `+` 보다 약간 느립니다.)
+- 더 좋은 방법으로, iterable 객체의 형태로 사용 가능한 콘텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
+- `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행 시간이 이차적으로 증가하지 않았습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 였다면 실행 시간이 이차적으로 증가했을 것입니다.
   ```py
   def add_string_with_plus(iters):
       s = ""
@@ -3320,9 +3320,9 @@ def convert_list_to_string(l, iters):
   >>> %timeit -n100 add_string_with_plus(10000) # Quadratic increase in execution time
   9 ms ± 298 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
   ```
-- 거대한 문자열을 구성하고 만드는 많은 방법들은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따라서,
+- 거대한 문자열을 구성하고 만드는 많은 방법은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따라서,
 
-    > 어떤 문제던지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 한다.
+    > 어떤 문제든지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 한다.
 
 ---
 
@@ -3330,14 +3330,14 @@ def convert_list_to_string(l, iters):
 <!-- Example ID: f885cb82-f1e4-4daa-9ff3-972b14cb1324 --->
 * `join()` 은 리스트 연산 대신에 문자열 연산입니다. (처음 사용할 때 다소 직관적이지 않습니다.)
 
-  **💡 설명:** 만약 `join()`이 문자열의 메소드라면, iterable 자료형 (리스트(list), 튜플(tuple), 반복자(iterators)) 에서 동작할 수 있습니다. 만약 그것이 리스트의 메소드라면, 모든 타입에 대해 각각 실행해야 할 것입니다. 또한, 제네릭 `list` 객체 API에 문자열-방식 의 메소드를 붙이는 것은 별로 말이 되지 않습니다.
+  **💡 설명:** 만약 `join()`이 문자열의 메소드라면, iterable 자료형 (리스트(list), 튜플(tuple), 반복자(iterators)) 에서 동작할 수 있습니다. 만약 그것이 리스트의 메소드라면, 모든 타입에 대해 각각 실행해야 할 것입니다. 또한, 제네릭 `list` 객체 API에 문자열-방식의 메소드를 붙이는 것은 별로 말이 되지 않습니다.
   
-* 몇개의 이상하게 보이지만 의미상 올바른 문장들:
-  + `[] = ()` 은 의미상 올바른 문장입니다. (빈 `tuple` 을 빈 `list` 안으로 풀어 넣다(unpacking))
-  + `'a'[0][0][0][0][0]` 은 파이썬에서 문자열들이 [순서](https://docs.python.org/ko/3/glossary.html#term-sequence) (반복 가능(iterables)하고 인덱스로 요소에 접근이 가능하다) 이므로 의미상 올바른 문장입니다.
-  + `3 --0-- 5 == 8` 과 `--5 == 5` 둘다 의미상 올바른 문장이며 결과값은 `True`입니다.
+* 몇 개의 이상하게 보이지만 의미상 올바른 문장들:
+  + `[] = ()` 은 의미상 올바른 문장입니다. (빈 `tuple`을 빈 `list` 안으로 풀어 넣다(unpacking))
+  + `'a'[0][0][0][0][0]` 은 파이썬에서 문자열들이 [순서](https://docs.python.org/ko/3/glossary.html#term-sequence) (iterables 하고 인덱스로 요소에 접근이 가능하다) 이므로 의미상 올바른 문장입니다.
+  + `3 --0-- 5 == 8`과 `--5 == 5` 둘다 의미상 올바른 문장이며 결괏값은 `True`입니다.
 
-* `a`가 숫자라고 생각할 때, `++a` 와 `--b` 둘다 파이썬에서 올바른 문장이지만 C, C++, 또는 Java 같은 언어에서 유사한 문장과는 같은 행동을 하지 않습니다.
+* `a`가 숫자라고 생각할 때, `++a`와 `--b` 둘 다 파이썬에서 올바른 문장이지만 C, C++, 또는 Java 같은 언어에서 유사한 문장과는 같은 행동을 하지 않습니다.
   ```py
   >>> a = 5
   >>> a
@@ -3349,11 +3349,11 @@ def convert_list_to_string(l, iters):
   ```
 
   **💡 설명:**
-  + 파이썬 문법에는 `++` 연산자가 없습니다. 이것은 실제로 두개의 `+` 연산자 입니다.
-  + `++a` 는 `a`로 번역되는 `+(+a)` 로 분석됩니다. 마찬가지로, `--a` 라는 문장의 결과도 옳게 됩니다.
-  + 이 StackOverflow [스레드](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python) 파이썬에서 증가 및 감소 연산자가 없는 이유에 대해 토론합니다.
+  + 파이썬 문법에는 `++` 연산자가 없습니다. 이것은 실제로 두 개의 `+` 연산자입니다.
+  + `++a` 는 `+(+a)`로 분석되어 `a`로 번역됩니다. 마찬가지로, `--a`라는 문장의 결과도 옳게 됩니다.
+  + 이 StackOverflow [스레드](https://stackoverflow.com/questions/3654830/why-are-there-no-and-operators-in-python)에서 파이썬에서 증가 및 감소 연산자가 없는 이유에 대해 토론합니다.
 
-* 파이썬의 Walrus 연산자에 대해 알고 있을겁니다. 그런데 *space-invader 연산자* 에 대해 들어보셧나요?
+* 파이썬의 Walrus 연산자에 대해 알고 있을 겁니다. 그런데 *space-invader 연산자* 에 대해 들어보셨나요?
   ```py
   >>> a = 42
   >>> a -=- 1
@@ -3366,7 +3366,7 @@ def convert_list_to_string(l, iters):
   >>> a
   >>> 44
   ```
-  **💡 설명:** 이 장난은 [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en) 에서 왔습니다. space-invader 연산자는 실제로 `a -= (-1)` 의 잘못된 형식입니다. `a = a - (- 1)` 의 경우에 해당됩니다. `a += (+ 1)` 의 경우도 비슷한 방식입니다.
+  **💡 설명:** 이 장난은 [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en) 에서 왔습니다. space-invader 연산자는 실제로 `a -= (-1)` 의 잘못된 형식입니다. `a = a - (- 1)`와 같습니다. `a += (+ 1)`도 비슷한 방식으로 적용됩니다.
   
 * 파이썬은 문서화되지 않은 [converse implication](https://en.wikipedia.org/wiki/Converse_implication) 연산자를 가지고 있습니다. 
      
@@ -3381,9 +3381,9 @@ def convert_list_to_string(l, iters):
      True
      ```
 
-     **💡 설명:** 만약 `False` 와 `True` 을 0 과 1로 대체하고 계산을 해보면, 진리표는 converse implication 연산자와 같습니다. ([Source](https://github.com/cosmologicon/pywat/blob/master/explanation.md#the-undocumented-converse-implication-operator))
+     **💡 설명:** 만약 `False` 와 `True` 을 0과 1로 대체하고 계산을 해보면, 진리표는 converse implication 연산자와 같습니다. ([Source](https://github.com/cosmologicon/pywat/blob/master/explanation.md#the-undocumented-converse-implication-operator))
      
-* 우리는 계속 연산자들을 말하고 있기 때문에, 행렬 곱셈을 위한 `@` 연산자도 있습니다. (걱정 마세요, 이번엔 진짜입니다).
+* 우리는 계속 연산자들을 말하고 있기 때문에, 행렬 곱셈을 위한 `@` 연산자도 있습니다. (걱정하지 마세요, 이번엔 진짜입니다).
 
      ```py
      >>> import numpy as np
@@ -3391,7 +3391,7 @@ def convert_list_to_string(l, iters):
      46
      ```
 
-     **💡 설명:** 파이썬 3.5 부터 `@` 연산자를 추가해 과학계를 염두에 두었습니다. 어떤 객체던 `__matmul__` 의 마법 메소드를 오버로드해 이 연산자의 행동을 정의할 수 있습니다.
+     **💡 설명:** 파이썬 3.5부터 `@` 연산자를 추가해 과학계를 염두에 두었습니다. 어떤 객체든 `__matmul__` 의 마법 메소드를 오버로드해 이 연산자의 행동을 정의할 수 있습니다.
 
 * 파이썬 3.8 이상에서는 `f'{some_var=}` 와 같은 일반적인 f-string 구문을 사용하여 빠른 디버깅을 할 수 있습니다. 예를 들어,
     ```py
@@ -3400,7 +3400,7 @@ def convert_list_to_string(l, iters):
     "string='wtfpython'"
     ``` 
 
-* 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수들만 정의될 수 있는 것을 의미합니다. 하지만, 파이썬은 2^16개 이상의 변수 이름들을 저장하는데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
+* 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수만 정의될 수 있는 것을 의미합니다. 하지만, 파이썬은 2^16개 이상의 변수 이름들을 저장하는 데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
      
      ```py
      import dis
@@ -3414,7 +3414,7 @@ def convert_list_to_string(l, iters):
     print(dis.dis(f))
     ```
      
-* 여러 파이썬 스레드들이 동시에 *파이썬 코드* 를 실행하지 않습니다 (예, 제대로 들으셨습니다!). 여러개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있습니다, 하지만, 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에, 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것 뿐입니다. 파이썬의 쓰레드는 IO-bound 작업들에 적합합니다, 그러나 CPU-bound 작업들에 대해서 실제로 병렬화를 달성합니다, 당신은 Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하길 원할 수 있습니다.
+* 여러 파이썬 스레드들이 동시에 *파이썬 코드* 를 실행하지 않습니다. (예, 제대로 들으셨습니다!) 여러 개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있습니다, 하지만, 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에, 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것뿐입니다. 파이썬의 쓰레드는 IO-bound 작업에 적합합니다, 그러나 CPU-bound 작업에 대해서 실제로 병렬화를 달성합니다, 당신은 Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하길 원할 수 있습니다.
 
 * 때때로, `print` 메소드는 값을 바로 출력하지 못할 수 있습니다. 예를 들어,
 
@@ -3426,7 +3426,7 @@ def convert_list_to_string(l, iters):
      time.sleep(3)
      ```
 
-     출력 버퍼가 `\n` 에 도달 한 후 또는 프로그램의 실행이 끝날 때 출력 버퍼가 플러시 되기 때문에 `end` 인자로 인하여 10초 뒤에 `wtfpython` 을 출력합니다. `flush=True` 인자를 전달하여 버퍼를 강제로 플러시 할 수도 있습니다.
+     출력 버퍼가 `\n` 에 도달한 후 또는 프로그램의 실행이 끝날 때 출력 버퍼가 플러시 되기 때문에 `end` 인자로 인하여 10초 뒤에 `wtfpython` 을 출력합니다. `flush=True` 인자를 전달하여 버퍼를 강제로 플러시 할 수도 있습니다.
 
 * 범위를 벗어난 리스트 슬라이싱은 에러를 던지지 않습니다.
   ```py
@@ -3445,9 +3445,9 @@ def convert_list_to_string(l, iters):
     True
     ```
 
-* 파이썬 3 에서 `int('١٢٣٤٥٦٧٨٩')` 는 `123456789` 을 반환합니다. 파이썬에서, 십진수 문자들에는 숫자 문자들과 십진법 숫자들을 형성하는데 사용될 수 있는 모든 문자들이 포함됩니다, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. 이 파이썬의 동작과 관련된 [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) 입니다.
+* 파이썬 3 에서 `int('١٢٣٤٥٦٧٨٩')` 는 `123456789` 을 반환합니다. 파이썬에서, 십진수 문자들에는 숫자 문자들과 십진법 숫자들을 형성하는데 사용될 수 있는 모든 문자가 포함됩니다, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. 이 파이썬의 동작과 관련된 [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) 입니다.
 
-* 파이썬 3 이상에서는 밑줄 (더 나은 가독성을 위해) 로 숫자 리터럴을 분리할 수 있습니다.
+* 파이썬 3 이상에서는 밑줄 (더 나은 가독성을 위해)로 숫자 리터럴을 분리할 수 있습니다.
 
      ```py
      >>> six_million = 6_000_000
@@ -3483,13 +3483,13 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 - 차이점들 식별 (불충분한 설명, 중복된 예제 등등.)
 - 이 프로젝트를 더욱 재미있고 유용하게 만들기 위한 창의적인 제안들
 
-더 많은 정보들은 [CONTRIBUTING.md](/CONTRIBUTING.md) 을 보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new) 를 만들어 토론해보세요.
+더 많은 정보들은 [CONTRIBUTING.md](/CONTRIBUTING.md)을 보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new)를 만들어 토론해보세요.
 
 추신: 역링크 요청으로 연락하지 마세요. 프로젝트와 관련이 높지 않으면 링크를 추가하지 않습니다.
 
 # 감사의 말
 
-이 항목들의 아이디어와 디자인은 Denys Dovhan's 의 멋진 프로젝트 [wtfjs](https://github.com/denysdovhan/wtfjs) 에서 영감을 받았습니다. Pythonista들의 압도적인 지지는 그것의 현재의 모습을 주었습니다. 
+이 항목들의 아이디어와 디자인은 Denys Dovhan's 의 멋진 프로젝트 [wtfjs](https://github.com/denysdovhan/wtfjs) 에서 영감을 받았습니다. Pythonista들의 압도적인 지지는 그것의 현재의 모습을 주었습니다.
 
 #### 몇개의 멋진 링크들!
 * https://www.youtube.com/watch?v=sH4XF6pKKmk
@@ -3513,11 +3513,11 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
 ## 친구들을 놀래켜보세요!
 
-만약 wtfpython이 마음에 드셧다면, 친구들에게 빠르게 공유하기 위한 퀵 링크들을 사용할 수 있어요.
+만약 wtfpython이 마음에 드셨다면, 친구들에게 빠르게 공유하기 위한 퀵 링크들을 사용할 수 있어요.
 
 [Twitter](https://twitter.com/intent/tweet?url=https://github.com/buttercrab/wtfpython-ko&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hastags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/buttercrab&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fbuttercrab%2Fwtfpython-ko&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)  
 
 ## 비슷한 것들을 찾고 있나요?
 
 만약 이것과 비슷한 내용들에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
-*추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/) 을 고려해보세요.*
+*추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/)을 고려해보세요.*
