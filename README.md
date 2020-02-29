@@ -3322,7 +3322,7 @@ def convert_list_to_string(l, iters):
   ```
 - 거대한 문자열을 구성하고 만드는 많은 방법은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따라서,
 
-    > 어떤 문제든지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 한다.
+    > 어떤 문제든지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 합니다.
 
 ---
 
@@ -3483,7 +3483,7 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 - 차이점들 식별 (불충분한 설명, 중복된 예제 등등.)
 - 이 프로젝트를 더욱 재미있고 유용하게 만들기 위한 창의적인 제안들
 
-더 많은 정보들은 [CONTRIBUTING.md](/CONTRIBUTING.md)을 보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new)를 만들어 토론해보세요.
+더 많은 정보는 [CONTRIBUTING.md](/CONTRIBUTING.md)을는보세요. 자유롭게 새로운 [issue](https://github.com/satwikkansal/wtfpython/issues/new)를 만들어 토론해보세요.
 
 추신: 역링크 요청으로 연락하지 마세요. 프로젝트와 관련이 높지 않으면 링크를 추가하지 않습니다.
 
@@ -3491,7 +3491,7 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
 이 항목들의 아이디어와 디자인은 Denys Dovhan's 의 멋진 프로젝트 [wtfjs](https://github.com/denysdovhan/wtfjs) 에서 영감을 받았습니다. Pythonista들의 압도적인 지지는 그것의 현재의 모습을 주었습니다.
 
-#### 몇개의 멋진 링크들!
+#### 몇 개의 멋진 링크들!
 * https://www.youtube.com/watch?v=sH4XF6pKKmk
 * https://www.reddit.com/r/Python/comments/3cu6ej/what_are_some_wtf_things_about_python
 * https://sopython.com/wiki/Common_Gotchas_In_Python
@@ -3511,7 +3511,7 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 [license-url]: http://www.wtfpl.net
 [license-image]: https://img.shields.io/badge/License-WTFPL%202.0-lightgrey.svg?style=flat-square
 
-## 친구들을 놀래켜보세요!
+## 친구들을 놀라게 해보세요!
 
 만약 wtfpython이 마음에 드셨다면, 친구들에게 빠르게 공유하기 위한 퀵 링크들을 사용할 수 있어요.
 
@@ -3519,5 +3519,5 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
 ## 비슷한 것들을 찾고 있나요?
 
-만약 이것과 비슷한 내용들에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
+만약 이것과 비슷한 내용에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
 *추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/)을 고려해보세요.*
