@@ -41,7 +41,7 @@
     + [▶ 질서 속의 무질서 *](#-질서-속의-무질서-)
     + [▶ 계속 시도해 보세요... *](#-계속-시도해-보세요-)
     + [▶ 무엇을 위해서(for)?](#-무엇을-위해서for)
-    + [▶ 실행되는 시간의 차이](#-무엇을-위해서for)
+    + [▶ 실행되는 시간의 차이](#-실행되는-시간의-차이)
     + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
     + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
     + [▶ A tic-tac-toe where X wins in the first attempt!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
@@ -732,9 +732,9 @@ array_4 = [400, 500, 600]
 
 ---
 
-### ▶ How not to use `is` operator
+### ▶ `is` 연산자를 안쓰는 방법
 <!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
-The following is a very famous example present all over the internet.
+아래 예제는 인터넷에서 매우 유명한 예제로 퍼져있습니다.
 
 1\.
 
@@ -765,7 +765,7 @@ True
 ```
 
 3\.
-**Output**
+**출력 결과**
 
 ```py
 >>> a, b = 257, 257
@@ -773,7 +773,7 @@ True
 True
 ```
 
-**Output (Python 3.7.x specifically)**
+**출력 결과 (파이썬 3.7.x)**
 
 ```py
 >>> a, b = 257, 257
@@ -781,25 +781,25 @@ True
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-**The difference between `is` and `==`**
+**`is`와 `==`의 차이점**
 
-* `is` operator checks if both the operands refer to the same object (i.e., it checks if the identity of the operands matches or not).
-* `==` operator compares the values of both the operands and checks if they are the same.
-* So `is` is for reference equality and `==` is for value equality. An example to clear things up,
+* `is` 연산자는 연산자 양쪽이 같은 객체를 참조하고 있는지를 확인합니다. (즉, 둘이 진짜로 같은지를 확인합니다).
+* `==` 연산자는 양쪽의 값을 비교하여 이 둘이 같은지를 확인합니다.
+* 그래서 `is`는 참조의 동등을, `==`는 값의 동등을 확인합니다. 다음 예제로 정리해보면,
   ```py
   >>> class A: pass
-  >>> A() is A() # These are two empty objects at two different memory locations.
+  >>> A() is A() # 이 둘은 메모리상에 다른 곳에 있는 두 빈 객체입니다. 
   False
   ```
 
-**`256` is an existing object but `257` isn't**
+**`256`은 존재하는 객체이지만 `257`은 아닙니다**
 
-When you start up python the numbers from `-5` to `256` will be allocated. These numbers are used a lot, so it makes sense just to have them ready.
+파이썬을 시작하게 되면, `-5`부터 `256`까지의 수들은 할당됩니다. 이 수들은 많이 사용되기 때문에 미리 준비하는 것입니다.
 
-Quoting from https://docs.python.org/3/c-api/long.html
-> The current implementation keeps an array of integer objects for all integers between -5 and 256, when you create an int in that range you just get back a reference to the existing object. So it should be possible to change the value of 1. I suspect the behavior of Python, in this case, is undefined. :-)
+https://docs.python.org/3/c-api/long.html 에서 인용한 글입니다.
+> 현 구현은 -5부터 256까지의 정수들을 담는 배열을 만듭니다. 만약 이 범위 안에 있는 정수를 만들게 되면 이미 존재하는 객체의 레퍼런스를 반환합니다. 그래서 1의 값을 바꾸는 것이 가능할 것입니다. 아마도 이 경우는 정의되지 않을 것입니다. :-)
 
 ```py
 >>> id(256)
@@ -820,13 +820,13 @@ Quoting from https://docs.python.org/3/c-api/long.html
 140084850247344
 ```
 
-Here the interpreter isn't smart enough while executing `y = 257` to recognize that we've already created an integer of the value `257,` and so it goes on to create another object in the memory.
+여기서 인터프리터는 `y = 257`을 실행할 때 위에서 벌써 `257`을 가지는 정수를 만들었다는 것을 알 정도로 똑똑하지 않아서 메모리에 새로운 객체를 만들게 됩니다.
 
-Similar optimization applies to other **immutable** objects like empty tuples as well. Since lists are mutable, that's why `[] is []` will return `False` and `() is ()` will return `True`. This explains our second snippet. Let's move on to the third one, 
+빈 튜플과 같이 다른 **변하지 않는** 객체에 대해서도 비슷한 최적화가 적용됩니다. 배열은 변할 수 있어서, `[] is []`는 항상 `False`를 반환하고 `() is ()`는 항상 `True`를 반환합니다. 이는 두 번째 예제를 성명합니다. 이제 세 번쨰로 넘어가볼까요?
 
-**Both `a` and `b` refer to the same object when initialized with same value in the same line.**
+**같은 줄에서 같은 값으로 초기화할 때 `a`와 `b` 둘 다 같은 객체를 참조합니다.**
 
-**Output**
+**출력 결과**
 
 ```py
 >>> a, b = 257, 257
@@ -842,9 +842,9 @@ Similar optimization applies to other **immutable** objects like empty tuples as
 140640774013488
 ```
 
-* When a and b are set to `257` in the same line, the Python interpreter creates a new object, then references the second variable at the same time. If you do it on separate lines, it doesn't "know" that there's already `257` as an object.
+* a와 b가 같은 줄에서 `257`로 할당될 때, 파이썬 인터프리터는 새로운 객체를 만듦과 동시에 두 번째 변수가 참조하게 됩니다. 이것을 다른 줄에서 한다면, 인터프리터는 `257`이 이미 있는지 알지 못합니다.
 
-* It's a compiler optimization and specifically applies to the interactive environment. When you enter two lines in a live interpreter, they're compiled separately, therefore optimized separately. If you were to try this example in a `.py` file, you would not see the same behavior, because the file is compiled all at once. This optimization is not limited to integers, it works for other immutable data types like strings (check the "Strings are tricky example") and floats as well,
+* 이 현상은 컴파일러 최적화이고 특별히 인터랙티브 환경에서만 적용됩니다. 인터프리터에 두 줄을 입력하게 되면, 각각 컴파일되며, 각각 최적화됩니다. 만약 이를 `.py`파일에서 시도한다면, 한 번에 컴파일되기 때문에 이 현상을 보지 못합니다. 이 최적화는 정수에만 국한된 것이 아니라 문자열("문자열은 가끔 헷갈려요"를 확인해보세요.)과 실수와 같이 변하지 않는 자료 구조에도 적용됩니다.
 
   ```py
   >>> a, b = 257.0, 257.0
@@ -852,7 +852,7 @@ Similar optimization applies to other **immutable** objects like empty tuples as
   True
   ```
 
-* Why didn't this work for Python 3.7? The abstract reason is because such compiler optimizations are implementation specific (i.e. may change with version, OS, etc). I'm still figuring out what exact implementation change cause the issue, you can check out this [issue](https://github.com/satwikkansal/wtfpython/issues/100) for updates.
+* 왜 파이썬 3.7에서는 작동되지 않나요? 간단히 말하자면 컴파일러 최적화는 구현하기 나름이기 때문입니다. (즉, 버전이나 운영체제 등에 따라 바뀔 수 있어요) 아직 이 문제를 일으킨 정확한 이유를 찾지 못했지만, 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인해보세요.
 
 ---
 
