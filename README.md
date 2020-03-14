@@ -45,8 +45,8 @@
     + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
     + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
     + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
-    + [▶ The sticky output function](#-the-sticky-output-function)
-    + [▶ The chicken-egg problem *](#-the-chicken-egg-problem-)
+    + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
+    + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
     + [▶ Subclass relationships](#-subclass-relationships)
     + [▶ All-true-ation *](#-all-true-ation-)
     + [▶ The surprising comma](#-the-surprising-comma)
@@ -919,7 +919,7 @@ board = [row] * 3
 
 ---
 
-### ▶ The sticky output function
+### ▶ 달라붙는 출력 함수
 <!-- Example ID: 4dc42f77-94cb-4eb5-a120-8203d3ed7604 --->
 
 1\.
@@ -931,7 +931,7 @@ for x in range(7):
     def some_func():
         return x
     funcs.append(some_func)
-    results.append(some_func())  # note the function call here
+    results.append(some_func())  # 함수를 호출하고 있다는 것을 놓치지 마세요.
 
 funcs_results = [func() for func in funcs]
 ```
@@ -944,7 +944,7 @@ funcs_results = [func() for func in funcs]
 >>> funcs_results
 [6, 6, 6, 6, 6, 6, 6]
 ```
-Even when the values of `x` were different in every iteration prior to appending `some_func` to `funcs`, all the functions return 6.
+`funcs`에 `some_func`를 추가하기 전의 `x`값은 항상 달랐는데도, 모든 함수가 6을 리턴합니다.
 
 2\.
 
@@ -954,11 +954,11 @@ Even when the values of `x` were different in every iteration prior to appending
 [512, 512, 512, 512, 512, 512, 512, 512, 512, 512]
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
-- When defining a function inside a loop that uses the loop variable in its body, the loop function's closure is bound to the variable, not its value. So all of the functions use the latest value assigned to the variable for computation.
+- 반복문 내에서 반복문의 변수를 사용하는 함수를 정의하면, 함수의 클로저는 변수의 값이 아니라 변수 자체에 바인딩됩니다. 따라서 모든 함수가 그 변수에 마지막으로 할당된 값을 사용하게 되죠.
 
-- To get the desired behavior you can pass in the loop variable as a named variable to the function. **Why this works?** Because this will define the variable again within the function's scope.
+- 원하는 결과를 얻고 싶다면, 반복문의 변수를 함수의 인자로서 넘겨주면 됩니다. **이게 왜 되는 걸까요?** 이렇게 하면 변수가 함수의 스코프 내에서 다시 정의되기 때문입니다.
 
     ```py
     funcs = []
@@ -977,7 +977,7 @@ Even when the values of `x` were different in every iteration prior to appending
 
 ---
 
-### ▶ The chicken-egg problem *
+### ▶ 닭이 먼저일까, 달걀이 먼저일까 *
 <!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
 1\.
 ```py
@@ -989,7 +989,7 @@ True
 True
 ```
 
-So which is the "ultimate" base class? There's more to the confusion by the way,
+그래서, "궁극적인" 기본 클래스는 뭘까요? 혼란스러운 점은 이게 끝이 아닙니다.
 
 2\. 
 
@@ -1015,15 +1015,15 @@ False
 ```
 
 
-#### 💡 Explanation
+#### 💡 설명
 
-- `type` is a [metaclass](https://realpython.com/python-metaclasses/) in Python.
-- **Everything** is an `object` in Python, which includes classes as well as their objects (instances).
-- class `type` is the metaclass of class `object`, and every class (including `type`) has inherited directly or indirectly from `object`.
-- There is no real base class among `object` and `type`. The confusion in the above snippets is arising because we're thinking about these relationships (`issubclass` and `isinstance`) in terms of Python classes. The relationship between `object` and `type` can't be reproduced in pure python. To be more precise the following relationships can't be reproduced in pure Python,
-    + class A is an instance of class B, and class B is an instance of class A.
-    + class A is an instance of itself.
-- These relationships between `object` and `type` (both being instances of each other as well as themselves) exist in Python because of "cheating" at the implementation level.
+- `type`은 파이썬의 [메타클래스](https://realpython.com/python-metaclasses/)입니다.
+- 파이썬에서 **모든 것은** `object`입니다. 이는 클래스와 인스턴스 모두에게 해당됩니다.
+- `type` 클래스는 `object` 클래스의 메타클래스이고, (`type`을 포함하는) 모든 클래스는 직접적으로든 간접적으로든 `object`를 상속합니다.
+- `object`와 `type` 중에서 진짜 기본 클래스는 존재하지 않습니다. 위의 코드들이 야기하는 혼란은 우리가 이런 관계들(`issubclass`와 `isinstance`)을 파이썬 클래스의 관점에서 생각하고 있기 때문에 발생합니다. `object`와 `type`의 관계는 순수 파이썬만으로는 재현할 수 없습니다. 정확히 말하자면, 아래의 관계는 순수 파이썬만으로 재현하는 것이 불가능합니다.
+    + 클래스 A는 클래스 B의 인스턴스이고, 클래스 B는 클래스 A의 인스턴스입니다.
+    + 클래스 A는 자기 자신의 인스턴스입니다.
+- `object`와 `type`의 이러한 관계(서로가 서로와 자기 스스로의 인스턴스인 것)를 가질 수 있는 건 구현 수준에서의 "편법"이 사용되었기 때문입니다.
 
 ---
 
