@@ -45,8 +45,8 @@
     + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
     + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
     + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
-    + [▶ The sticky output function](#-the-sticky-output-function)
-    + [▶ The chicken-egg problem *](#-the-chicken-egg-problem-)
+    + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
+    + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까,-달걀이-먼저일까-*)
     + [▶ Subclass relationships](#-subclass-relationships)
     + [▶ All-true-ation *](#-all-true-ation-)
     + [▶ The surprising comma](#-the-surprising-comma)
@@ -516,6 +516,7 @@ TypeError: unhashable type: 'dict'
 #### 💡 설명:
 
 - `dictionary` 그리고 `ordered_dict`, `another_ordered_dict`가 자동적으로 같지 않은 이유는 `OrderedDict` 클래스에서 `__eq__` 메소드가 구현된 방식 때문입니다. [도큐먼트](https://docs.python.org/3/library/collections.html#ordereddict-objects)에서 
+	
 	> OrderedDict 오브젝트이 같음을 확인하는 방법은 순서와 관련이 있고 `list(od1.items())==list(od2.items())`로 구현되어 있습니다. `OrderedDict` 오프젝트와 다른 매핑 오프젝트들의 같음을 확인하는 방법은 순서와 상관있습니다.
 - 위와 같이 동작하는 이유는 `OrderedDict` 오브젝트가 바로 보통의 딕셔너리가 사용되는 곳에 사용될 수 있게 하기 위해서 입니다. 
 - 그러면 왜 `set` 오브젝트에서 순서를 바꾼것이 왜 길이에 영향을 미친 것일까요? 같음을 확인하는 함수가 잘 구현되어 있지 않기 때문입니다. 집합(set)은 유일한 원소들의 순서를 고려하지 않은 자료구조이므로, 각 원소를 삽입하는 순서는 상관이 없어야 합니다. 하지만 이 경우에는 상관이 있네요. 한번 깊이 들어가 봅시다.
@@ -919,7 +920,7 @@ board = [row] * 3
 
 ---
 
-### ▶ The sticky output function
+### ▶ 달라붙는 출력 함수
 <!-- Example ID: 4dc42f77-94cb-4eb5-a120-8203d3ed7604 --->
 
 1\.
@@ -931,7 +932,7 @@ for x in range(7):
     def some_func():
         return x
     funcs.append(some_func)
-    results.append(some_func())  # note the function call here
+    results.append(some_func())  # 함수를 호출하고 있다는 것을 놓치지 마세요.
 
 funcs_results = [func() for func in funcs]
 ```
@@ -944,7 +945,7 @@ funcs_results = [func() for func in funcs]
 >>> funcs_results
 [6, 6, 6, 6, 6, 6, 6]
 ```
-Even when the values of `x` were different in every iteration prior to appending `some_func` to `funcs`, all the functions return 6.
+`funcs`에 `some_func`를 추가하기 전의 `x`값은 항상 달랐는데도, 모든 함수가 6을 리턴합니다.
 
 2\.
 
@@ -954,11 +955,11 @@ Even when the values of `x` were different in every iteration prior to appending
 [512, 512, 512, 512, 512, 512, 512, 512, 512, 512]
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
-- When defining a function inside a loop that uses the loop variable in its body, the loop function's closure is bound to the variable, not its value. So all of the functions use the latest value assigned to the variable for computation.
+- 반복문 내에서 반복문의 변수를 사용하는 함수를 정의하면, 함수의 클로저는 변수의 값이 아니라 변수 자체에 바인딩됩니다. 따라서 모든 함수가 그 변수에 마지막으로 할당된 값을 사용하게 되죠.
 
-- To get the desired behavior you can pass in the loop variable as a named variable to the function. **Why this works?** Because this will define the variable again within the function's scope.
+- 원하는 결과를 얻고 싶다면, 반복문의 변수를 함수의 인자로서 넘겨주면 됩니다. **이게 왜 되는 걸까요?** 이렇게 하면 변수가 함수의 스코프 내에서 다시 정의되기 때문입니다.
 
     ```py
     funcs = []
@@ -977,9 +978,10 @@ Even when the values of `x` were different in every iteration prior to appending
 
 ---
 
-### ▶ The chicken-egg problem *
+### ▶ 닭이 먼저일까, 달걀이 먼저일까 *
 <!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
 1\.
+
 ```py
 >>> isinstance(3, int)
 True
@@ -989,7 +991,7 @@ True
 True
 ```
 
-So which is the "ultimate" base class? There's more to the confusion by the way,
+그래서, "궁극적인" 기본 클래스는 뭘까요? 혼란스러운 점은 이게 끝이 아닙니다.
 
 2\. 
 
@@ -1015,15 +1017,15 @@ False
 ```
 
 
-#### 💡 Explanation
+#### 💡 설명
 
-- `type` is a [metaclass](https://realpython.com/python-metaclasses/) in Python.
-- **Everything** is an `object` in Python, which includes classes as well as their objects (instances).
-- class `type` is the metaclass of class `object`, and every class (including `type`) has inherited directly or indirectly from `object`.
-- There is no real base class among `object` and `type`. The confusion in the above snippets is arising because we're thinking about these relationships (`issubclass` and `isinstance`) in terms of Python classes. The relationship between `object` and `type` can't be reproduced in pure python. To be more precise the following relationships can't be reproduced in pure Python,
-    + class A is an instance of class B, and class B is an instance of class A.
-    + class A is an instance of itself.
-- These relationships between `object` and `type` (both being instances of each other as well as themselves) exist in Python because of "cheating" at the implementation level.
+- `type`은 파이썬의 [메타클래스](https://realpython.com/python-metaclasses/)입니다.
+- 파이썬에서 **모든 것은** `object`입니다. 이는 클래스와 인스턴스 모두에게 해당됩니다.
+- `type` 클래스는 `object` 클래스의 메타클래스이고, (`type`을 포함하는) 모든 클래스는 직접적으로든 간접적으로든 `object`를 상속합니다.
+- `object`와 `type` 중에서 진짜 기본 클래스는 존재하지 않습니다. 위의 코드들이 야기하는 혼란은 우리가 이런 관계들(`issubclass`와 `isinstance`)을 파이썬 클래스의 관점에서 생각하고 있기 때문에 발생합니다. `object`와 `type`의 관계는 순수 파이썬만으로는 재현할 수 없습니다. 정확히 말하자면, 아래의 관계는 순수 파이썬만으로 재현하는 것이 불가능합니다.
+    + 클래스 A는 클래스 B의 인스턴스이고, 클래스 B는 클래스 A의 인스턴스입니다.
+    + 클래스 A는 자기 자신의 인스턴스입니다.
+- `object`와 `type`의 이러한 관계(서로가 서로와 자기 스스로의 인스턴스인 것)를 가질 수 있는 건 구현 수준에서의 "편법"이 사용되었기 때문입니다.
 
 ---
 
@@ -1278,7 +1280,7 @@ I have lost faith in truth!
 #### 💡 Explanation:
 
 * `bool` is a subclass of `int` in Python
-    
+  
     ```py
     >>> issubclass(bool, int)
     True
@@ -3369,7 +3371,7 @@ def convert_list_to_string(l, iters):
   **💡 설명:** 이 장난은 [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en) 에서 왔습니다. space-invader 연산자는 실제로 `a -= (-1)` 의 잘못된 형식입니다. `a = a - (- 1)`와 같습니다. `a += (+ 1)`도 비슷한 방식으로 적용됩니다.
   
 * 파이썬은 문서화되지 않은 [converse implication](https://en.wikipedia.org/wiki/Converse_implication) 연산자를 가지고 있습니다. 
-     
+  
      ```py
      >>> False ** False == True
      True
@@ -3398,10 +3400,10 @@ def convert_list_to_string(l, iters):
     >>> some_string = "wtfpython"
     >>> f'{some_string=}'
     "string='wtfpython'"
-    ``` 
+    ```
 
 * 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수만 정의될 수 있는 것을 의미합니다. 하지만, 파이썬은 2^16개 이상의 변수 이름들을 저장하는 데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
-     
+  
      ```py
      import dis
     exec("""
@@ -3413,7 +3415,7 @@ def convert_list_to_string(l, iters):
 
     print(dis.dis(f))
     ```
-     
+    
 * 여러 파이썬 스레드들이 동시에 *파이썬 코드* 를 실행하지 않습니다. (예, 제대로 들으셨습니다!) 여러 개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있습니다, 하지만, 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에, 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것뿐입니다. 파이썬의 쓰레드는 IO-bound 작업에 적합합니다, 그러나 CPU-bound 작업에 대해서 실제로 병렬화를 달성합니다, 당신은 Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하길 원할 수 있습니다.
 
 * 때때로, `print` 메소드는 값을 바로 출력하지 못할 수 있습니다. 예를 들어,
