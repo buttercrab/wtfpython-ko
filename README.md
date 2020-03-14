@@ -44,7 +44,7 @@
     + [▶ 실행되는 시간의 차이](#-무엇을-위해서for)
     + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
     + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
-    + [▶ 첫 번째 시도에서 X가 승리하는 틱택 토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
+    + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
     + [▶ The sticky output function](#-the-sticky-output-function)
     + [▶ The chicken-egg problem *](#-the-chicken-egg-problem-)
     + [▶ Subclass relationships](#-subclass-relationships)
@@ -872,13 +872,13 @@ False
 
 ---
 
-### ▶ 첫 번째 시도에서 X가 승리하는 틱택 토!
+### ▶ X가 첫 번째 시도에서 승리하는 틱택토!
 <!-- Example ID: 69329249-bdcb-424f-bd09-cca2e6705a7a --->
 
 ```py
-# row를 초기화합시다
+# row를 초기화합니다
 row = [""] * 3 #row i['', '', '']
-# board를 만듭시다
+# board를 만듭니다
 board = [row] * 3
 ```
 
@@ -900,15 +900,15 @@ board = [row] * 3
 
 #### 💡 설명:
 
-이 시각화 자료는 우리가 `row` 변수를 초기화할 때 메모리에서 어떠한 일이 일어나는지 보여줍니다.
+이 시각화 자료는 `row` 변수를 초기화할 때 메모리에서 어떠한 일이 일어나는지 보여줍니다.
 
 ![image](/images/tic-tac-toe/after_row_initialized.png)
 
-그리고 `row`를 곱하여 `board`를 초기화할 때, 이는 메모리에서 일어나는 일이다. (각각의 원소 `board[0]`, `board[1]` 그리고 `board[2]`는  `row`가 참조한 동일한 리스트의 참조자입니다.)
+그리고 이는 `row`를 곱하여 `board`를 초기화할 때, 메모리에서 일어나는 일입니다. (각각의 원소 `board[0]`, `board[1]` 그리고 `board[2]`는  `row`가 참조한 동일한 리스트의 참조자입니다.)
 
 ![image](/images/tic-tac-toe/after_board_initialized.png)
 
-당신은 위와 같은 현상을 `row`를 사용하지 않고 `board`를 생성하여 해결할 수 있습니다.. (이 이슈에서 질문됨 [this](https://github.com/satwikkansal/wtfpython/issues/68)).
+우리는 위와 같은 현상을 `row`를 사용하지 않고 `board`를 생성하여 해결할 수 있습니다. (이 이슈에서 질문됨 [this](https://github.com/satwikkansal/wtfpython/issues/68)).
 
 ```py
 >>> board = [['']*3 for _ in range(3)]
