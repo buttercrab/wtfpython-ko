@@ -46,7 +46,7 @@
     + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
     + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
     + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
-    + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까,-달걀이-먼저일까-*)
+    + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까,-달걀이-먼저일까-)
     + [▶ Subclass relationships](#-subclass-relationships)
     + [▶ All-true-ation *](#-all-true-ation-)
     + [▶ The surprising comma](#-the-surprising-comma)
