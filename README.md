@@ -29,80 +29,96 @@
 
 <!-- toc -->
 
+- [목차](#목차)
 - [예제의 구성](#예제의-구성)
-    + [▶ 빛나는 제목](#-빛나는-제목)
 - [사용방법](#사용방법)
 - [👀 예제](#-예제)
-  * ["머리가 아플수도 있어요!" 단원](#머리가-아플수도-있어요-단원)
-    + [▶ 먼저 처음 것들부터 *](#-먼저-처음-것들부터-)
-    + [▶ 문자열은 가끔 헷갈려요](#-문자열은-가끔-헷갈려요)
-    + [▶ 해시 브라우니](#-해시-브라우니)
-    + [▶ 깊이 들어가면 우리는 다 똑같아.](#-깊이-들어가면-우리는-다-똑같아)
-    + [▶ 질서 속의 무질서 *](#-질서-속의-무질서-)
-    + [▶ 계속 시도해 보세요... *](#-계속-시도해-보세요-)
-    + [▶ 무엇을 위해서(for)?](#-무엇을-위해서for)
-    + [▶ 실행되는 시간의 차이](#-무엇을-위해서for)
-    + [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
-    + [▶ `is not ...` is not `is (not ...)`](#-is-not--is-not-is-not-)
-    + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-a-tic-tac-toe-where-x-wins-in-the-first-attempt)
-    + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
-    + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
-    + [▶ Subclass relationships](#-subclass-relationships)
-    + [▶ All-true-ation *](#-all-true-ation-)
-    + [▶ The surprising comma](#-the-surprising-comma)
-    + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
-    + [▶ not knot!](#-not-knot)
-    + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
-    + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
-    + [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
-    + [▶ Non-reflexive class method *](#-non-reflexive-class-method-)
-    + [▶ yielding None](#-yielding-none)
-    + [▶ Yielding from... return! *](#-yielding-from-return-)
-    + [▶ Nan-reflexivity *](#-nan-reflexivity-)
-    + [▶ Mutating the immutable!](#-mutating-the-immutable)
-    + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
-    + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
-    + [▶ Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
-  * [Section: Slippery Slopes](#section-slippery-slopes)
-    + [▶ Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
-    + [▶ Stubborn `del` operation](#-stubborn-del-operation)
-    + [▶ The out of scope variable](#-the-out-of-scope-variable)
-    + [▶ Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
-    + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
-    + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
-    + [▶ Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
-    + [▶ Catching the Exceptions](#-catching-the-exceptions)
-    + [▶ Same operands, different story!](#-same-operands-different-story)
-    + [▶ Be careful with chained operations](#-be-careful-with-chained-operations)
-    + [▶ Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
-    + [▶ Needles in a Haystack *](#-needles-in-a-haystack-)
-    + [▶ Splitsies *](#-splitsies-)
-    + [▶ Wild imports *](#-wild-imports-)
-    + [▶ All sorted? *](#-all-sorted-)
-    + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
-  * [Section: The Hidden treasures!](#section-the-hidden-treasures)
-    + [▶ Okay Python, Can you make me fly?](#-okay-python-can-you-make-me-fly)
-    + [▶ `goto`, but why?](#-goto-but-why)
-    + [▶ Brace yourself!](#-brace-yourself)
-    + [▶ Let's meet Friendly Language Uncle For Life](#-lets-meet-friendly-language-uncle-for-life)
-    + [▶ Even Python understands that love is complicated](#-even-python-understands-that-love-is-complicated)
-    + [▶ Yes, it exists!](#-yes-it-exists)
-    + [▶ Ellipsis *](#-ellipsis-)
-    + [▶ Inpinity](#-inpinity)
-    + [▶ Let's mangle](#-lets-mangle)
-  * [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
-    + [▶ Skipping lines?](#-skipping-lines)
-    + [▶ Teleportation](#-teleportation)
-    + [▶ Well, something is fishy...](#-well-something-is-fishy)
-  * ["기타 등등" 단원](#기타-등등-단원)
-    + [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
-    + [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
-    + [▶ 사소한 것들 *](#-사소한-것들-)
+  - ["머리가 아플수도 있어요!" 단원](#머리가-아플수도-있어요-단원)
+    - [▶ 먼저 처음 것들부터 *](#-먼저-처음-것들부터-)
+      - [💡 설명](#-설명)
+    - [▶ 문자열은 가끔 헷갈려요](#-문자열은-가끔-헷갈려요)
+      - [💡 설명:](#-설명-1)
+    - [▶ 해시 브라우니](#-해시-브라우니)
+      - [💡 설명](#-설명-2)
+    - [▶ 깊이 들어가면 우리는 다 똑같아.](#-깊이-들어가면-우리는-다-똑같아)
+      - [💡 설명:](#-설명-3)
+    - [▶ 질서 속의 무질서 *](#-질서-속의-무질서-)
+      - [💡 설명:](#-설명-4)
+    - [▶ 계속 시도해 보세요... *](#-계속-시도해-보세요-)
+      - [💡 설명:](#-설명-5)
+    - [▶ 무엇을 위해서(for)?](#-무엇을-위해서for)
+      - [💡 설명:](#-설명-6)
+    - [▶ 실행되는 시간의 차이](#-실행되는-시간의-차이)
+      - [💡 설명](#-설명-7)
+    - [▶ How not to use `is` operator](#-how-not-to-use-is-operator)
+      - [💡 Explanation:](#-explanation)
+    - [▶ `is not ...` 은 `is (not ...)`이 아니다](#-is-not--은-is-not-이-아니다)
+      - [💡 설명](#-설명-8)
+    - [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-x가-첫-번째-시도에서-승리하는-틱택토)
+      - [💡 설명:](#-설명-9)
+    - [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
+      - [💡 설명](#-설명-10)
+    - [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
+      - [💡 설명](#-설명-11)
+    - [▶ Subclass relationships](#-subclass-relationships)
+      - [💡 Explanation:](#-explanation-1)
+    - [▶ All-true-ation *](#-all-true-ation-)
+      - [💡 Explanation:](#-explanation-2)
+- [A simple example to count the number of booleans and](#a-simple-example-to-count-the-number-of-booleans-and)
+- [integers in an iterable of mixed data types.](#integers-in-an-iterable-of-mixed-data-types)
+- [prints nothing](#prints-nothing)
+- [so far so good, let's zip the remaining](#so-far-so-good-lets-zip-the-remaining)
+- [This time let's initialize x first](#this-time-lets-initialize-x-first)
+- [An assert statement with an assertion failure message.](#an-assert-statement-with-an-assertion-failure-message)
+- [No AssertionError is raised](#no-assertionerror-is-raised)
+- [is same as](#is-same-as)
+- [but](#but)
+- [isn't the same as](#isnt-the-same-as)
+- [File: module.py](#file-modulepy)
+    - [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
+      - [💡 Explanation:](#-explanation-3)
+  - [---](#hr)
+  - [Section: The Hidden treasures!](#section-the-hidden-treasures)
+    - [▶ Okay Python, Can you make me fly?](#-okay-python-can-you-make-me-fly)
+      - [💡 Explanation:](#-explanation-4)
+    - [▶ `goto`, but why?](#-goto-but-why)
+      - [💡 Explanation:](#-explanation-5)
+    - [▶ Brace yourself!](#-brace-yourself)
+      - [💡 Explanation:](#-explanation-6)
+    - [▶ Let's meet Friendly Language Uncle For Life](#-lets-meet-friendly-language-uncle-for-life)
+      - [💡 Explanation:](#-explanation-7)
+    - [▶ Even Python understands that love is complicated](#-even-python-understands-that-love-is-complicated)
+      - [💡 Explanation:](#-explanation-8)
+    - [▶ Yes, it exists!](#-yes-it-exists)
+      - [💡 Explanation:](#-explanation-9)
+    - [▶ Ellipsis *](#-ellipsis-)
+      - [💡 Explanation](#-explanation-10)
+    - [▶ Inpinity](#-inpinity)
+      - [💡 Explanation:](#-explanation-11)
+    - [▶ Let's mangle](#-lets-mangle)
+      - [💡 Explanation:](#-explanation-12)
+  - [---](#hr-1)
+  - [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
+    - [▶ Skipping lines?](#-skipping-lines)
+      - [💡 Explanation](#-explanation-13)
+    - [▶ Teleportation](#-teleportation)
+      - [💡 Explanation:](#-explanation-14)
+    - [▶ Well, something is fishy...](#-well-something-is-fishy)
+      - [💡 Explanation](#-explanation-15)
+  - [---](#hr-2)
+  - ["기타 등등" 단원](#기타-등등-단원)
+    - [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
+      - [💡 설명:](#-설명-12)
+    - [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
+      - [💡 설명](#-설명-13)
+    - [▶ 사소한 것들 *](#-사소한-것들-)
+  - [---](#hr-3)
 - [기여하기](#기여하기)
 - [감사의 말](#감사의-말)
+      - [몇 개의 멋진 링크들!](#몇-개의-멋진-링크들)
 - [🎓 License](#-license)
-  * [친구들을 놀래켜보세요!](#친구들을-놀래켜보세요)
-  * [비슷한 것들을 찾고 있나요?](#비슷한-것들을-찾고-있나요)
+  - [친구들을 놀라게 해보세요!](#친구들을-놀라게-해보세요)
+  - [비슷한 것들을 찾고 있나요?](#비슷한-것들을-찾고-있나요)
 
 <!-- tocstop -->
 
@@ -516,7 +532,6 @@ TypeError: unhashable type: 'dict'
 #### 💡 설명:
 
 - `dictionary` 그리고 `ordered_dict`, `another_ordered_dict`가 자동적으로 같지 않은 이유는 `OrderedDict` 클래스에서 `__eq__` 메소드가 구현된 방식 때문입니다. [도큐먼트](https://docs.python.org/3/library/collections.html#ordereddict-objects)에서 
-	
 	> OrderedDict 오브젝트이 같음을 확인하는 방법은 순서와 관련이 있고 `list(od1.items())==list(od2.items())`로 구현되어 있습니다. `OrderedDict` 오프젝트와 다른 매핑 오프젝트들의 같음을 확인하는 방법은 순서와 상관있습니다.
 - 위와 같이 동작하는 이유는 `OrderedDict` 오브젝트가 바로 보통의 딕셔너리가 사용되는 곳에 사용될 수 있게 하기 위해서 입니다. 
 - 그러면 왜 `set` 오브젝트에서 순서를 바꾼것이 왜 길이에 영향을 미친 것일까요? 같음을 확인하는 함수가 잘 구현되어 있지 않기 때문입니다. 집합(set)은 유일한 원소들의 순서를 고려하지 않은 자료구조이므로, 각 원소를 삽입하는 순서는 상관이 없어야 합니다. 하지만 이 경우에는 상관이 있네요. 한번 깊이 들어가 봅시다.
@@ -981,7 +996,6 @@ funcs_results = [func() for func in funcs]
 ### ▶ 닭이 먼저일까, 달걀이 먼저일까 *
 <!-- Example ID: 60730dc2-0d79-4416-8568-2a63323b3ce8 --->
 1\.
-
 ```py
 >>> isinstance(3, int)
 True
@@ -1280,7 +1294,7 @@ I have lost faith in truth!
 #### 💡 Explanation:
 
 * `bool` is a subclass of `int` in Python
-  
+    
     ```py
     >>> issubclass(bool, int)
     True
@@ -3371,7 +3385,7 @@ def convert_list_to_string(l, iters):
   **💡 설명:** 이 장난은 [Raymond Hettinger's tweet](https://twitter.com/raymondh/status/1131103570856632321?lang=en) 에서 왔습니다. space-invader 연산자는 실제로 `a -= (-1)` 의 잘못된 형식입니다. `a = a - (- 1)`와 같습니다. `a += (+ 1)`도 비슷한 방식으로 적용됩니다.
   
 * 파이썬은 문서화되지 않은 [converse implication](https://en.wikipedia.org/wiki/Converse_implication) 연산자를 가지고 있습니다. 
-  
+     
      ```py
      >>> False ** False == True
      True
@@ -3400,10 +3414,10 @@ def convert_list_to_string(l, iters):
     >>> some_string = "wtfpython"
     >>> f'{some_string=}'
     "string='wtfpython'"
-    ```
+    ``` 
 
 * 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수만 정의될 수 있는 것을 의미합니다. 하지만, 파이썬은 2^16개 이상의 변수 이름들을 저장하는 데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
-  
+     
      ```py
      import dis
     exec("""
@@ -3415,7 +3429,7 @@ def convert_list_to_string(l, iters):
 
     print(dis.dis(f))
     ```
-    
+     
 * 여러 파이썬 스레드들이 동시에 *파이썬 코드* 를 실행하지 않습니다. (예, 제대로 들으셨습니다!) 여러 개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있습니다, 하지만, 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에, 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것뿐입니다. 파이썬의 쓰레드는 IO-bound 작업에 적합합니다, 그러나 CPU-bound 작업에 대해서 실제로 병렬화를 달성합니다, 당신은 Python [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하길 원할 수 있습니다.
 
 * 때때로, `print` 메소드는 값을 바로 출력하지 못할 수 있습니다. 예를 들어,
