@@ -47,7 +47,7 @@
     + [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-x가-첫-번째-시도에서-승리하는-틱택토)
     + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
     + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
-    + [▶ Subclass relationships](#-subclass-relationships)
+    + [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
     + [▶ All-true-ation *](#-all-true-ation-)
     + [▶ The surprising comma](#-the-surprising-comma)
     + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
@@ -936,7 +936,7 @@ for x in range(7):
 funcs_results = [func() for func in funcs]
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> results
@@ -968,7 +968,7 @@ funcs_results = [func() for func in funcs]
         funcs.append(some_func)
     ```
 
-    **Output:**
+    **출력 결과:**
     ```py
     >>> funcs_results = [func() for func in funcs]
     >>> funcs_results
@@ -1027,9 +1027,9 @@ False
 
 ---
 
-### ▶ Subclass relationships
+### ▶ 서브 클래스의 관계
 <!-- Example ID: 9f6d8cf0-e1b5-42d0-84a0-4cfab25a0bc0 --->
-**Output:**
+**출력 결과:**
 ```py
 >>> from collections import Hashable
 >>> issubclass(list, object)
@@ -1040,14 +1040,14 @@ True
 False
 ```
 
-The Subclass relationships were expected to be transitive, right? (i.e., if `A` is a subclass of `B`, and `B` is a subclass of `C`, the `A` _should_ a subclass of `C`)
+서브 클래스의 관계는 삼단논법을 따라야 하지 않나요? (즉 `A`가 `B`의 서브 클래스이고 `B`가 `C`의 서브 클래스이면 `A`는 `C`의 서브 클래스 _이여야만_ 합니다)
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Subclass relationships are not necessarily transitive in Python. Anyone is allowed to define their own, arbitrary `__subclasscheck__` in a metaclass.
-* When `issubclass(cls, Hashable)` is called, it simply looks for non-Falsey "`__hash__`" method in `cls` or anything it inherits from.
-* Since `object` is hashable, but `list` is non-hashable, it breaks the transitivity relation.
-* More detailed explanation can be found [here](https://www.naftaliharris.com/blog/python-subclass-intransitivity/).
+* 파이썬에서는 서브 클래스의 관계가 삼단논법을 따를 필요가 없습니다. 아무나 자유롭게 메타클래스에 자신만의 `__subclasscheck__`를 만들 수 있습니다.
+* `issubclass(cls, Hashable)`이 호출되면, `cls`나 이의 조상 클래스에서 거짓이 아닌 "`__hash__`" 메소드를 찾습니다.
+* `object`가 해싱할 수 있고 `list`는 해싱할 수 없기 때문에, 상속되었다고 보기 힘듭니다.
+* 더 자세한 정보는 [여기](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)에서 찾아볼 수 있습니다.
 
 ---
 
