@@ -1045,7 +1045,7 @@ False
 #### 💡 설명:
 
 * 파이썬에서는 서브 클래스의 관계가 삼단논법을 따를 필요가 없습니다. 아무나 자유롭게 메타클래스에 자신만의 `__subclasscheck__`를 만들 수 있습니다.
-* `issubclass(cls, Hashable)`이 호출되면, `cls`나 상속되는 클래스에서 거짓이 아닌 "`__hash__`" 메소드를 찾습니다.
+* `issubclass(cls, Hashable)`이 호출되면, `cls`나 이의 조상 클래스에서 거짓이 아닌 "`__hash__`" 메소드를 찾습니다.
 * `object`가 해싱할 수 있고 `list`는 해싱할 수 없기 때문에, 상속되었다고 보기 힘듭니다.
 * 더 자세한 정보는 [여기](https://www.naftaliharris.com/blog/python-subclass-intransitivity/)에서 찾아볼 수 있습니다.
 
