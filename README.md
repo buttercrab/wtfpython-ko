@@ -3227,7 +3227,7 @@ Shouldn't that be 100?
 ```
 
 #### 💡 설명:
-+ `s1 += s2 + s3`에서 `s1`과 같은 첫 번째 문자열은 전체 문자열을 계산하는 동안에 파괴되지 않기 때문에 두 개 이상의 연결된 문자열에 대해서 `+=`가 `+` 보다 빠르게 됩니다.
++ `s1 += s2 + s3`에서 `s1`과 같은 첫 번째 문자열은 전체 문자열을 계산하는 동안에 파괴되지 않기 때문에 두 개 이상의 연결된 문자열에 대해서 `+=`가 `+` 보다 빠릅니다.
 
 ---
 
@@ -3266,7 +3266,7 @@ def convert_list_to_string(l, iters):
 **출력 결과:**
 
 ```py
-# 결과의 더 좋은 가독성을 위해 %timeit을 사용하여 ipython shell에서 실행됩니다.
+# 더 좋은 가독성을 위해 %timeit을 사용하여 ipython shell에서 실행했습니다.
 # 파이썬 shell/scriptm= 에서 timeit 모듈을 사용할 수 있습니다. 아래와 같은 방식입니다.
 # timeit.timeit('add_string_with_plus(10000)', number=1000, globals=globals())
 
