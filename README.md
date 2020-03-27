@@ -3218,16 +3218,16 @@ Shouldn't that be 100?
 <!-- Example ID: bfd19c60-a807-4a26-9598-4912b86ddb36 --->
 
 ```py
-# using "+", three strings:
+# 3개의 문자열을 "+"을 사용해서:
 >>> timeit.timeit("s1 = s1 + s2 + s3", setup="s1 = ' ' * 100000; s2 = ' ' * 100000; s3 = ' ' * 100000", number=100)
 0.25748300552368164
-# using "+=", three strings:
+# 3개의 문자열을 "+="을 사용해서:
 >>> timeit.timeit("s1 += s2 + s3", setup="s1 = ' ' * 100000; s2 = ' ' * 100000; s3 = ' ' * 100000", number=100)
 0.012188911437988281
 ```
 
 #### 💡 설명:
-+ 두 개 이상의 연결된 문자열에 대해서 `+=` 가 `+` 보다 빠릅니다. 왜냐하면 첫 문자열 (예를 들어, `s1 += s2 + s3`의 `s1`)은 전체 문자열이 계산되는 동안에 파괴되지 않습니다.
++ `s1 += s2 + s3`에서 `s1`과 같은 첫 번째 문자열은 전체 문자열을 계산하는 동안에 파괴되지 않기 때문에 두 개 이상의 연결된 문자열에 대해서 `+=`가 `+` 보다 빠르게 됩니다.
 
 ---
 
@@ -3267,7 +3267,7 @@ def convert_list_to_string(l, iters):
 
 ```py
 # 결과의 더 좋은 가독성을 위해 %timeit을 사용하여 ipython shell에서 실행됩니다.
-# 일반 파이썬 shell/scriptm= 에서 timeit 모듈을 사용할 수 있습니다. 아래와 같은 방식입니다.
+# 파이썬 shell/scriptm= 에서 timeit 모듈을 사용할 수 있습니다. 아래와 같은 방식입니다.
 # timeit.timeit('add_string_with_plus(10000)', number=1000, globals=globals())
 
 >>> NUM_ITERS = 1000
@@ -3303,11 +3303,11 @@ def convert_list_to_string(l, iters):
 
 #### 💡 설명
 
-- 이 링크에서 [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit) 에 대해 더 읽을 수 있습니다. 그것들은 코드 조각들의 실행 시간을 측정하는 데 사용됩니다.
-- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 immutable 하므로 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사되어야 합니다. 만약 당신이 길이 10의 문자열 4개를 연결한다면, 당신은 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사하게 될 것입니다. 문자열의 수와 길이가 증가함에 따라 상황은 이차적으로 악화됩니다. (`add_bytes_with_plus` 함수로 실행 시간을 정당화합니다.)
+- [timeit](https://docs.python.org/3/library/timeit.html) 또는 [%timeit](https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit)에 대해 더 읽을 수 있습니다. 그것들은 코드의 실행 시간을 측정하는 데 사용됩니다.
+- 긴 문자열들을 생성하는데 `+` 을 사용하지 마세요. - 파이썬에서, `str` 은 변하지 않아서 좌우의 문자열들은 각각의 쌍들에 대해 새로운 문자열로 복사됩니다. 만약 길이 10의 문자열 4개를 연결한다면, 40개의 문자(character)만 복사하지 않고 (10+10) + ((10+10)+10) + (((10+10)+10)+10) = 90개의 문자(character)를 복사합니다. 문자열의 수와 길이가 증가함에 따라 상황은 이차적으로 악화합니다. (`add_bytes_with_plus` 함수로 실행 시간을 보였습니다.)
 - 그러므로, `.format.` 또는 `%` 문법을 사용하는 것을 권고합니다. (하지만, 매우 짧은 문자열들의 경우 `+` 보다 약간 느립니다.)
 - 더 좋은 방법으로, iterable 객체의 형태로 사용 가능한 콘텐츠가 있다면, 훨씬 더 빠른 `''.join(iterable_object)`을 사용할 수 있습니다.
-- `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행 시간이 이차적으로 증가하지 않았습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 였다면 실행 시간이 이차적으로 증가했을 것입니다.
+- `add_bytes_with_plus`와 달리 앞의 예에서 보여준 `+=` 최적화로 인해 `add_string_with_plus`는 실행 시간이 이차적으로 증가하지 않습니다. `s += "xyz"` 대신 `s = s + "x" + "y" + "z"` 이였다면 실행 시간이 이차적으로 증가했을 겁니다.
   ```py
   def add_string_with_plus(iters):
       s = ""
@@ -3320,7 +3320,7 @@ def convert_list_to_string(l, iters):
   >>> %timeit -n100 add_string_with_plus(10000) # Quadratic increase in execution time
   9 ms ± 298 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
   ```
-- 거대한 문자열을 구성하고 만드는 많은 방법은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따라서,
+- 거대한 문자열을 구성하고 만드는 많은 방법은 [Zen of Python](https://www.python.org/dev/peps/pep-0020/) 과 약간 대조적입니다. 이에 따르면,
 
     > 어떤 문제든지 해결할 하나의 - 가급적이면 유일한 - 명백한 방법이 존재해야 합니다.
 
