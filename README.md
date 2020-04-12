@@ -3134,7 +3134,7 @@ False
 42
 ```
 
-내장된 `ord()` 함수는 문자의 유니코드 [code point](https://en.wikipedia.org/wiki/Code_point) 를 반환하며, 키릴 문자 'e'와 라틴 문자 'e'의 다른 코드 위치는 예제의 동작이 옳음을 보여줍니다.
+내장된 `ord()` 함수는 문자의 유니코드 [코드 포인트](https://en.wikipedia.org/wiki/Code_point) 를 반환하며, 키릴 문자 'e'와 라틴 문자 'e'의 다른 코드 위치는 예제의 동작이 옳음을 보여줍니다.
 
 ---
 
