@@ -90,10 +90,10 @@
     + [▶ Ellipsis *](#-ellipsis-)
     + [▶ Inpinity](#-inpinity)
     + [▶ Let's mangle](#-lets-mangle)
-  * [Section: Appearances are deceptive!](#section-appearances-are-deceptive)
-    + [▶ Skipping lines?](#-skipping-lines)
-    + [▶ Teleportation](#-teleportation)
-    + [▶ Well, something is fishy...](#-well-something-is-fishy)
+  * ["겉모습은 기만적입니다!" 단원](#겉모습은-기만적입니다-단원)
+    + [▶ 줄 건너뛰기?](#-줄-건너뛰기)
+    + [▶ 순간이동](#-순간이동)
+    + [▶ 음, 뭔가 수상한데...](#-음-뭔가-수상한데)
   * ["기타 등등" 단원](#기타-등등-단원)
     + [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
     + [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
@@ -3100,9 +3100,9 @@ AttributeError: 'A' object has no attribute '__variable'
 ---
 ---
 
-## Section: Appearances are deceptive!
+## "겉모습은 기만적입니다!" 단원
 
-### ▶ Skipping lines?
+### ▶ 줄 건너뛰기?
 <!-- Example ID: d50bbde1-fb9d-4735-9633-3444b9d2f417 --->
 **Output:**
 ```py
@@ -3112,46 +3112,46 @@ AttributeError: 'A' object has no attribute '__variable'
 11
 ```
 
-Wut?
+뭐라고요?
 
-**Note:** The easiest way to reproduce this is to simply copy the statements from the above snippet and paste them into your file/shell.
+**참고:** 이를 재현하는 가장 쉬운 방법은 위의 코드에서 구문을 복사해서 파일/셸에 붙여넣는 것입니다.
 
-#### 💡 Explanation
+#### 💡 설명
 
-Some non-Western characters look identical to letters in the English alphabet but are considered distinct by the interpreter.
+일부 비-서양의 문자들은 영어의 알파벳과 똑같아 보이지만 인터프리터에 의해 별개의 것으로 여겨집니다.
 
 ```py
->>> ord('е') # cyrillic 'e' (Ye)
+>>> ord('е') # 키릴 문자 'e' (Ye)
 1077
->>> ord('e') # latin 'e', as used in English and typed using standard keyboard
+>>> ord('e') # 라틴 문자 'e', 영어에 사용되고 표준 키보드를 사용하여 타이핑한 것
 101
 >>> 'е' == 'e'
 False
 
->>> value = 42 # latin e
->>> valuе = 23 # cyrillic 'e', Python 2.x interpreter would raise a `SyntaxError` here
+>>> value = 42 # 라틴 문자 e
+>>> valuе = 23 # 키릴 문자 'e', Python 2.x 인터프리터는 `SyntaxError`를 일으킵니다
 >>> value
 42
 ```
 
-The built-in `ord()` function returns a character's Unicode [code point](https://en.wikipedia.org/wiki/Code_point), and different code positions of Cyrillic 'e' and Latin 'e' justify the behavior of the above example.
+내장된 `ord()` 함수는 문자의 유니코드 [코드 포인트](https://en.wikipedia.org/wiki/Code_point) 를 반환하며, 키릴 문자 'e'와 라틴 문자 'e'의 다른 코드 위치는 예제의 동작이 옳음을 보여줍니다.
 
 ---
 
-### ▶ Teleportation
+### ▶ 순간이동
 
 <!-- Example ID: edafe923-0c20-4315-b6e1-0c31abfc38f5 --->
 
 ```py
-# `pip install nump` first.
+# 먼저 `pip install numpy`를 하세요.
 import numpy as np
 
 def energy_send(x):
-    # Initializing a numpy array
+    # numpy 배열을 초기화합니다.
     np.array([float(x)])
 
 def energy_receive():
-    # Return an empty numpy array
+    # 빈 numpy 배열을 반환합니다.
     return np.empty((), dtype=np.float).tolist()
 ```
 
@@ -3162,21 +3162,21 @@ def energy_receive():
 123.456
 ```
 
-Where's the Nobel Prize?
+노벨상은 어디있나요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Notice that the numpy array created in the `energy_send` function is not returned, so that memory space is free to reallocate.
-* `numpy.empty()` returns the next free memory slot without reinitializing it. This memory spot just happens to be the same one that was just freed (usually, but not always).
+* `energy_send` 함수에서 생성된 numpy 배열은 반환되지 않아 메모리 공간을 자유롭게 재할당할 수 있습니다.
+* `numpy.empty()`는 다시 초기화하지 않고 다음에 사용 가능한 메모리 슬롯을 반환합니다. 이 메모리 위치는 막 풀려난 것과 같습니다. (보통 그러나, 항상 그렇지는 않습니다.)
 
 ---
 
-### ▶ Well, something is fishy...
+### ▶ 음, 뭔가 수상한데...
 <!-- Example ID: cb6a37c5-74f7-44ca-b58c-3b902419b362 --->
 ```py
 def square(x):
     """
-    A simple function to calculate the square of a number by addition.
+    숫자의 합으로 제곱을 구하는 간단한 함수.
     """
     sum_so_far = 0
     for counter in range(x):
@@ -3191,18 +3191,18 @@ def square(x):
 10
 ```
 
-Shouldn't that be 100?
+100이 아니여야 하나요?
 
-**Note:** If you're not able to reproduce this, try running the file [mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py) via the shell.
+**참고:** 이걸 재현할 수 없는 경우 [mixed_tabs_and_spaces.py](/mixed_tabs_and_spaces.py)를 셸에서 실행해보세요.
 
-#### 💡 Explanation
+#### 💡 설명
 
-* **Don't mix tabs and spaces!** The character just preceding return is a "tab",  and the code is indented by multiple of "4 spaces" elsewhere in the example.
-* This is how Python handles tabs:
+* **탭과 스페이스를 혼용하지 마세요!** 예제의 반환 직전에 있는 문자는 "탭"이며 다른 곳의 들여쓰기는 "4 스페이스"로 되어있습니다.
+* 파이썬이 탭을 처리하는 방법입니다:
   
-  > First, tabs are replaced (from left to right) by one to eight spaces such that the total number of characters up to and including the replacement is a multiple of eight <...>
-* So the "tab" at the last line of `square` function is replaced with eight spaces, and it gets into the loop.
-* Python 3 is kind enough to throw an error for such cases automatically.
+  > 탭은 왼쪽에서 오른쪽으로 1~8개의 공백으로 치환되며 치환된 항목을 포함하여 총 문자 수가 8의 배수가 되어야 합니다.
+* 즉, `square` 함수의 마지막 줄에 있는 "탭"은 8개의 공백으로 바뀌어 루프 안으로 들어가게 됩니다.
+* 파이썬 3는 그럴 때 자동으로 오류를 발생시킬 만큼 친절합니다.
 
     **Output (Python 3.x):**
     ```py
