@@ -1078,7 +1078,7 @@ True
 - ```py
   def all(iterable):
       for element in iterable:
-          if not element다
+          if not element:
               return False
       return True
   ```
