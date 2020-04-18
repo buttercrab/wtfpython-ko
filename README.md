@@ -48,7 +48,7 @@
     + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
     + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
     + [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
-    + [▶ All-true-ation *](#-all-true-ation-)
+    + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
     + [▶ The surprising comma](#-the-surprising-comma)
     + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
     + [▶ not knot!](#-not-knot)
