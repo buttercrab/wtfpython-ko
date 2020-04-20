@@ -1084,7 +1084,7 @@ True
   ```
 
 - `all([])`은 비어있으므로 `True`를 반환합니다.
-- `all([[]])`은 `not []`가 `True`, 즉 `iterable`안에 있는 배열이 비어 있기 때문에 `not False`이므로 `False`를 반환합니다.
+- `all([[]])`은 `not[]`는 True이며 이는 `not False`와 같고, `iterable` 안에 있는 리스트가 비어 있기 때문에 `False`를 반환합니다.
 - `all([[[]]])`와 더 많이 겹친 경우는 `not [[]]`, `not [[[]]]`... 이 `not True`와 동일 하므로 모두 `True`를 반환합니다.
 
 ---
