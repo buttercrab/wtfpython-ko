@@ -48,7 +48,7 @@
     + [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
     + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
     + [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
-    + [▶ All-true-ation *](#-all-true-ation-)
+    + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
     + [▶ The surprising comma](#-the-surprising-comma)
     + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
     + [▶ not knot!](#-not-knot)
@@ -1051,7 +1051,7 @@ False
 
 ---
 
-### ▶ All-true-ation *
+### ▶ 참 거짓의 반복 *
 
 <!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
 
@@ -1069,11 +1069,11 @@ False
 True
 ```
 
-Why's this True-False alteration?
+왜 이런 참 거짓의 반복이 일어날까요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The implementation of `all` function is equivalent to
+- `all`함수의 구현은 다음과 같습니다
 
 - ```py
   def all(iterable):
@@ -1083,9 +1083,9 @@ Why's this True-False alteration?
       return True
   ```
 
-- `all([])` returns `True` since the iterable is empty. 
-- `all([[]])` returns `False` because `not []` is `True` is equivalent to `not False` as the list inside the iterable is empty.
-- `all([[[]]])` and higher recursive variants are always `True` since `not [[]]`, `not [[[]]]`, and so on are equivalent to `not True`.
+- `all([])`은 비어있으므로 `True`를 반환합니다.
+- `all([[]])`은 `not[]`는 True이며 이는 `not False`와 같고, `iterable` 안에 있는 리스트가 비어 있기 때문에 `False`를 반환합니다.
+- `all([[[]]])`와 더 많이 겹친 경우는 `not [[]]`, `not [[[]]]`... 이 `not True`와 동일 하므로 모두 `True`를 반환합니다.
 
 ---
 
