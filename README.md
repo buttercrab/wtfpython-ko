@@ -80,13 +80,12 @@
     + [▶ Wild imports *](#-wild-imports-)
     + [▶ All sorted? *](#-all-sorted-)
     + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
-  * [Section: The Hidden treasures!](#section-the-hidden-treasures)
   * ["숨겨진 보물들!" 단원](#숨겨진-보물들-단원)
-    + [▶ 파이썬, 날 날게해줄 수 있니?](#-okay-python-can-you-make-me-fly)
-    + [▶ `goto`, but why?](#-goto-but-why)
-    + [▶ Brace yourself!](#-brace-yourself)
-    + [▶ Let's meet Friendly Language Uncle For Life](#-lets-meet-friendly-language-uncle-for-life)
-    + [▶ Even Python understands that love is complicated](#-even-python-understands-that-love-is-complicated)
+    + [▶ 파이썬, 날 날게해줄 수 있니?](#-파이썬-날-날게해줄-수-있니)
+    + [▶ `goto`, 하지만 왜?](#-goto-하지만-왜)
+    + [▶ 마음 단단히 먹으세요!](#-마음-단단히-먹으세요)
+    + [▶ 평생 친근한 아저씨 같은 언어를 만나봅시다](#-평생-친근한-아저씨-같은-언어를-만나봅시다)
+    + [▶ 파이썬조차 사랑이 복잡하다는 것을 이해합니다](#-파이썬조차-사랑이-복잡하다는-것을-이해합니다)
     + [▶ Yes, it exists!](#-yes-it-exists)
     + [▶ Ellipsis *](#-ellipsis-)
     + [▶ Inpinity](#-inpinity)
@@ -2740,9 +2739,8 @@ Before Python 3.5, the boolean value for `datetime.time` object was considered t
 
 ## "숨겨진 보물들!" 단원
 
-이 단원에는 저같은 초보자들이 (더 이상은 아니지만) 대부분 모르고 있는 파이썬에 대한 덜 알려지고 흥미로운 것들이 몇가지 포함되어있습니다.
+이 단원에는 저 같은 초보자들이 (더 이상은 아니지만) 대부분 모르고 있는 파이썬에 대한 덜 알려지고 흥미로운 것들이 몇 가지 포함되어있습니다.
 
-### ▶ Okay Python, Can you make me fly?
 ### ▶ 파이썬, 날 날게해줄 수 있니?
 <!-- Example ID: a92f3645-1899-4d50-9721-0031be4aec3f --->
 자, 여기 있습니다
@@ -2755,13 +2753,12 @@ import antigravity
 쉿... 이건 일급비밀이야.
 
 #### 💡 설명:
-+ `antigravity` 모듈은 파이썬 개발자들이 추가한 몇 안되는 이스터에그입니다.
++ `antigravity` 모듈은 파이썬 개발자들이 추가한 몇 안 되는 이스터에그입니다.
 + `import antigravity` 는 파이썬에 대한 [고전 XKCD 만화](http://xkcd.com/353)을 웹 브라우저에 띄워줍니다.
-+ 더 많은것이 그 안에 있는데, **또 다른 이스터에그가 이스터에그 안에 있습니다**. 코드를 보게 된다면 [코드](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17)를 보게 된다면, [XKCD의 geohashing 알고리즘](https://xkcd.com/426)을 구현하는 함수가 정의되어 있습니다.
++ 더 많은 것이 그 안에 있는데, **또 다른 이스터에그가 이스터에그 안에 있습니다**. [코드](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17)를 보게 된다면, [XKCD의 geohashing 알고리즘](https://xkcd.com/426)을 구현하는 함수가 정의되어 있습니다.
 
 ---
 
-### ▶ `goto`, but why?
 ### ▶ `goto`, 하지만 왜?
 <!-- Example ID: 2aff961e-7fa5-4986-a18a-9e5894bd89fe --->
 
@@ -2791,10 +2788,9 @@ Freedom!
 
 ---
 
-### ▶ Brace yourself!
 ### ▶ 마음 단단히 먹으세요!
 <!-- Example ID: 5c0c75f2-ddd9-4da3-ba49-c4be7ec39acf --->
-만약 여러분이 파이썬에서 스코프를 나타내기 위해 공백을 사용하는 것을 좋아하지 않는 사람 중 한명이라면, C-스타일의 {}을 가져와 사용할 수 있습니다.
+만약 여러분이 파이썬에서 스코프를 나타내기 위해 공백을 사용하는 것을 좋아하지 않는 사람 중 한 명이라면, C-스타일의 {}을 가져와 사용할 수 있습니다.
 
 ```py
 from __future__ import braces
@@ -2807,7 +2803,7 @@ from __future__ import braces
 SyntaxError: not a chance
 ```
 
-중괄호? 절대 안되! 만약 이게 실망스럽다면 자바를 사용하세요. 또 하나 놀라운 것은 `__future__`모듈에서 발생한 `SyntaxError`가 [코드](https://github.com/python/cpython/blob/master/Lib/__future__.py)의 어디에 있는지 찾을 수 있나요?
+중괄호? 절대 안돼! 만약 이게 실망스럽다면 자바를 사용하세요. 또 하나 놀라운 것은 `__future__`모듈에서 발생한 `SyntaxError`가 [코드](https://github.com/python/cpython/blob/master/Lib/__future__.py)의 어디에 있는지 찾을 수 있나요?
 
 #### 💡 설명:
 + `__future__` 모듈은 일반적으로 미래의 파이썬 버전에서 추가될 기능을 제공합니다. 하지만 이 특정한 맥락에서 "미래"는 아이러니합니다.
@@ -2817,7 +2813,6 @@ SyntaxError: not a chance
 
 ---
 
-### ▶ Let's meet Friendly Language Uncle For Life
 ### ▶ 평생동안 친근한 아저씨같은 언어를 만나봅시다
 <!-- Example ID: 6427fae6-e959-462d-85da-ce4c94ce41be --->
 **출력 결과 (Python 3.x)**
@@ -2836,12 +2831,12 @@ True
 또 시작이군.
 
 #### 💡 설명:
-- 이것은 2009년 4월 1일에 출시된 [PEP-401](https://www.python.org/dev/peps/pep-0401/)와 관련이 있습니다. (이제 여러분은 무엇을 의미하는지 알것입니다)
+- 이것은 2009년 4월 1일에 출시된 [PEP-401](https://www.python.org/dev/peps/pep-0401/) 와 관련이 있습니다. (이제 여러분은 무엇을 의미하는지 알 것입니다)
 - PEP-401의 일부를 인용하면
  
-  > 파이선 3.0의 != 비항등 연산자는 손가락의 고통을 유발하는 끔직하 실수라는 것을 인지하고, FLUFL은 유일한 문법으로 <> 다이아몬드 연산자를 복구시켯습니다.
-- 베리 아저씨가 PEP에서 공유한것들은 더 많은데, [여기](https://www.python.org/dev/peps/pep-0401/)서 읽을 수 있습니다.
-- 이것은 대화형 환경에서는 잘 작동하지만, 파이썬 파일을 통해서는 `SyntaxError`를 일으킵니다 ([이 이슈](https://github.com/satwikkansal/wtfpython/issues/94)를 읽어보세요). 하지만, 여러분이 구분을 `eval`이나 `compile`으로 감싼다면 잘 작동할것입니다.
+  > 파이선 3.0의 != 비항등 연산자는 손가락의 고통을 유발하는 끔직한 실수라는 것을 인지하고, FLUFL은 유일한 문법으로 <> 다이아몬드 연산자를 복구시켰습니다.
+- 베리 아저씨가 PEP에서 공유한 것들은 더 많은데, [여기](https://www.python.org/dev/peps/pep-0401/) 서 읽을 수 있습니다.
+- 이것은 대화형 환경에서는 잘 작동하지만, 파이썬 파일을 통해서는 `SyntaxError`를 일으킵니다. ([이 이슈](https://github.com/satwikkansal/wtfpython/issues/94)를 읽어보세요) 하지만, 여러분이 구분을 `eval`이나 `compile`으로 감싼다면 잘 작동할 것입니다.
     ```py
     from __future__ import barry_as_FLUFL
     print(eval('"Ruby" <> "Python"'))
@@ -2849,7 +2844,6 @@ True
 
 ---
 
-### ▶ Even Python understands that love is complicated
 ### ▶ 파이썬 조차 사랑이 복잡하다는 것을 이해합니다
 <!-- Example ID: b93cad9e-d341-45d1-999c-fcdce65bed25 --->
 ```py
@@ -2901,9 +2895,9 @@ True
 
 #### 💡 설명:
 
-* 파이썬의 `this` 모듈은 The Zen Of Python ([pep 20](https://www.python.org/dev/peps/pep-0020))을 위한 이스터에그입니다.
-* 그리고 이게 충분히 흥미롭다고 생각하면, [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py)의 구현을 확인해보세요. 흥미롭게도, **the code for the Zen을 스스로 위반합니다** (그리고 아마도 유일하게 이런 일이 있는 곳입니다).
-* `love is not True or False; love is love`라는 표현에 대해 아이러니하지만 이것은 자기-설명적인 (그렇지 않다면, `is`와 `is not`에 관련된 예시를 봐주세요) 표현입니다.
+* 파이썬의 `this` 모듈은 The Zen Of Python ([pep 20](https://www.python.org/dev/peps/pep-0020)) 을 위한 이스터에그입니다.
+* 그리고 이게 아주 흥미롭다고 생각하면, [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py)의 구현을 확인해보세요. 흥미롭게도, **the code for the Zen을 스스로 위반합니다** (그리고 아마도 유일하게 이런 일이 있는 곳입니다).
+* `love is not True or False; love is love`라는 표현에 대해 아이러니하지만, 이것은 자기-설명적인 (그렇지 않다면, `is`와 `is not`에 관련된 예시를 봐주세요) 표현입니다.
 
 ---
 
