@@ -81,7 +81,8 @@
     + [▶ All sorted? *](#-all-sorted-)
     + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
   * [Section: The Hidden treasures!](#section-the-hidden-treasures)
-    + [▶ Okay Python, Can you make me fly?](#-okay-python-can-you-make-me-fly)
+  * ["숨겨진 보물들!" 단원](#숨겨진-보물들-단원)
+    + [▶ 파이썬, 날 날게해줄 수 있니?](#-okay-python-can-you-make-me-fly)
     + [▶ `goto`, but why?](#-goto-but-why)
     + [▶ Brace yourself!](#-brace-yourself)
     + [▶ Let's meet Friendly Language Uncle For Life](#-lets-meet-friendly-language-uncle-for-life)
@@ -2737,29 +2738,31 @@ Before Python 3.5, the boolean value for `datetime.time` object was considered t
 
 
 
-## Section: The Hidden treasures!
+## "숨겨진 보물들!" 단원
 
-This section contains a few lesser-known and interesting things about Python that most beginners like me are unaware of (well, not anymore).
+이 단원에는 저같은 초보자들이 (더 이상은 아니지만) 대부분 모르고 있는 파이썬에 대한 덜 알려지고 흥미로운 것들이 몇가지 포함되어있습니다.
 
 ### ▶ Okay Python, Can you make me fly?
+### ▶ 파이썬, 날 날게해줄 수 있니?
 <!-- Example ID: a92f3645-1899-4d50-9721-0031be4aec3f --->
-Well, here you go
+자, 여기 있습니다
 
 ```py
 import antigravity
 ```
 
-**Output:**
-Sshh... It's a super-secret.
+**출력 결과:**
+쉿... 이건 일급비밀이야.
 
-#### 💡 Explanation:
-+ `antigravity` module is one of the few easter eggs released by Python developers.
-+ `import antigravity` opens up a web browser pointing to the [classic XKCD comic](http://xkcd.com/353/) about Python.
-+ Well, there's more to it. There's **another easter egg inside the easter egg**. If you look at the [code](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17), there's a function defined that purports to implement the [XKCD's geohashing algorithm](https://xkcd.com/426/).
+#### 💡 설명:
++ `antigravity` 모듈은 파이썬 개발자들이 추가한 몇 안되는 이스터에그입니다.
++ `import antigravity` 는 파이썬에 대한 [고전 XKCD 만화](http://xkcd.com/353)을 웹 브라우저에 띄워줍니다.
++ 더 많은것이 그 안에 있는데, **또 다른 이스터에그가 이스터에그 안에 있습니다**. 코드를 보게 된다면 [코드](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17)를 보게 된다면, [XKCD의 geohashing 알고리즘](https://xkcd.com/426)을 구현하는 함수가 정의되어 있습니다.
 
 ---
 
 ### ▶ `goto`, but why?
+### ▶ `goto`, 하지만 왜?
 <!-- Example ID: 2aff961e-7fa5-4986-a18a-9e5894bd89fe --->
 
 ```py
@@ -2769,56 +2772,58 @@ for i in range(9):
         for k in range(9):
             print("I am trapped, please rescue!")
             if k == 2:
-                goto .breakout # breaking out from a deeply nested loop
+                goto .breakout # 깊게 중첩된 루프에서 탈출
 label .breakout
 print("Freedom!")
 ```
 
-**Output (Python 2.3):**
+**출력 결과 (Python 2.3):**
 ```py
 I am trapped, please rescue!
 I am trapped, please rescue!
 Freedom!
 ```
 
-#### 💡 Explanation:
-- A working version of `goto` in Python was [announced](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html) as an April Fool's joke on 1st April 2004.
-- Current versions of Python do not have this module.
-- Although it works, but please don't use it. Here's the [reason](https://docs.python.org/3/faq/design.html#why-is-there-no-goto) to why `goto` is not present in Python.
+#### 💡 설명:
+- 파이썬에 `goto`가 추가된 버전은 2004년 4월 1일에 만우절 장난으로 [발표](https://mail.python.org/pipermail/python-announce-list/2004-April/002982.html)되었습니다.
+- 현재 버전의 파이썬은 이 모듈을 가지고 있지 않습니다.
+- 비록 이것이 작동하지만, 사용하지 마십시오. 파이썬에는 `goto`가 존재하지 않는 [이유](https://docs.python.org/3/faq/design.html#why-is-there-no-goto)가 있습니다.
 
 ---
 
 ### ▶ Brace yourself!
+### ▶ 마음 단단히 먹으세요!
 <!-- Example ID: 5c0c75f2-ddd9-4da3-ba49-c4be7ec39acf --->
-If you are one of the people who doesn't like using whitespace in Python to denote scopes, you can use the C-style {} by importing,
+만약 여러분이 파이썬에서 스코프를 나타내기 위해 공백을 사용하는 것을 좋아하지 않는 사람 중 한명이라면, C-스타일의 {}을 가져와 사용할 수 있습니다.
 
 ```py
 from __future__ import braces
 ```
 
-**Output:**
+**출력 결과:**
 ```py
   File "some_file.py", line 1
     from __future__ import braces
 SyntaxError: not a chance
 ```
 
-Braces? No way! If you think that's disappointing, use Java. Okay, another surprising thing, can you find where's the `SyntaxError` raised in `__future__` module [code](https://github.com/python/cpython/blob/master/Lib/__future__.py)?
+중괄호? 절대 안되! 만약 이게 실망스럽다면 자바를 사용하세요. 또 하나 놀라운 것은 `__future__`모듈에서 발생한 `SyntaxError`가 [코드](https://github.com/python/cpython/blob/master/Lib/__future__.py)의 어디에 있는지 찾을 수 있나요?
 
-#### 💡 Explanation:
-+ The `__future__` module is normally used to provide features from future versions of Python. The "future" in this specific context is however, ironic.
-+ This is an easter egg concerned with the community's feelings on this issue.
-+ The code is actually present [here](https://github.com/python/cpython/blob/025eb98dc0c1dc27404df6c544fc2944e0fa9f3a/Python/future.c#L49) in `future.c` file.
-+ When the CPython compiler encounters a [future statement](https://docs.python.org/3.3/reference/simple_stmts.html#future-statements), it first runs the appropriate code in `future.c` before treating it as a normal import statement.
+#### 💡 설명:
++ `__future__` 모듈은 일반적으로 미래의 파이썬 버전에서 추가될 기능을 제공합니다. 하지만 이 특정한 맥락에서 "미래"는 아이러니합니다.
++ 이것은 이 문제에 대한 커뮤니티의 감정과 관련된 이스터에그입니다.
++ 그 코드는 실제로 [여기](https://github.com/python/cpython/blob/025eb98dc0c1dc27404df6c544fc2944e0fa9f3a/Python/future.c#L49) `future.c` 파일 안에 존재합니다.
++ CPython 컴파일러가 [future 구문](https://docs.python.org/3.3/reference/simple_stmts.html#future-statements)과 마주칠 때, 먼저 `future.c`에서 적절한 코드를 실행한 후 그걸 일반적인 구문으로 간주합니다.
 
 ---
 
 ### ▶ Let's meet Friendly Language Uncle For Life
+### ▶ 평생동안 친근한 아저씨같은 언어를 만나봅시다
 <!-- Example ID: 6427fae6-e959-462d-85da-ce4c94ce41be --->
-**Output (Python 3.x)**
+**출력 결과 (Python 3.x)**
 ```py
 >>> from __future__ import barry_as_FLUFL
->>> "Ruby" != "Python" # there's no doubt about it
+>>> "Ruby" != "Python" # 이건 의심할 여지가 없습니다
   File "some_file.py", line 1
     "Ruby" != "Python"
               ^
@@ -2828,15 +2833,15 @@ SyntaxError: invalid syntax
 True
 ```
 
-There we go.
+또 시작이군.
 
-#### 💡 Explanation:
-- This is relevant to [PEP-401](https://www.python.org/dev/peps/pep-0401/) released on April 1, 2009 (now you know, what it means).
-- Quoting from the PEP-401
-  
-  > Recognized that the != inequality operator in Python 3.0 was a horrible, finger-pain inducing mistake, the FLUFL reinstates the <> diamond operator as the sole spelling.
-- There were more things that Uncle Barry had to share in the PEP; you can read them [here](https://www.python.org/dev/peps/pep-0401/).
-- It works well in an interactive environment, but it will raise a `SyntaxError` when you run via python file (see this [issue](https://github.com/satwikkansal/wtfpython/issues/94)). However, you can wrap the statement inside an `eval` or `compile` to get it working,
+#### 💡 설명:
+- 이것은 2009년 4월 1일에 출시된 [PEP-401](https://www.python.org/dev/peps/pep-0401/)와 관련이 있습니다. (이제 여러분은 무엇을 의미하는지 알것입니다)
+- PEP-401의 일부를 인용하면
+ 
+  > 파이선 3.0의 != 비항등 연산자는 손가락의 고통을 유발하는 끔직하 실수라는 것을 인지하고, FLUFL은 유일한 문법으로 <> 다이아몬드 연산자를 복구시켯습니다.
+- 베리 아저씨가 PEP에서 공유한것들은 더 많은데, [여기](https://www.python.org/dev/peps/pep-0401/)서 읽을 수 있습니다.
+- 이것은 대화형 환경에서는 잘 작동하지만, 파이썬 파일을 통해서는 `SyntaxError`를 일으킵니다 ([이 이슈](https://github.com/satwikkansal/wtfpython/issues/94)를 읽어보세요). 하지만, 여러분이 구분을 `eval`이나 `compile`으로 감싼다면 잘 작동할것입니다.
     ```py
     from __future__ import barry_as_FLUFL
     print(eval('"Ruby" <> "Python"'))
@@ -2845,14 +2850,15 @@ There we go.
 ---
 
 ### ▶ Even Python understands that love is complicated
+### ▶ 파이썬 조차 사랑이 복잡하다는 것을 이해합니다
 <!-- Example ID: b93cad9e-d341-45d1-999c-fcdce65bed25 --->
 ```py
 import this
 ```
 
-Wait, what's **this**? `this` is love :heart:
+잠깐, **this**가 뭔가요? `this`는 사랑입니다 :heart:
 
-**Output:**
+**출력 결과:**
 ```
 The Zen of Python, by Tim Peters
 
@@ -2877,7 +2883,7 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
 
-It's the Zen of Python!
+이것은 the Zen of Python 입니다!
 
 ```py
 >>> love = this
@@ -2889,15 +2895,15 @@ False
 False
 >>> love is not True or False
 True
->>> love is not True or False; love is love  # Love is complicated
+>>> love is not True or False; love is love  # 사랑은 복잡합니다
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* `this` module in Python is an easter egg for The Zen Of Python ([PEP 20](https://www.python.org/dev/peps/pep-0020)).
-* And if you think that's already interesting enough, check out the implementation of [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py). Interestingly, **the code for the Zen violates itself** (and that's probably the only place where this happens).
-* Regarding the statement `love is not True or False; love is love`, ironic but it's self-explanatory (if not, please see the examples related to `is` and `is not` operators).
+* 파이썬의 `this` 모듈은 The Zen Of Python ([pep 20](https://www.python.org/dev/peps/pep-0020))을 위한 이스터에그입니다.
+* 그리고 이게 충분히 흥미롭다고 생각하면, [this.py](https://hg.python.org/cpython/file/c3896275c0f6/Lib/this.py)의 구현을 확인해보세요. 흥미롭게도, **the code for the Zen을 스스로 위반합니다** (그리고 아마도 유일하게 이런 일이 있는 곳입니다).
+* `love is not True or False; love is love`라는 표현에 대해 아이러니하지만 이것은 자기-설명적인 (그렇지 않다면, `is`와 `is not`에 관련된 예시를 봐주세요) 표현입니다.
 
 ---
 
