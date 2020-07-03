@@ -86,10 +86,10 @@
     + [▶ 마음 단단히 먹으세요!](#-마음-단단히-먹으세요)
     + [▶ 평생 친근한 아저씨 같은 언어를 만나봅시다](#-평생-친근한-아저씨-같은-언어를-만나봅시다)
     + [▶ 파이썬 조차 사랑이 복잡하다는 것을 이해합니다](#-파이썬-조차-사랑이-복잡하다는-것을-이해합니다)
-    + [▶ Yes, it exists!](#-yes-it-exists)
+    + [▶ 네, 존재합니다!](#-네-존재합니다)
     + [▶ Ellipsis *](#-ellipsis-)
     + [▶ Inpinity](#-inpinity)
-    + [▶ Let's mangle](#-lets-mangle)
+    + [▶ 망쳐봅시다](#-망쳐봅시다)
   * ["겉모습은 기만적입니다!" 단원](#겉모습은-기만적입니다-단원)
     + [▶ 줄 건너뛰기?](#-줄-건너뛰기)
     + [▶ 순간이동](#-순간이동)
@@ -2813,7 +2813,7 @@ SyntaxError: not a chance
 
 ---
 
-### ▶ 평생 친근한 아저씨같은 언어를 만나봅시다
+### ▶ 평생 친근한 아저씨 같은 언어를 만나봅시다
 <!-- Example ID: 6427fae6-e959-462d-85da-ce4c94ce41be --->
 **출력 결과 (Python 3.x)**
 ```py
@@ -2901,9 +2901,9 @@ True
 
 ---
 
-### ▶ Yes, it exists!
+### ▶ 네, 존재합니다!
 <!-- Example ID: 4286db3d-1ea7-47c9-8fb6-a9a04cac6e49 --->
-**The `else` clause for loops.** One typical example might be:
+**반복문에 대한 `else` 조건**의 예로 다음과 같은게 있습니다:
 
 ```py
   def does_exists_num(l, to_find):
@@ -2915,7 +2915,7 @@ True
           print("Does not exist")
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_list = [1, 2, 3, 4, 5]
 >>> does_exists_num(some_list, 4)
@@ -2924,7 +2924,7 @@ Exists!
 Does not exist
 ```
 
-**The `else` clause in exception handling.** An example,
+**예외 처리에 대한 `else` 조건**의 예는 다음과 같습니다,
 
 ```py
 try:
@@ -2935,14 +2935,14 @@ else:
     print("Try block executed successfully...")
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 Try block executed successfully...
 ```
 
-#### 💡 Explanation:
-- The `else` clause after a loop is executed only when there's no explicit `break` after all the iterations. You can think of it as a "nobreak" clause.
-- `else` clause after a try block is also called "completion clause" as reaching the `else` clause in a `try` statement means that the try block actually completed successfully.
+#### 💡 설명:
+- 모든 반복이 끝난 후 명시된 `break`가 없을 때, `else` 조건이 실행됩니다. "nobreak" 조건이라 생각할 수 있습니다.
+- try 블록 뒤의 `else` 조건은 `try` 문에서 try 블록이 성공적으로 완료된 후 도달하므로 "완료 조건"이라고도 합니다.
 
 ---
 
@@ -2953,10 +2953,10 @@ def some_func():
     Ellipsis
 ```
 
-**Output**
+**출력 결과**
 ```py
 >>> some_func()
-# No output, No Error
+# 출력도 없고, 에러도 없다
 
 >>> SomeRandomString
 Traceback (most recent call last):
@@ -2967,15 +2967,15 @@ NameError: name 'SomeRandomString' is not defined
 Ellipsis
 ```
 
-#### 💡 Explanation
-- In Python, `Ellipsis` is a globally available built-in object which is equivalent to `...`.
+#### 💡 설명
+- 파이썬에서, `Ellipsis`는 `...`에 해당하는 전역 내장 객체입니다.
     ```py
     >>> ...
     Ellipsis
     ```
-- Eliipsis can be used for several purposes,
-    + As a placeholder for code that hasn't been written yet (just like `pass` statement)
-    + In slicing syntax to represent the full slices in remaining direction
+- Ellipsis 는 여러가지 목적으로 사용될 수 있는데,
+    + 아직 작성되지 않은 코드의 자리 표시자 (placeholder)로 사용될 수 있습니다 (`pass` 구문과 마찬가지로).
+    + 슬라이스 문법에서 남은 방향의 전체 슬레이스를 나타낼 수 있습니다. 
     ```py
     >>> import numpy as np
     >>> three_dimensional_array = np.arange(8).reshape(2, 2, 2)
@@ -2991,26 +2991,26 @@ Ellipsis
         ]
     ])
     ```
-    So our `three_dimensional_array` is an array of array of arrays. Let's say we want to print the second element (index `1`) of all the innermost arrays, we can use Ellipsis to bypass all the preceding dimensions
+    우리의 `three_dimensional_array`는 배열의 배열의 배열입니다. 가장 안쪽 배열의 두번째 (1번 인덱스) 를 출력하고 싶다고 가정하면, 앞의 모든 차원을 생략하는데 Ellipsis를 사용할 수 있습니다.
     ```py
     >>> three_dimensional_array[:,:,1]
     array([[1, 3],
        [5, 7]])
-    >>> three_dimensional_array[..., 1] # using Ellipsis.
+    >>> three_dimensional_array[..., 1] # Ellipsis 사용.
     array([[1, 3],
        [5, 7]])
     ```
-    Note: this will work for any number of dimensions. You can even select slice in first and last dimension and ignore the middle ones this way (`n_dimensional_array[firs_dim_slice, ..., last_dim_slice]`)
-    + In [type hinting](https://docs.python.org/3/library/typing.html) to indicate only a part of the type (like `(Callable[..., int]` or `Tuple[str, ...]`))
-    + You may also use Ellipsis as a default function argument (in the cases when you want to differentiate between the "no argument passed" and "None value passed" scenarios).
+    참고: 이건 모든 차원에서 작동합니다. 여러분이 첫번째와 마지막 차원에서 슬라이스를 선택하고 중간의 값들을 무시하려면 이러한 방법이 있습니다. (`n_dimensional_array[firs_dim_slice, ..., last_dim_slice]`)
+    + [타입 힌트](https://docs.python.org/3/library/typing.html) 에서는 파입의 일부만 나타내기 위해 사용합니다. (`(Callable[..., int]` 또는 `Tuple[str, ...]`))
+    + Ellipsis를 기본 함수 인수로 ("인수가 전달되지 않음", "아무 값도 전달되지 않음"의 시나리오를 구분하기 위해) Ellipsis를 사용할 수 있습니다.
 
 ---
 
 ### ▶ Inpinity
 <!-- Example ID: ff473ea8-a3b1-4876-a6f0-4378aff790c1 --->
-The spelling is intended. Please, don't submit a patch for this.
+철자는 의도된 것입니다. 이것에 대한 수정사항을 보내지 마세요.
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> infinity = float('infinity')
 >>> hash(infinity)
@@ -3019,13 +3019,13 @@ The spelling is intended. Please, don't submit a patch for this.
 -314159
 ```
 
-#### 💡 Explanation:
-- Hash of infinity is 10⁵ x π.
-- Interestingly, the hash of `float('-inf')` is "-10⁵ x π" in Python 3, whereas "-10⁵ x e" in Python 2.
+#### 💡 설명:
+- 무한대의 해시는 10⁵ x π 입니다.
+- 흥미롭게도, 파이썬 3에서 `float('-inf')`의 해시는 "-10⁵ x π" 입니다. 반면에 파이썬 2에서는 "-10⁵ x e" 입니다.
 
 ---
 
-### ▶ Let's mangle
+### ▶ 망쳐봅시다
 <!-- Example ID: 37146d2d-9e67-43a9-8729-3c17934b910c --->
 1\.
 ```py
@@ -3035,7 +3035,7 @@ class Yo(object):
         self.bro = True
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> Yo().bro
 True
@@ -3049,12 +3049,12 @@ True
 ```py
 class Yo(object):
     def __init__(self):
-        # Let's try something symmetrical this time
+        # 이번엔 대칭적으로 해봅시다
         self.__honey__ = True
         self.bro = True
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> Yo().bro
 True
@@ -3065,7 +3065,7 @@ Traceback (most recent call last):
 AttributeError: 'Yo' object has no attribute '_Yo__honey__'
 ```
 
-Why did `Yo()._Yo__honey` work?
+왜 `Yo()._Yo__honey`가 동작했을까요?
 
 3\.
 
@@ -3074,10 +3074,10 @@ _A__variable = "Some value"
 
 class A(object):
     def some_func(self):
-        return __variable # not initiatlized anywhere yet
+        return __variable # 아직 아무것도 초기화되지 않았습니다
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -3088,14 +3088,14 @@ AttributeError: 'A' object has no attribute '__variable'
 ```
 
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* [Name Mangling](https://en.wikipedia.org/wiki/Name_mangling) is used to avoid naming collisions between different namespaces.
-* In Python, the interpreter modifies (mangles) the class member names starting with `__` (double underscore a.k.a "dunder") and not ending with more than one trailing underscore by adding `_NameOfTheClass` in front.
-* So, to access `__honey` attribute in the first snippet, we had to append `_Yo` to the front, which would prevent conflicts with the same name attribute defined in any other class.
-* But then why didn't it work in the second snippet? Because name mangling excludes the names ending with double underscores.
-* The third snippet was also a consequence of name mangling. The name `__variable` in the statement `return __variable` was mangled to `_A__variable`, which also happens to be the name of the variable we declared in the outer scope.
-* Also, if the mangled name is longer than 255 characters, truncation will happen.
+* [이름 망치기](https://en.wikipedia.org/wiki/Name_mangling) 는 서로 다른 네임스페이스 간의 이름이 충돌되는 것을 피하기 위해 사용됩니다.
+* 파이썬에서, 인터프리터는 클래스 멤버의 이름 중 `__` (언더스코어 두개 또는 "dunder") 로 시작하고 앞에 `_NameOfTheClass`로 하나 이상의 언더스코어로 끝나지 않는 이름을 수정 (망치기) 합니다.
+* 첫번째 코드에서 `__honey` 속성에 접근하기 위해 앞에 `_Yo`를 붙여야 했는데, 이는 다른 클래스에서 동일한 이름의 속성과 충돌되는 것을 막을 수 있습니다.
+* 하지만 왜 두번쨰 코드는 작동하지 않을까요? 왜냐하면 이름 망치기가 이름 끝의 언더스코어 두개를 제거합니다.
+* 세번째 코드또한 이름 망치기의 결과입니다. `return __variable` 구문의 `__variable`이 `_A_variable`로 바뀌었는데, 이는 우리가 스코프의 밖에서 선언한 변수의 이름이기도 합니다.
+* 또한, 망친 이름이 255자보다 길어지면, 잘리게 될겁니다.
 
 ---
 ---
@@ -3104,7 +3104,7 @@ AttributeError: 'A' object has no attribute '__variable'
 
 ### ▶ 줄 건너뛰기?
 <!-- Example ID: d50bbde1-fb9d-4735-9633-3444b9d2f417 --->
-**Output:**
+**출력 결과:**
 ```py
 >>> value = 11
 >>> valuе = 32
@@ -3155,7 +3155,7 @@ def energy_receive():
     return np.empty((), dtype=np.float).tolist()
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> energy_send(123.456)
 >>> energy_receive()
@@ -3184,7 +3184,7 @@ def square(x):
   return sum_so_far
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 
 ```py
 >>> square(10)
@@ -3204,7 +3204,7 @@ def square(x):
 * 즉, `square` 함수의 마지막 줄에 있는 "탭"은 8개의 공백으로 바뀌어 루프 안으로 들어가게 됩니다.
 * 파이썬 3는 그럴 때 자동으로 오류를 발생시킬 만큼 친절합니다.
 
-    **Output (Python 3.x):**
+    **출력 결과 (Python 3.x):**
     ```py
     TabError: inconsistent use of tabs and spaces in indentation
     ```
