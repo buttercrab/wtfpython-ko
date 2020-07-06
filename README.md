@@ -63,10 +63,10 @@
     + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
     + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
     + [▶ Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
-  * [Section: Slippery Slopes](#section-slippery-slopes)
-    + [▶ Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
-    + [▶ Stubborn `del` operation](#-stubborn-del-operation)
-    + [▶ The out of scope variable](#-the-out-of-scope-variable)
+  * ["미끄러운 비탈길" 단원](#미끄러운-비탈길-단원)
+    + [▶ 딕셔너리가 반복 중일 때 수정하기](#-딕셔너리가-반복-중일-때-수정하기)
+    + [▶ 완강한 `del` 연산자](#-완강한-del-연산자)
+    + [▶ 범위를 벗어난 변수](#-범위를-벗어난-변수)
     + [▶ Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
     + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
     + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
@@ -1830,9 +1830,9 @@ a, b = a[b] = {}, 5
 ---
 ---
 
-## Section: Slippery Slopes
+## "미끄러운 비탈길" 단원
 
-### ▶ Modifying a dictionary while iterating over it
+### ▶ 딕셔너리가 반복 중일 때 수정하기
 <!-- Example ID: b4e5cdfb-c3a8-4112-bd38-e2356d801c41 --->
 ```py
 x = {0: None}
@@ -1843,7 +1843,7 @@ for i in x:
     print(i)
 ```
 
-**Output (Python 2.7- Python 3.5):**
+**출력 결과 (Python 2.7- Python 3.5):**
 
 ```
 0
@@ -1856,19 +1856,19 @@ for i in x:
 7
 ```
 
-Yes, it runs for exactly **eight** times and stops.
+정확히 **8**번 돌고 멈춥니다.
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Iteration over a dictionary that you edit at the same time is not supported.
-* It runs eight times because that's the point at which the dictionary resizes to hold more keys (we have eight deletion entries, so a resize is needed). This is actually an implementation detail.
-* How deleted keys are handled and when the resize occurs might be different for different Python implementations.
-* So for Python versions other than Python 2.7 - Python 3.5, the count might be different from 8 (but whatever the count is, it's going to be the same every time you run it). You can find some discussion around this [here](https://github.com/satwikkansal/wtfpython/issues/53) or in [this](https://stackoverflow.com/questions/44763802/bug-in-python-dict) StackOverflow thread.
-* Python 3.8 onwards, you'll see `RuntimeError: dictionary keys changed during iteration` exception if you try to do this.
+* 딕셔너리가 반복될 때 동시에 편집할 수 있는 것은 지원되지 않습니다.
+* 8번 반복되는 이유는 더 많은 키를 소유하기 위해 딕셔너리가 크기를 조정하는 지점이기 때문입니다. (우리는 8개의 삭제 항목들이 있으므로, 크기의 조정이 필요합니다) 이는 실제 구현의 세부사항입니다.
+* 삭제된 키를 처리하는 과정과 크기의 조정이 이루어지는 시점은 Python의 구현에 따라 다를 수 있습니다.
+* 따라서, 파이썬 2.7 - 3.5 이외의 버전의 경우, 실행 횟수가 8과 다를 수 있습니다. (하지만 횟수가 어떻던 간에, 실행할 때 마다 동일한 결과입니다) [여기](https://github.com/satwikkansal/wtfpython/issues/53) 또는 StackOverflow의 [이 스레드](https://stackoverflow.com/questions/44763802/bug-in-python-dict)에서 이에 관한 토론을 찾을 수 있습니다.
+* 파이썬 3.8 이상에서는 이것을 시도할 경우 `RuntimeError: dictionary keys changed during iteration` 예외를 보여줍니다.
 
 ---
 
-### ▶ Stubborn `del` operation
+### ▶ 완강한 `del` 연산자
 <!-- Example ID: 777ed4fd-3a2d-466f-95e7-c4058e61d78e --->
 <!-- read-only -->
 
@@ -1878,42 +1878,42 @@ class SomeClass:
         print("Deleted!")
 ```
 
-**Output:**
+**출력 결과:**
 1\.
 ```py
 >>> x = SomeClass()
 >>> y = x
->>> del x # this should print "Deleted!"
+>>> del x # "Deleted!"를 출력해야 합니다
 >>> del y
 Deleted!
 ```
 
-Phew, deleted at last. You might have guessed what saved from `__del__` being called in our first attempt to delete `x`. Let's add more twists to the example.
+휴, 드디어 삭제되었습니다. 여러분은 처음의 `x` 삭제에서 `__del__`이 호출되지 않은 것을 생각하실 수도 있습니다. 이제 예제를 살짝 비틀어 봅시다.
 
 2\.
 ```py
 >>> x = SomeClass()
 >>> y = x
 >>> del x
->>> y # check if y exists
+>>> y # y가 존재하는지 확인합니다
 <__main__.SomeClass instance at 0x7f98a1a67fc8>
->>> del y # Like previously, this should print "Deleted!"
->>> globals() # oh, it didn't. Let's check all our global variables and confirm
+>>> del y # 이전과 같이, "Deleted!"를 출력해야 합니다
+>>> globals() # 오, 그렇지 않네요. 우리의 전역변수를 확인해봅시다
 Deleted!
 {'__builtins__': <module '__builtin__' (built-in)>, 'SomeClass': <class __main__.SomeClass at 0x7f98a1a5f668>, '__package__': None, '__name__': '__main__', '__doc__': None}
 ```
 
-Okay, now it's deleted :confused:
+좋습니다. 이제 삭제되었습니다 :confused:
 
-#### 💡 Explanation:
-+ `del x` doesn’t directly call `x.__del__()`.
-+ Whenever `del x` is encountered, Python decrements the reference count for `x` by one, and `x.__del__()` when x’s reference count reaches zero.
-+ In the second output snippet, `y.__del__()` was not called because the previous statement (`>>> y`) in the interactive interpreter created another reference to the same object, thus preventing the reference count from reaching zero when `del y` was encountered.
-+ Calling `globals` caused the existing reference to be destroyed, and hence we can see "Deleted!" being printed (finally!).
+#### 💡 설명:
++ `del x`는 직접적으로 `x.__del__()`을 부르지 않습니다.
++ `del x`가 호출될 때, 파이썬은 `x`에 대한 참조 카운트를 하나씩 줄입니다. 그리고 `x.__del__()`은 x의 참조 카운트가 0에 도달할 때 실행됩니다.
++ 두번째 코드의 출력에서, `y.__del__()` 는 호출되지 않습니다. 왜냐하면 이전의 구문에 (`>>> y`) 대화형 인터프리터가 같은 객체에 대해 또 다른 참조를 만들고, 따라서 `del y`가 호출될 때 참조 카운트가 0에 도달하지 않습니다.
++ `globals`가 호출되면 존재하는 참조가 파괴돼, 이런 이유로 우리는 "Deleted!"가 출력되는 것을 볼 수 있습니다. (마침내!)
 
 ---
 
-### ▶ The out of scope variable
+### ▶ 범위를 벗어난 변수
 <!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
 ```py
 a = 1
@@ -1925,7 +1925,7 @@ def another_func():
     return a
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_func()
 1
@@ -1933,10 +1933,10 @@ def another_func():
 UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
-#### 💡 Explanation:
-* When you make an assignment to a variable in scope, it becomes local to that scope. So `a` becomes local to the scope of `another_func`,  but it has not been initialized previously in the same scope, which throws an error.
-* Read [this](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html) short but an awesome guide to learn more about how namespaces and scope resolution works in Python.
-* To modify the outer scope variable `a` in `another_func`, use `global` keyword.
+#### 💡 설명:
+* 범위 내의 변수에 할당하면, 해당 범위의 로컬 변수가 됩니다. 그래서 `a`는 `another_func`의 범위에 국한되지만 이전과 같은 범위에서 초기화 되지 않아 에러가 발생합니다.
+* 짧지만 멋진 [이 가이드](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)를 읽고 네임스페이스와 범위 결정이 파이썬에서 작동하는 방법에 대해 알아보세요.
+* `another_func`에서 외부 범위의 `a`를 변경하려면, `global` 키워드를 사용하세요.
   ```py
   def another_func()
       global a
@@ -1944,7 +1944,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
       return a
   ```
 
-  **Output:**
+  **출력 결과:**
   ```py
   >>> another_func()
   2
