@@ -67,7 +67,7 @@
     + [▶ 딕셔너리가 반복 중일 때 수정하기](#-딕셔너리가-반복-중일-때-수정하기)
     + [▶ 완강한 `del` 연산자](#-완강한-del-연산자)
     + [▶ 범위를 벗어난 변수](#-범위를-벗어난-변수)
-    + [▶ Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
+    + [▶ 반복하는 동안 리스트의 아이템을 삭제하기](#-반복하는-동안-리스트의-아이템을-삭제하기)
     + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
     + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
     + [▶ Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
@@ -1952,7 +1952,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
 
 ---
 
-### ▶ Deleting a list item while iterating
+### ▶ 반복하는 동안 리스트의 아이템을 삭제하기
 <!-- Example ID: 4cc52d4e-d42b-4e09-b25f-fbf5699b7d4e --->
 ```py
 list_1 = [1, 2, 3, 4]
@@ -1973,7 +1973,7 @@ for idx, item in enumerate(list_4):
     list_4.pop(idx)
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> list_1
 [1, 2, 3, 4]
@@ -1985,30 +1985,30 @@ for idx, item in enumerate(list_4):
 [2, 4]
 ```
 
-Can you guess why the output is `[2, 4]`?
+왜 출력 결과가 `[2, 4]`가 나오는지 알 수 있나요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* It's never a good idea to change the object you're iterating over. The correct way to do so is to iterate over a copy of the object instead, and `list_3[:]` does just that.
+* 반복하고 있는 객체를 바꾸는 것은 좋은 생각이 아닙니다. 올바른 방법은 `list_3[:]`과 같이 복사본을 반복하는 것입니다.
 
      ```py
      >>> some_list = [1, 2, 3, 4]
      >>> id(some_list)
      139798789457608
-     >>> id(some_list[:]) # Notice that python creates new object for sliced list.
+     >>> id(some_list[:]) # 파이썬은 슬라이스된 리스트를 위해 새로운 객체를 생성하는 것을 알 수 있습니다.
      139798779601192
      ```
 
-**Difference between `del`, `remove`, and `pop`:**
-* `del var_name` just removes the binding of the `var_name` from the local or global namespace (That's why the `list_1` is unaffected).
-* `remove` removes the first matching value, not a specific index, raises `ValueError` if the value is not found.
-* `pop` removes the element at a specific index and returns it, raises `IndexError` if an invalid index is specified.
+**`del`, `remove`, `pop`의 차이점**
+* `del var_name`은 로컬 또는 전역 네임스페이스에서 `var_name`의 바인딩을 삭제합니다. (그래서 `list_1`은 영향 받지 않습니다)
+* `remove`는 특정 인덱스가 아닌 첫번째 일치하는 값을 삭제하는 경우 값을 찾을 수 없으면 `ValueError`를 일으킵니다.
+* `pop`은 특정 인덱스에서 요소를 제거하고 반환하며, 인덱스가 유효하지 않으면 `IndexError`를 일으킵니다.
 
-**Why the output is `[2, 4]`?**
-- The list iteration is done index by index, and when we remove `1` from `list_2` or `list_4`, the contents of the lists are now `[2, 3, 4]`. The remaining elements are shifted down, i.e., `2` is at index 0, and `3` is at index 1. Since the next iteration is going to look at index 1 (which is the `3`), the `2` gets skipped entirely. A similar thing will happen with every alternate element in the list sequence.
+**왜 `[2, 4]`가 출력되나요?**
+- 리스트의 반복은 인덱스별로 이루어지며, `list_2` 또는 `list_4`에서 `1`을 삭제하면, 리스트는 `[2, 3, 4]`가 됩니다. 나머지 요소들은 인덱스가 낮아지게 되어 `2`는 인덱스 0, `3`은 인덱스 1이 됩니다. 다음번 반복은 인덱스 1 (요소 `3`이 됩니다)을 보게 되고, `2`는 건너뛰게 됩니다. 리스트 순서의 모든 대안 요소들도 비슷한 상황이 일어납니다.
 
-* Refer to this StackOverflow [thread](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) explaining the example
-* See also this nice StackOverflow [thread](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) for a similar example related to dictionaries in Python.
+* 예제를 설명하는 StackOverflow [스레드](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) 를 참고하였습니다.
+* 파이썬의 딕셔너리에 관련된 비슷한 예제로 이 StackOverflow [스레드](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) 도 참고하세요.
 
 ---
 
