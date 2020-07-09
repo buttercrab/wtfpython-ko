@@ -2026,13 +2026,14 @@ for idx, item in enumerate(list_4):
 >>> numbers_iter = iter(numbers)
 >>> list(zip(numbers_iter, first_three)) 
 [(0, 0), (1, 1), (2, 2)]
-# so far so good, let's zip the remaining
+# 지금까지는 좋은데, 나머지도 압축해봅시다
 >>> list(zip(numbers_iter, remaining))
 [(4, 3), (5, 4), (6, 5)]
 ```
 Where did element `3` go from the `numbers` list?
+`numbers` 리스트에서 요소 `3`이 어디로 갓나요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
 - From Python [docs](https://docs.python.org/3.3/library/functions.html#zip), here's an approximate implementation of zip function,
     ```py
