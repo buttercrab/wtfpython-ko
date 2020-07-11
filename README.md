@@ -2030,13 +2030,11 @@ for idx, item in enumerate(list_4):
 >>> list(zip(numbers_iter, remaining))
 [(4, 3), (5, 4), (6, 5)]
 ```
-Where did element `3` go from the `numbers` list?
-`numbers` 리스트에서 요소 `3`이 어디로 갓나요?
+`numbers` 리스트에서 요소 `3`이 어디로 갔을까요?
 
 #### 💡 설명:
 
-- From Python [docs](https://docs.python.org/3.3/library/functions.html#zip), here's an approximate implementation of zip function,
-- 파이썬의 [문서](https://docs.python.org/3.3/library/functions.html#zip)에서, zip 함수의 대략적인 구현을 살펴봅시다.
+- 파이썬의 [이 문서](https://docs.python.org/3.3/library/functions.html#zip)에서, zip 함수의 대략적인 구현을 살펴봅시다.
     ```py
     def zip(*iterables):
         sentinel = object()
@@ -2050,7 +2048,7 @@ Where did element `3` go from the `numbers` list?
             yield tuple(result)
     ```
 - So the function takes in arbitrary number of itreable objects, adds each of their items to the `result` list by calling the `next` function on them, and stops whenever any of the iterable is exhausted. 
-- 그래서 이 함수는 임의의 수의 반복 가능한 객체를 취합하고, 그 위에 있는 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 항목중의 하나가 고갈될 때 마다 중지합니다.
+- 그래서 이 함수는 임의의 수의 반복 가능한 객체를 모아 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 가능한 객체중 하나가 고갈될 때에 중지합니다.
 - The caveat here is when any iterable is exhausted, the existing elements in the `result` list are discarded. That's what happened with `3` in the `numbers_iter`.
 - The correct way to do the above using `zip` would be,
     ```py
