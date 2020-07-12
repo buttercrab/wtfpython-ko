@@ -2047,10 +2047,9 @@ for idx, item in enumerate(list_4):
                 result.append(elem)
             yield tuple(result)
     ```
-- So the function takes in arbitrary number of itreable objects, adds each of their items to the `result` list by calling the `next` function on them, and stops whenever any of the iterable is exhausted. 
 - 그래서 이 함수는 임의의 수의 반복 가능한 객체를 모아 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 가능한 객체중 하나가 고갈될 때에 중지합니다.
-- The caveat here is when any iterable is exhausted, the existing elements in the `result` list are discarded. That's what happened with `3` in the `numbers_iter`.
-- The correct way to do the above using `zip` would be,
+- 여기서 주의해야 할 점은 반복 가능한 객체들이 고갈될 때, `result` 리스트에 들어 있는 기존의 요소들이 폐기되는 것입니다. `numbers_iter` 내부의 `3`에 그러한 일이 일어났습니다.
+- `zip`을 사용하여 위와 같은 일을 처리하는 올바른 방법은 다음과 같습니다,
     ```py
     >>> numbers = list(range(7))
     >>> numbers_iter = iter(numbers)
@@ -2059,7 +2058,7 @@ for idx, item in enumerate(list_4):
     >>> list(zip(remaining, numbers_iter))
     [(3, 3), (4, 4), (5, 5), (6, 6)]
     ```
-    The first argument of zip should be the one with fewest elements.
+    zip의 첫번째 인자는 가장 적은 요소를 가지고 있어야 합니다.
 
 ---
 
