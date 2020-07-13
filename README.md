@@ -2072,17 +2072,17 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 6 : for x inside loop
 6 : x in global
 ```
 
-But `x` was never defined outside the scope of for loop...
+하지만 `x`는 루프의 밖에서 선언된 적이 없습니다...
 
 2\.
 ```py
-# This time let's initialize x first
+# 이번엔 먼저 x를 초기화해봅시다
 x = -1
 for x in range(7):
     if x == 6:
@@ -2090,7 +2090,7 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 6 : for x inside loop
 6 : x in global
@@ -2098,7 +2098,7 @@ print(x, ': x in global')
 
 3\.
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2107,7 +2107,7 @@ print(x, ': x in global')
 4
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2116,13 +2116,13 @@ print(x, ': x in global')
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- In Python, for-loops use the scope they exist in and leave their defined loop-variable behind. This also applies if we explicitly defined the for-loop variable in the global namespace before. In this case, it will rebind the existing variable.
+- 파이썬에서, for 루프는 루프의 스코프를 사용하고 정의된 루프 변수는 뒤로 남겨둡니다. 이전에 전역 네임스페이스에서 for 루프 변수를 명시적으로 정의한 경우에도 적용됩니다. 이 경우, 기존에 존재하는 변수를 다시 바인딩합니다.
 
-- The differences in the output of Python 2.x and Python 3.x interpreters for list comprehension example can be explained by following change documented in [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) changelog:
+- 파이썬 2.x와 파이썬 3.x의 인터프리터의 출력 결과의 차이는 다음의 [파이썬 3.0의 새로운 기능들](https://docs.python.org/3/whatsnew/3.0.html) 변경 로그에서 확인할 수 있습니다:
 
-    > "List comprehensions no longer support the syntactic form `[... for var in item1, item2, ...]`. Use `[... for var in (item1, item2, ...)]` instead. Also, note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a `list()` constructor, and in particular, the loop control variables are no longer leaked into the surrounding scope."
+    > "리스트 컴프리헨션은 더 이상 `[... for var in item1, item2, ...]` 문법을 지원하지 않습니다. 대신 `[... for var in (item1, item2, ...)]`을 사용하세요. 또한 리스트 컴프리헨션은 다른 의미들을 가지고 있는점에 주목해야합니다: 그들은 `list()` 생성 표현식 생성자의 문법 설탕에 가깝고, 특히 루프 제어 변수들은 더 이상 범위 밖으로 유출되지 않습니다.
 
 ---
 
@@ -2135,7 +2135,7 @@ def some_func(default_arg=[]):
     return default_arg
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_func()
 ['some_string']
@@ -2147,9 +2147,9 @@ def some_func(default_arg=[]):
 ['some_string', 'some_string', 'some_string']
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The default mutable arguments of functions in Python aren't really initialized every time you call the function. Instead, the recently assigned value to them is used as the default value. When we explicitly passed `[]` to `some_func` as the argument, the default value of the `default_arg` variable was not used, so the function returned as expected.
+- 파이썬에서 함수의 기본 변경가능한 인수는 함수가 호출 될 때마다 실제로 초기화 되지 않습니다. 대신, 최근에 할당된 값이 기본값으로 사용됩니다. `some_func`에 `[]`를 인수로 넘겨줄 때 `default_arg`의 기본값이 사용되지 않아 결과가 예상대로 나오게 됩니다.
 
     ```py
     def some_func(default_arg=[]):
@@ -2157,9 +2157,9 @@ def some_func(default_arg=[]):
         return default_arg
     ```
 
-    **Output:**
+    **출력 결과:**
     ```py
-    >>> some_func.__defaults__ #This will show the default argument values for the function
+    >>> some_func.__defaults__ #이건 함수에 대한 기본 인수값을 보여줍니다
     ([],)
     >>> some_func()
     >>> some_func.__defaults__
@@ -2172,7 +2172,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- A common practice to avoid bugs due to mutable arguments is to assign `None` as the default value and later check if any value is passed to the function corresponding to that argument. Example:
+- 변경가능한 인수로 인한 버그를 피하는 일반적인 방법으로는 기본값으로 `None`을 지정한 후에 해당 인수에 어떠한 값이 들어오는지 확인하는 것입니다. 예시:
 
     ```py
     def some_func(default_arg=None):
