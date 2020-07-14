@@ -2189,26 +2189,26 @@ def some_func(default_arg=[]):
 ```py
 some_list = [1, 2, 3]
 try:
-    # This should raise an ``IndexError``
+    # ``IndexError``를 일으킵니다
     print(some_list[4])
 except IndexError, ValueError:
     print("Caught!")
 
 try:
-    # This should raise a ``ValueError``
+    # ``ValueError``를 일으킵니다
     some_list.remove(4)
 except IndexError, ValueError:
     print("Caught again!")
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 Caught!
 
 ValueError: list.remove(x): x not in list
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
   File "<input>", line 3
     except IndexError, ValueError:
@@ -2216,24 +2216,25 @@ ValueError: list.remove(x): x not in list
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
 * To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
+* 예외처리 구문에 여러개의 예외를 처리하려면, 해당 예외들을 튜플로 묶어 첫번째 인수로 넘겨줘야합니다. 두번째 인수는 선택적 이름으로, 주어진 경우 일어난 예외 인스턴스가 바인딩됩니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
-     # This should raise a ``ValueError``
+     # ``ValueError``를 일으킵니다
      some_list.remove(4)
   except (IndexError, ValueError), e:
      print("Caught again!")
      print(e)
   ```
-  **Output (Python 2.x):**
+  **출력 결과 (Python 2.x):**
   ```
   Caught again!
   list.remove(x): x not in list
   ```
-  **Output (Python 3.x):**
+  **출력 결과 (Python 3.x):**
   ```py
     File "<input>", line 4
       except (IndexError, ValueError), e:
@@ -2241,7 +2242,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* Separating the exception from the variable with a comma is deprecated and does not work in Python 3; the correct way is to use `as`. Example,
+* 쉼표로 예외에서 변수를 분리하는 방법은 더 이상 사용되지 않으며 파이썬 3에서는 작동하지 않습니다; 이 경우 `as`를 사용해야합니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2251,7 +2252,7 @@ SyntaxError: invalid syntax
       print("Caught again!")
       print(e)
   ```
-  **Output:**
+  **출력 결과:**
   ```
   Caught again!
   list.remove(x): x not in list
