@@ -2269,7 +2269,7 @@ b = a
 a = a + [5, 6, 7, 8]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> a
 [1, 2, 3, 4, 5, 6, 7, 8]
@@ -2284,7 +2284,7 @@ b = a
 a += [5, 6, 7, 8]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> a
 [1, 2, 3, 4, 5, 6, 7, 8]
@@ -2292,13 +2292,13 @@ a += [5, 6, 7, 8]
 [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-*  `a += b` doesn't always behave the same way as `a = a + b`.  Classes *may* implement the *`op=`* operators differently, and lists do this.
+*  `a += b` 는 항상 `a = a + b`와 같게 동작하지 않습니다. 클래스는 *`op=`* 연산자를 *다르게* 구현할 수 있으며, 리스트는 다음과 같습니다.
 
-* The expression `a = a + [5,6,7,8]` generates a new list and sets `a`'s reference to that new list, leaving `b` unchanged.
+* `a = a + [5,6,7,8]` 표현식은 새로운 리스트를 생성하여 새로운 리스트에 대한 `a`의 참조를 설정하므로, `b`는 바뀌지 않습니다.
 
-* The expression `a += [5,6,7,8]` is actually mapped to an "extend" function that operates on the list such that `a` and `b` still point to the same list that has been modified in-place.
+* `a += [5,6,7,8]` 표현식은 실제로 `a`와 `b`가 여전히 내부에서 수정된 목록을 가르키도록 하는 "확장" 함수에 매핑됩니다.
 
 ---
 
