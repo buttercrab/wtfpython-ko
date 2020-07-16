@@ -2047,7 +2047,7 @@ for idx, item in enumerate(list_4):
                 result.append(elem)
             yield tuple(result)
     ```
-- 그래서 이 함수는 임의의 수의 반복 가능한 객체를 모아 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 가능한 객체중 하나가 고갈될 때에 중지합니다.
+- 그래서 이 함수는 임의의 수의 반복 가능한 객체를 모아 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 가능한 객체 중 하나가 고갈될 때에 중지합니다.
 - 여기서 주의해야 할 점은 반복 가능한 객체들이 고갈될 때, `result` 리스트에 들어 있는 기존의 요소들이 폐기되는 것입니다. `numbers_iter` 내부의 `3`에 그러한 일이 일어났습니다.
 - `zip`을 사용하여 위와 같은 일을 처리하는 올바른 방법은 다음과 같습니다,
     ```py
@@ -2122,7 +2122,7 @@ print(x, ': x in global')
 
 - 파이썬 2.x와 파이썬 3.x의 인터프리터의 출력 결과의 차이는 다음의 [파이썬 3.0의 새로운 기능들](https://docs.python.org/3/whatsnew/3.0.html) 변경 로그에서 확인할 수 있습니다:
 
-    > "리스트 컴프리헨션은 더 이상 `[... for var in item1, item2, ...]` 문법을 지원하지 않습니다. 대신 `[... for var in (item1, item2, ...)]`을 사용하세요. 또한 리스트 컴프리헨션은 다른 의미들을 가지고 있는점에 주목해야합니다: 그들은 `list()` 생성 표현식 생성자의 문법 설탕에 가깝고, 특히 루프 제어 변수들은 더 이상 범위 밖으로 유출되지 않습니다.
+    > "리스트 컴프리헨션은 이제 `[... for var in item1, item2, ...]` 문법을 지원하지 않습니다. 대신 `[... for var in (item1, item2, ...)]`을 사용하세요. 또한 리스트 컴프리헨션은 다른 의미들을 가지고 있는점에 주목해야합니다: 그들은 `list()` 생성 표현식 생성자의 문법 설탕에 가깝고, 특히 루프 제어 변수들은 더 이상 범위 밖으로 유출되지 않습니다.
 
 ---
 
@@ -2149,7 +2149,7 @@ def some_func(default_arg=[]):
 
 #### 💡 설명:
 
-- 파이썬에서 함수의 기본 변경가능한 인수는 함수가 호출 될 때마다 실제로 초기화 되지 않습니다. 대신, 최근에 할당된 값이 기본값으로 사용됩니다. `some_func`에 `[]`를 인수로 넘겨줄 때 `default_arg`의 기본값이 사용되지 않아 결과가 예상대로 나오게 됩니다.
+- 파이썬에서 함수의 기본 변경 가능한 인수는 함수가 호출될 때마다 실제로 초기화되지 않습니다. 대신, 최근에 할당된 값이 기본값으로 사용됩니다. `some_func`에 `[]`를 인수로 넘겨줄 때 `default_arg`의 기본값이 사용되지 않아 결과가 예상대로 나오게 됩니다.
 
     ```py
     def some_func(default_arg=[]):
@@ -2172,7 +2172,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- 변경가능한 인수로 인한 버그를 피하는 일반적인 방법으로는 기본값으로 `None`을 지정한 후에 해당 인수에 어떠한 값이 들어오는지 확인하는 것입니다. 예시:
+- 변경 가능한 인수로 인한 버그를 피하는 일반적인 방법으로는 기본값으로 `None`을 지정한 후에 해당 인수에 어떠한 값이 들어오는지 확인하는 것입니다. 예시:
 
     ```py
     def some_func(default_arg=None):
@@ -2218,8 +2218,7 @@ SyntaxError: invalid syntax
 
 #### 💡 설명
 
-* To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
-* 예외처리 구문에 여러개의 예외를 처리하려면, 해당 예외들을 튜플로 묶어 첫번째 인수로 넘겨줘야합니다. 두번째 인수는 선택적 이름으로, 주어진 경우 일어난 예외 인스턴스가 바인딩됩니다. 예를 들어,
+* 예외처리 구문에 여러 개의 예외를 처리하려면, 해당 예외들을 튜플로 묶어 첫 번째 인수로 넘겨줘야 합니다. 두 번째 인수는 선택적 이름으로, 주어진 경우 일어난 예외 인스턴스가 바인딩 됩니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2242,7 +2241,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* 쉼표로 예외에서 변수를 분리하는 방법은 더 이상 사용되지 않으며 파이썬 3에서는 작동하지 않습니다; 이 경우 `as`를 사용해야합니다. 예를 들어,
+* 쉼표로 예외에서 변수를 분리하는 방법은 이제는 사용되지 않으며 파이썬 3에서는 작동하지 않습니다; 이 경우 `as`를 사용해야 합니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2298,7 +2297,7 @@ a += [5, 6, 7, 8]
 
 * `a = a + [5,6,7,8]` 표현식은 새로운 리스트를 생성하여 새로운 리스트에 대한 `a`의 참조를 설정하므로, `b`는 바뀌지 않습니다.
 
-* `a += [5,6,7,8]` 표현식은 실제로 `a`와 `b`가 여전히 내부에서 수정된 목록을 가르키도록 하는 "확장" 함수에 매핑됩니다.
+* `a += [5,6,7,8]` 표현식은 실제로 `a`와 `b`가 여전히 내부에서 수정된 목록을 가리키도록 하는 "확장" 함수에 대치됩니다.
 
 ---
 
@@ -2306,11 +2305,11 @@ a += [5, 6, 7, 8]
 ### ▶ Be careful with chained operations
 <!-- Example ID: 07974979-9c86-4720-80bd-467aa19470d9 --->
 ```py
->>> (False == False) in [False] # makes sense
+>>> (False == False) in [False] # 말이 되네요
 False
->>> False == (False in [False]) # makes sense
+>>> False == (False in [False]) # 이것도 말이 됩니다
 False
->>> False == False in [False] # now what?
+>>> False == False in [False] # 이건 뭐죠?
 True
 
 >>> True is False == False
@@ -2326,25 +2325,25 @@ False
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-As per https://docs.python.org/2/reference/expressions.html#not-in
+https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
 
-> Formally, if a, b, c, ..., y, z are expressions and op1, op2, ..., opN are comparison operators, then a op1 b op2 c ... y opN z is equivalent to a op1 b and b op2 c and ... y opN z, except that each expression is evaluated at most once.
+> 형식적으로, a, b, c, ..., y, z가 표현식이고 op1, op2, ..., opN이 비교 연산자라면, 각 식이 한번에 평가된다는 점을 제외하고 a op1 b op2 c ... y opN z는 a op1 b and b op2 c and ... y opN z에 해당합니다. 
 
-While such behavior might seem silly to you in the above examples, it's fantastic with stuff like `a == b == c` and `0 <= x <= 100`.
+위의 예시와 같은 행동들은 멍청해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
 
-* `False is False is False` is equivalent to `(False is False) and (False is False)`
-* `True is False == False` is equivalent to `True is False and False == False` and since the first part of the statement (`True is False`) evaluates to `False`, the overall expression evaluates to `False`.
-* `1 > 0 < 1` is equivalent to `1 > 0 and 0 < 1` which evaluates to `True`.
-* The expression `(1 > 0) < 1` is equivalent to `True < 1` and
+* `False is False is False`는 `(False is False) and (False is False)`와 같습니다.
+* `True is False == False`는 `True is False and False == False`와 같으며 구문의 첫 부분 (`True is False`)가 `False`로 평가되기 때문에 전체 표현식의 결과는 `False`가 됩니다.
+* `1 > 0 < 1`은 `1 > 0 and 0 < 1`과 같아 `True`가 계산됩니다.
+* 표현식 `(1 > 0) < 1`은 `True < 1`과 같으며
   ```py
   >>> int(True)
   1
-  >>> True + 1 #not relevant for this example, but just for fun
+  >>> True + 1 #예제와는 관련이 없지만, 재미를 위해서입니다.
   2
   ```
-  So, `1 < 1` evaluates to `False`
+  즉, `1 < 1`의 결과는 `False`입니다.
 
 ---
 
