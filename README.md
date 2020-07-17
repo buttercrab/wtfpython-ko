@@ -2357,7 +2357,7 @@ class SomeClass:
     y = (x for i in range(10))
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> list(SomeClass.y)[0]
 5
@@ -2371,22 +2371,22 @@ class SomeClass:
     y = [x for i in range(10)]
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 >>> SomeClass.y[0]
 17
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> SomeClass.y[0]
 5
 ```
 
-#### 💡 Explanation
-- Scopes nested inside class definition ignore names bound at the class level.
-- A generator expression has its own scope.
-- Starting from Python 3.X, list comprehensions also have their own scope.
+#### 💡 설명
+- 클래스 정의 내에서 중첩된 범위는 클래스 수준에서 바인딩 된 이름을 무시합니다.
+- 생성 표현식은 자체적인 범위를 갖습니다.
+- 파이썬 3.x부터는 리스트 컴프리헨션 또한 자체적인 범위를 갖습니다.
 
 ---
 
@@ -2394,7 +2394,7 @@ class SomeClass:
 
 <!-- Example ID: 52a199b1-989a-4b28-8910-dff562cebba9 --->
 
-I haven't met even a single experience Pythonist till date who has not come across one or more of the following scenarios,
+다음의 시나리오 중 하나 이상을 접해보지 못한 파이써니스트는 한 번도 만나본 적이 없습니다,
 
 1\.
 
@@ -2402,10 +2402,10 @@ I haven't met even a single experience Pythonist till date who has not come acro
 x, y = (0, 1) if True else None, None
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
->>> x, y  # expected (0, 1)
+>>> x, y  # (0, 1)이 예상됩니다
 ((0, 1), None)
 ```
 
@@ -2424,7 +2424,7 @@ t = ()
 print(t)
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 one
@@ -2452,26 +2452,26 @@ ten_words_list = [
 ]
 ```
 
-**Output**
+**출력 결과**
 
 ```py
 >>> len(ten_words_list)
 9
 ```
 
-4\. Not asserting strongly enough
+4\. 충분히 강하게 주장하지 않음
 
 ```py
 a = "python"
 b = "javascript"
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
-# An assert statement with an assertion failure message.
+# 실패 메세지가 있는 assert 구문.
 >>> assert(a == b, "Both languages are different")
-# No AssertionError is raised
+# AssertionError가 일어나지 않습니다
 ```
 
 5\.
@@ -2488,7 +2488,7 @@ some_list = some_list.append(4)
 some_dict = some_dict.update({"key_4": 4})
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> print(some_list)
@@ -2515,7 +2515,7 @@ def similar_recursive_func(a):
         return a
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> some_recursive_func([5, 0])
@@ -2524,22 +2524,22 @@ def similar_recursive_func(a):
 4
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* For 1, the correct statement for expected behavior is `x, y = (0, 1) if True else (None, None)`.
+* 1번에서, 예상되는 동작에 대한 올바른 구문은 `x, y = (0, 1) if True else (None, None)`입니다.
 
-* For 2, the correct statement for expected behavior is `t = ('one',)` or `t = 'one',` (missing comma) otherwise the interpreter considers `t` to be a `str` and iterates over it character by character.
+* 2번에서, 예상되는 동작에 대한 올바른 구문은 `t = ('one',)` 또는 `t = 'one',` (콤마가 없음)입니다. 그렇지 않으면 인터프리터는 `t`를 `str`로 생각해 문자 별로 반복합니다.
 
-* `()` is a special token and denotes empty `tuple`.
+* `()`은 특별한 토큰이며 빈 `tuple`을 의미합니다.
 
-* In 3, as you might have already figured out, there's a missing comma after 5th element (`"that"`) in the list. So by implicit string literal concatenation,
+* 3번에서, 여러분들도 이미 알아 차렷겟지만, 리스트의 5번째 요소 (`"that"`)의 뒤에 콤마가 빠져있습니다. 그래서 암묵적인 문자열 리터럴의 연결에 의해,
 
   ```py
   >>> ten_words_list
   ['some', 'very', 'big', 'list', 'thatconsists', 'of', 'exactly', 'ten', 'words']
   ```
 
-* No `AssertionError` was raised in 4th snippet because instead of asserting the individual expression `a == b`, we're asserting entire tuple. The following snippet will clear things up,
+* 4번째 코드에서 `AssertionError`가 일어나지 않은 이유는 `a == b` 표현식이 아닌 전체 튜플을 비교하기 때문입니다. 다음의 코드에서 이를 해결할 수 있습니다.
 
   ```py
   >>> a = "python"
@@ -2558,11 +2558,11 @@ def similar_recursive_func(a):
   AssertionError: Values aren not equal
   ```
 
-* As for the fifth snippet, most methods that modify the items of sequence/mapping objects like `list.append`, `dict.update`, `list.sort`, etc. modify the objects in-place and return `None`. The rationale behind this is to improve performance by avoiding making a copy of the object if the operation can be done in-place (Referred from [here](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)).
+* 다섯 번째 코드에서, `list.append`, `dict.update`, `list.sort`또는 다른 것들과 같이 아이템의 순서/매핑 객체의 항목을 수정하는 대부분의 메소드입니다. 그 자리에서 객체를 수정한 후 `None`을 반환합니다. 이를 뒷받침하는 근거는 그 자리에서 연산을 시행할 수 있는 경우 객체의 사본을 만드는 것을 피해 성능을 향상하기 위함입니다. ([이것](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)을 참조하였습니다)
 
-* Last one should be fairly obvious, passing mutable object (like  `list` ) results in a call by reference, whereas an immutable object (like `int`)  results in a call by value.
+* 마지막으로, `list`와 같은 가변 객체를 전달은 참조로 호출되는 반면, `int`와 같은 불변 객체는 값으로 호출됩니다.
 
-* Being aware of these nitpicks can save you hours of debugging effort in the long run. 
+* 이런 자잘한 것들까지 알고 있으면 장기적으로 디버깅 시간을 절약할 수 있습니다.
 
 ---
 
