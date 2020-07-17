@@ -68,18 +68,18 @@
     + [▶ 완강한 `del` 연산자](#-완강한-del-연산자)
     + [▶ 범위를 벗어난 변수](#-범위를-벗어난-변수)
     + [▶ 반복하는 동안 리스트의 아이템을 삭제하기](#-반복하는-동안-리스트의-아이템을-삭제하기)
-    + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
-    + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
-    + [▶ Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
-    + [▶ Catching the Exceptions](#-catching-the-exceptions)
-    + [▶ Same operands, different story!](#-same-operands-different-story)
-    + [▶ Be careful with chained operations](#-be-careful-with-chained-operations)
-    + [▶ Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
-    + [▶ Needles in a Haystack *](#-needles-in-a-haystack-)
-    + [▶ Splitsies *](#-splitsies-)
-    + [▶ Wild imports *](#-wild-imports-)
-    + [▶ All sorted? *](#-all-sorted-)
-    + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
+    + [▶ 반복자의 손실되는 zip *](#-반복자의-손실되는-zip-)
+    + [▶ 루프 변수가 유출되고 있습니다!](#-루프-변수가-유출되고-있습니다)
+    + [▶ 기본 가변인수를 조심하세요!](#-기본-가변인수를-조심하세요)
+    + [▶ 예외들을 잡기](#-예외들을-잡기)
+    + [▶ 같은 피연산자, 다른 이야기!](#-같은-피연산자-다른-이야기)
+    + [▶ 연결된 연산들을 조심하세요](#-연결된-연산들을-조심하세요)
+    + [▶ 이름 확인은 클래스 범위를 무시합니다](#-이름-확인은-클래스-범위를-무시합니다)
+    + [▶ 모래밭에서 바늘찾기 *](#-모래밭에서-바늘찾기-)
+    + [▶ 나눠봅시다 *](#-나눠봅시다-)
+    + [▶ 제멋대로 가져오기 *](#-제멋대로-가져오기-)
+    + [▶ 다 정렬되었나요? *](#-다-정렬되었나요-)
+    + [▶ 자정은 존재하지 않나요?](#-자정은-존재하지-않나요)
   * ["숨겨진 보물들!" 단원](#숨겨진-보물들-단원)
     + [▶ 파이썬, 날 날게해줄 수 있니?](#-파이썬-날-날게해줄-수-있니)
     + [▶ `goto`, 하지만 왜?](#-goto-하지만-왜)
@@ -2013,7 +2013,7 @@ for idx, item in enumerate(list_4):
 ---
 
 
-### ▶ Lossy zip of iterators *
+### ▶ 반복자의 손실되는 zip *
 <!-- Example ID: c28ed154-e59f-4070-8eb6-8967a4acac6d --->
 
 ```py
@@ -2062,7 +2062,7 @@ for idx, item in enumerate(list_4):
 
 ---
 
-### ▶ Loop variables leaking out!
+### ▶ 루프 변수가 유출되고 있습니다!
 <!-- Example ID: ccec7bf6-7679-4963-907a-1cd8587be9ea --->
 1\.
 ```py
@@ -2126,7 +2126,7 @@ print(x, ': x in global')
 
 ---
 
-### ▶ Beware of default mutable arguments!
+### ▶ 기본 가변인수를 조심하세요!
 <!-- Example ID: 7d42dade-e20d-4a7b-9ed7-16fb58505fe9 --->
 
 ```py
@@ -2184,7 +2184,7 @@ def some_func(default_arg=[]):
 
 ---
 
-### ▶ Catching the Exceptions
+### ▶ 예외들을 잡기
 <!-- Example ID: b5ca5e6a-47b9-4f69-9375-cda0f8c6755d --->
 ```py
 some_list = [1, 2, 3]
@@ -2259,7 +2259,7 @@ SyntaxError: invalid syntax
 
 ---
 
-### ▶ Same operands, different story!
+### ▶ 같은 피연산자, 다른 이야기!
 <!-- Example ID: ca052cdf-dd2d-4105-b936-65c28adc18a0 --->
 1\.
 ```py
@@ -2302,7 +2302,7 @@ a += [5, 6, 7, 8]
 ---
 
 
-### ▶ Be careful with chained operations
+### ▶ 연결된 연산들을 조심하세요
 <!-- Example ID: 07974979-9c86-4720-80bd-467aa19470d9 --->
 ```py
 >>> (False == False) in [False] # 말이 되네요
@@ -2347,7 +2347,7 @@ https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
 
 ---
 
-### ▶ Name resolution ignoring class scope
+### ▶ 이름 확인은 클래스 범위를 무시합니다
 <!-- Example ID: 03f73d96-151c-4929-b0a8-f74430788324 --->
 1\.
 ```py
@@ -2390,7 +2390,7 @@ class SomeClass:
 
 ---
 
-### ▶ Needles in a Haystack *
+### ▶ 모래밭에서 바늘찾기 *
 
 <!-- Example ID: 52a199b1-989a-4b28-8910-dff562cebba9 --->
 
@@ -2567,31 +2567,31 @@ def similar_recursive_func(a):
 ---
 
 
-### ▶ Splitsies *
+### ▶ 나눠봅시다 *
 <!-- Example ID: ec3168ba-a81a-4482-afb0-691f1cc8d65a --->
 ```py
 >>> 'a'.split()
 ['a']
 
-# is same as
+# 같은 결과입니다
 >>> 'a'.split(' ')
 ['a']
 
-# but
+# 하지만 
 >>> len(''.split())
 0
 
-# isn't the same as
+# 이건 같지 않네요
 >>> len(''.split(' '))
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- It might appear at first that the default separator for split is a single space `' '`, but as per the [docs](https://docs.python.org/2.7/library/stdtypes.html#str.split)
-    >  If sep is not specified or is `None`, a different splitting algorithm is applied: runs of consecutive whitespace are regarded as a single separator, and the result will contain no empty strings at the start or end if the string has leading or trailing whitespace. Consequently, splitting an empty string or a string consisting of just whitespace with a None separator returns `[]`.
-    > If sep is given, consecutive delimiters are not grouped together and are deemed to delimit empty strings (for example, `'1,,2'.split(',')` returns `['1', '', '2']`). Splitting an empty string with a specified separator returns `['']`.
-- Noticing how the leading and trailing whitespaces are handled in the following snippet will make things clear,
+- 처음에는 split의 기본 구분자가 공백 한 칸 `' '`인 것처럼 보이지만, [문서](https://docs.python.org/2.7/library/stdtypes.html#str.split)에 따르면
+    > sep 이 지정되지 않거나 None 이면, 다른 분할 알고리즘이 적용됩니다: 연속된 공백 문자는 단일한 구분자로 간주하고, 문자열이 선행이나 후행 공백을 포함해도 결과는 시작과 끝에 빈 문자열을 포함하지 않습니다. 결과적으로, 빈 문자열이나 공백만으로 구성된 문자열을 None 구분자로 나누면 [] 를 돌려줍니다.
+    > sep 이 주어지면, 연속된 구분자는 묶이지 않고 빈 문자열을 구분하는 것으로 간주합니다 (예를 들어, '1,,2'.split(',') 는 ['1', '', '2'] 를 돌려줍니다). sep 인자는 여러 문자로 구성될 수 있습니다 (예를 들어, '1<>2<>3'.split('<>') 는 ['1', '2', '3'] 를 돌려줍니다). 지정된 구분자로 빈 문자열을 나누면 [''] 를 돌려줍니다.
+- 다음 코드에서 앞뒤의 공백이 어떻게 처리되는지 알게 되면 명확해질 겁니다,
     ```py
     >>> ' a '.split(' ')
     ['', 'a', '']
@@ -2603,7 +2603,7 @@ def similar_recursive_func(a):
 
 ---
 
-### ▶ Wild imports *
+### ▶ 제멋대로 가져오기 *
 <!-- Example ID: 83deb561-bd55-4461-bb5e-77dd7f411e1c --->
 <!-- read-only -->
 
@@ -2618,7 +2618,7 @@ def _another_weird_name_func():
 
 ```
 
-**Output**
+**출력 결과**
 
 ```py
 >>> from module import *
@@ -2630,16 +2630,16 @@ Traceback (most recent call last):
 NameError: name '_another_weird_name_func' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- It is often advisable to not use wildcard imports. The first obvious reason for this is, in wildcard imports, the names with a leading underscore get imported. This may lead to errors during runtime.
-- Had we used `from ... import a, b, c` syntax, the above `NameError` wouldn't have occurred.
+- 와일드카드 import는 자주 사용하지 않는 것이 좋습니다. 와일드카드 import에 대해 명확한 첫 번째 이유는 언더스코어로 시작하는 이름이 import 되기 때문입니다. 이로 인해 런타임 중에 에러가 발생할 수 있습니다.
+- 만약 `from ... import a, b, c` 문법을 사용한다면, `NameError`는 발생하지 않을 것입니다.
     ```py
     >>> from module import some_weird_name_func_, _another_weird_name_func
     >>> _another_weird_name_func()
     works!
     ```
-- If you really want to use wildcard imports, then you'd have to define the list `__all__` in your module that will contain a list of public objects that'll be available when we do wildcard imports.
+- 만약 정말로 와일드카드 import가 사용하고 싶다면, 와일드카드 import를 할 때 사용할 수 있는 공용 객체가 들어 있는 리스트인 `__all__`을 모듈 내에 정의해야 합니다. 
     ```py
     __all__ = ['_another_weird_name_func']
 
@@ -2649,7 +2649,7 @@ NameError: name '_another_weird_name_func' is not defined
     def _another_weird_name_func():
         print("works!")
     ```
-    **Output**
+    **출력 결과**
 
     ```py
     >>> _another_weird_name_func()
@@ -2662,7 +2662,7 @@ NameError: name '_another_weird_name_func' is not defined
 
 ---
 
-### ▶ All sorted? *
+### ▶ 다 정렬되었나요? *
 
 <!-- Example ID: e5ff1eaf-8823-4738-b4ce-b73f7c9d5511 -->
 
@@ -2678,9 +2678,9 @@ True
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The `sorted` method always returns a list, and comparing lists and tuples always returns `False` in Python. 
+- 파이썬에서 `sorted` 메소드는 항상 리스트를 반환하고, 리스트와 튜플의 비교는 항상 `False`를 반환합니다.
 
 - ```py
   >>> [] == tuple()
@@ -2690,9 +2690,9 @@ False
   (tuple, list)
   ```
 
-- Unlike `sorted`, the `reversed` method returns an iterator. Why? Because sorting requires the iterator to be either modified in-place or use an extra container (a list), whereas reversing can simply work by iterating from the last index to the first.
+- `sorted`와 달리 `reversed` 메소드는 반복자를 반환합니다. 왜 그럴까요? 왜냐하면 정렬은 반복자가 그 자리에서 변경되거나 추가적인 컨테이너(리스트)를 사용해야 하지만, 뒤집는 것은 단순히 끝 인덱스부터 처음까지 반복하면 되기 때문입니다.
 
-- So during comparison `sorted(y) == sorted(y)`, the first call to `sorted()` will consume the iterator `y`, and the next call will just return an empty list.
+- 따라서 `sorted(y) == sorted(y)`를 비교하는 동안에, 처음의 `sorted()`가 호출되면 `y`의 반복자를 소모하고, 다음의 호출에는 빈 리스트가 반환됩니다.
 
   ```py
   >>> x = 7, 8, 9
@@ -2703,7 +2703,7 @@ False
 
 ---
 
-### ▶ Midnight time doesn't exist?
+### ▶ 자정은 존재하지 않나요?
 <!-- Example ID: 1bce8294-5619-4d70-8ce3-fe0bade690d1 --->
 ```py
 from datetime import datetime
@@ -2721,16 +2721,16 @@ if noon_time:
     print("Time at noon is", noon_time)
 ```
 
-**Output (< 3.5):**
+**출력 결과 (< 3.5):**
 
 ```py
 ('Time at noon is', datetime.time(12, 0))
 ```
-The midnight time is not printed.
+자정은 출력되지 않습니다.
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-Before Python 3.5, the boolean value for `datetime.time` object was considered to be `False` if it represented midnight in UTC. It is error-prone when using the `if obj:` syntax to check if the `obj` is null or some equivalent of "empty."
+파이썬 3.5 이전에, `datetime.time` 객체의 불리언 값은 UTC 기준으로 자정을 나타내는 경우 `False`로 간주하였습니다. 이는 `if obj:` 구문을 사용하우 `obj`가 null 또는 "비어있음"인지 확인하는 경우 오류가 발생하기 쉽습니다.
 
 ---
 ---
