@@ -63,23 +63,23 @@
     + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
     + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
     + [▶ Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
-  * [Section: Slippery Slopes](#section-slippery-slopes)
-    + [▶ Modifying a dictionary while iterating over it](#-modifying-a-dictionary-while-iterating-over-it)
-    + [▶ Stubborn `del` operation](#-stubborn-del-operation)
-    + [▶ The out of scope variable](#-the-out-of-scope-variable)
-    + [▶ Deleting a list item while iterating](#-deleting-a-list-item-while-iterating)
-    + [▶ Lossy zip of iterators *](#-lossy-zip-of-iterators-)
-    + [▶ Loop variables leaking out!](#-loop-variables-leaking-out)
-    + [▶ Beware of default mutable arguments!](#-beware-of-default-mutable-arguments)
-    + [▶ Catching the Exceptions](#-catching-the-exceptions)
-    + [▶ Same operands, different story!](#-same-operands-different-story)
-    + [▶ Be careful with chained operations](#-be-careful-with-chained-operations)
-    + [▶ Name resolution ignoring class scope](#-name-resolution-ignoring-class-scope)
-    + [▶ Needles in a Haystack *](#-needles-in-a-haystack-)
-    + [▶ Splitsies *](#-splitsies-)
-    + [▶ Wild imports *](#-wild-imports-)
-    + [▶ All sorted? *](#-all-sorted-)
-    + [▶ Midnight time doesn't exist?](#-midnight-time-doesnt-exist)
+  * ["미끄러운 비탈길" 단원](#미끄러운-비탈길-단원)
+    + [▶ 딕셔너리가 반복 중일 때 수정하기](#-딕셔너리가-반복-중일-때-수정하기)
+    + [▶ 완강한 `del` 연산자](#-완강한-del-연산자)
+    + [▶ 범위를 벗어난 변수](#-범위를-벗어난-변수)
+    + [▶ 반복하는 동안 리스트의 아이템을 삭제하기](#-반복하는-동안-리스트의-아이템을-삭제하기)
+    + [▶ 반복자의 손실되는 zip *](#-반복자의-손실되는-zip-)
+    + [▶ 루프 변수가 유출되고 있습니다!](#-루프-변수가-유출되고-있습니다)
+    + [▶ 기본 가변인수를 조심하세요!](#-기본-가변인수를-조심하세요)
+    + [▶ 여러 예외들을 잡기](#-여러-예외들을-잡기)
+    + [▶ 같은 피연산자, 다른 이야기!](#-같은-피연산자-다른-이야기)
+    + [▶ 연결된 연산들을 조심하세요](#-연결된-연산들을-조심하세요)
+    + [▶ 이름 확인은 클래스 범위를 무시합니다](#-이름-확인은-클래스-범위를-무시합니다)
+    + [▶ 모래밭에서 바늘찾기 *](#-모래밭에서-바늘찾기-)
+    + [▶ 나눠봅시다 *](#-나눠봅시다-)
+    + [▶ 제멋대로 가져오기 *](#-제멋대로-가져오기-)
+    + [▶ 다 정렬되었나요? *](#-다-정렬되었나요-)
+    + [▶ 자정은 존재하지 않나요?](#-자정은-존재하지-않나요)
   * ["숨겨진 보물들!" 단원](#숨겨진-보물들-단원)
     + [▶ 파이썬, 날 날게해줄 수 있니?](#-파이썬-날-날게해줄-수-있니)
     + [▶ `goto`, 하지만 왜?](#-goto-하지만-왜)
@@ -1830,9 +1830,9 @@ a, b = a[b] = {}, 5
 ---
 ---
 
-## Section: Slippery Slopes
+## "미끄러운 비탈길" 단원
 
-### ▶ Modifying a dictionary while iterating over it
+### ▶ 딕셔너리가 반복 중일 때 수정하기
 <!-- Example ID: b4e5cdfb-c3a8-4112-bd38-e2356d801c41 --->
 ```py
 x = {0: None}
@@ -1843,7 +1843,7 @@ for i in x:
     print(i)
 ```
 
-**Output (Python 2.7- Python 3.5):**
+**출력 결과 (Python 2.7- Python 3.5):**
 
 ```
 0
@@ -1856,19 +1856,19 @@ for i in x:
 7
 ```
 
-Yes, it runs for exactly **eight** times and stops.
+정확히 **8**번 돌고 멈춥니다.
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Iteration over a dictionary that you edit at the same time is not supported.
-* It runs eight times because that's the point at which the dictionary resizes to hold more keys (we have eight deletion entries, so a resize is needed). This is actually an implementation detail.
-* How deleted keys are handled and when the resize occurs might be different for different Python implementations.
-* So for Python versions other than Python 2.7 - Python 3.5, the count might be different from 8 (but whatever the count is, it's going to be the same every time you run it). You can find some discussion around this [here](https://github.com/satwikkansal/wtfpython/issues/53) or in [this](https://stackoverflow.com/questions/44763802/bug-in-python-dict) StackOverflow thread.
-* Python 3.8 onwards, you'll see `RuntimeError: dictionary keys changed during iteration` exception if you try to do this.
+* 딕셔너리가 반복될 때 동시에 편집할 수 있는 것은 지원되지 않습니다.
+* 8번 반복되는 이유는 더 많은 키를 소유하기 위해 딕셔너리가 크기를 조정하는 지점이기 때문입니다. (우리는 8개의 삭제 항목들이 있으므로, 크기의 조정이 필요합니다) 이는 실제 구현의 세부사항입니다.
+* 삭제된 키를 처리하는 과정과 크기의 조정이 이루어지는 시점은 Python의 구현에 따라 다를 수 있습니다.
+* 따라서, 파이썬 2.7 - 3.5 이외의 버전의 경우, 실행 횟수가 8과 다를 수 있습니다. (하지만 횟수가 어떻던 간에, 실행할 때 마다 동일한 결과입니다) [여기](https://github.com/satwikkansal/wtfpython/issues/53) 또는 StackOverflow의 [이 스레드](https://stackoverflow.com/questions/44763802/bug-in-python-dict)에서 이에 관한 토론을 찾을 수 있습니다.
+* 파이썬 3.8 이상에서는 이것을 시도할 경우 `RuntimeError: dictionary keys changed during iteration` 예외를 보여줍니다.
 
 ---
 
-### ▶ Stubborn `del` operation
+### ▶ 완강한 `del` 연산자
 <!-- Example ID: 777ed4fd-3a2d-466f-95e7-c4058e61d78e --->
 <!-- read-only -->
 
@@ -1878,42 +1878,42 @@ class SomeClass:
         print("Deleted!")
 ```
 
-**Output:**
+**출력 결과:**
 1\.
 ```py
 >>> x = SomeClass()
 >>> y = x
->>> del x # this should print "Deleted!"
+>>> del x # "Deleted!"를 출력해야 합니다
 >>> del y
 Deleted!
 ```
 
-Phew, deleted at last. You might have guessed what saved from `__del__` being called in our first attempt to delete `x`. Let's add more twists to the example.
+휴, 드디어 삭제되었습니다. 여러분은 처음의 `x` 삭제에서 `__del__`이 호출되지 않은 것을 생각하실 수도 있습니다. 이제 예제를 살짝 비틀어 봅시다.
 
 2\.
 ```py
 >>> x = SomeClass()
 >>> y = x
 >>> del x
->>> y # check if y exists
+>>> y # y가 존재하는지 확인합니다
 <__main__.SomeClass instance at 0x7f98a1a67fc8>
->>> del y # Like previously, this should print "Deleted!"
->>> globals() # oh, it didn't. Let's check all our global variables and confirm
+>>> del y # 이전과 같이, "Deleted!"를 출력해야 합니다
+>>> globals() # 오, 그렇지 않네요. 우리의 전역변수를 확인해봅시다
 Deleted!
 {'__builtins__': <module '__builtin__' (built-in)>, 'SomeClass': <class __main__.SomeClass at 0x7f98a1a5f668>, '__package__': None, '__name__': '__main__', '__doc__': None}
 ```
 
-Okay, now it's deleted :confused:
+좋습니다. 이제 삭제되었습니다 :confused:
 
-#### 💡 Explanation:
-+ `del x` doesn’t directly call `x.__del__()`.
-+ Whenever `del x` is encountered, Python decrements the reference count for `x` by one, and `x.__del__()` when x’s reference count reaches zero.
-+ In the second output snippet, `y.__del__()` was not called because the previous statement (`>>> y`) in the interactive interpreter created another reference to the same object, thus preventing the reference count from reaching zero when `del y` was encountered.
-+ Calling `globals` caused the existing reference to be destroyed, and hence we can see "Deleted!" being printed (finally!).
+#### 💡 설명:
++ `del x`는 직접적으로 `x.__del__()`을 부르지 않습니다.
++ `del x`가 호출될 때, 파이썬은 `x`에 대한 참조 카운트를 하나씩 줄입니다. 그리고 `x.__del__()`은 x의 참조 카운트가 0에 도달할 때 실행됩니다.
++ 두번째 코드의 출력에서, `y.__del__()` 는 호출되지 않습니다. 왜냐하면 이전의 구문에 (`>>> y`) 대화형 인터프리터가 같은 객체에 대해 또 다른 참조를 만들고, 따라서 `del y`가 호출될 때 참조 카운트가 0에 도달하지 않습니다.
++ `globals`가 호출되면 존재하는 참조가 파괴돼, 이런 이유로 우리는 "Deleted!"가 출력되는 것을 볼 수 있습니다. (마침내!)
 
 ---
 
-### ▶ The out of scope variable
+### ▶ 범위를 벗어난 변수
 <!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
 ```py
 a = 1
@@ -1925,7 +1925,7 @@ def another_func():
     return a
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_func()
 1
@@ -1933,10 +1933,10 @@ def another_func():
 UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
-#### 💡 Explanation:
-* When you make an assignment to a variable in scope, it becomes local to that scope. So `a` becomes local to the scope of `another_func`,  but it has not been initialized previously in the same scope, which throws an error.
-* Read [this](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html) short but an awesome guide to learn more about how namespaces and scope resolution works in Python.
-* To modify the outer scope variable `a` in `another_func`, use `global` keyword.
+#### 💡 설명:
+* 범위 내의 변수에 할당하면, 해당 범위의 로컬 변수가 됩니다. 그래서 `a`는 `another_func`의 범위에 국한되지만 이전과 같은 범위에서 초기화 되지 않아 에러가 발생합니다.
+* 짧지만 멋진 [이 가이드](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)를 읽고 네임스페이스와 범위 결정이 파이썬에서 작동하는 방법에 대해 알아보세요.
+* `another_func`에서 외부 범위의 `a`를 변경하려면, `global` 키워드를 사용하세요.
   ```py
   def another_func()
       global a
@@ -1944,7 +1944,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
       return a
   ```
 
-  **Output:**
+  **출력 결과:**
   ```py
   >>> another_func()
   2
@@ -1952,7 +1952,7 @@ UnboundLocalError: local variable 'a' referenced before assignment
 
 ---
 
-### ▶ Deleting a list item while iterating
+### ▶ 반복하는 동안 리스트의 아이템을 삭제하기
 <!-- Example ID: 4cc52d4e-d42b-4e09-b25f-fbf5699b7d4e --->
 ```py
 list_1 = [1, 2, 3, 4]
@@ -1973,7 +1973,7 @@ for idx, item in enumerate(list_4):
     list_4.pop(idx)
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> list_1
 [1, 2, 3, 4]
@@ -1985,35 +1985,35 @@ for idx, item in enumerate(list_4):
 [2, 4]
 ```
 
-Can you guess why the output is `[2, 4]`?
+왜 출력 결과가 `[2, 4]`가 나오는지 알 수 있나요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* It's never a good idea to change the object you're iterating over. The correct way to do so is to iterate over a copy of the object instead, and `list_3[:]` does just that.
+* 반복하고 있는 객체를 바꾸는 것은 좋은 생각이 아닙니다. 올바른 방법은 `list_3[:]`과 같이 복사본을 반복하는 것입니다.
 
      ```py
      >>> some_list = [1, 2, 3, 4]
      >>> id(some_list)
      139798789457608
-     >>> id(some_list[:]) # Notice that python creates new object for sliced list.
+     >>> id(some_list[:]) # 파이썬은 슬라이스된 리스트를 위해 새로운 객체를 생성하는 것을 알 수 있습니다.
      139798779601192
      ```
 
-**Difference between `del`, `remove`, and `pop`:**
-* `del var_name` just removes the binding of the `var_name` from the local or global namespace (That's why the `list_1` is unaffected).
-* `remove` removes the first matching value, not a specific index, raises `ValueError` if the value is not found.
-* `pop` removes the element at a specific index and returns it, raises `IndexError` if an invalid index is specified.
+**`del`, `remove`, `pop`의 차이점**
+* `del var_name`은 로컬 또는 전역 네임스페이스에서 `var_name`의 바인딩을 삭제합니다. (그래서 `list_1`은 영향 받지 않습니다)
+* `remove`는 특정 인덱스가 아닌 첫번째 일치하는 값을 삭제하는 경우 값을 찾을 수 없으면 `ValueError`를 일으킵니다.
+* `pop`은 특정 인덱스에서 요소를 제거하고 반환하며, 인덱스가 유효하지 않으면 `IndexError`를 일으킵니다.
 
-**Why the output is `[2, 4]`?**
-- The list iteration is done index by index, and when we remove `1` from `list_2` or `list_4`, the contents of the lists are now `[2, 3, 4]`. The remaining elements are shifted down, i.e., `2` is at index 0, and `3` is at index 1. Since the next iteration is going to look at index 1 (which is the `3`), the `2` gets skipped entirely. A similar thing will happen with every alternate element in the list sequence.
+**왜 `[2, 4]`가 출력되나요?**
+- 리스트의 반복은 인덱스별로 이루어지며, `list_2` 또는 `list_4`에서 `1`을 삭제하면, 리스트는 `[2, 3, 4]`가 됩니다. 나머지 요소들은 인덱스가 낮아지게 되어 `2`는 인덱스 0, `3`은 인덱스 1이 됩니다. 다음번 반복은 인덱스 1 (요소 `3`이 됩니다)을 보게 되고, `2`는 건너뛰게 됩니다. 리스트 순서의 모든 대안 요소들도 비슷한 상황이 일어납니다.
 
-* Refer to this StackOverflow [thread](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) explaining the example
-* See also this nice StackOverflow [thread](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) for a similar example related to dictionaries in Python.
+* 예제를 설명하는 StackOverflow [스레드](https://stackoverflow.com/questions/45946228/what-happens-when-you-try-to-delete-a-list-element-while-iterating-over-it) 를 참고하였습니다.
+* 파이썬의 딕셔너리에 관련된 비슷한 예제로 이 StackOverflow [스레드](https://stackoverflow.com/questions/45877614/how-to-change-all-the-dictionary-keys-in-a-for-loop-with-d-items) 도 참고하세요.
 
 ---
 
 
-### ▶ Lossy zip of iterators *
+### ▶ 반복자의 손실되는 zip *
 <!-- Example ID: c28ed154-e59f-4070-8eb6-8967a4acac6d --->
 
 ```py
@@ -2026,15 +2026,15 @@ Can you guess why the output is `[2, 4]`?
 >>> numbers_iter = iter(numbers)
 >>> list(zip(numbers_iter, first_three)) 
 [(0, 0), (1, 1), (2, 2)]
-# so far so good, let's zip the remaining
+# 지금까지는 좋은데, 나머지도 압축해봅시다
 >>> list(zip(numbers_iter, remaining))
 [(4, 3), (5, 4), (6, 5)]
 ```
-Where did element `3` go from the `numbers` list?
+`numbers` 리스트에서 요소 `3`이 어디로 갔을까요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- From Python [docs](https://docs.python.org/3.3/library/functions.html#zip), here's an approximate implementation of zip function,
+- 파이썬의 [이 문서](https://docs.python.org/3.3/library/functions.html#zip)에서, zip 함수의 대략적인 구현을 살펴봅시다.
     ```py
     def zip(*iterables):
         sentinel = object()
@@ -2047,9 +2047,9 @@ Where did element `3` go from the `numbers` list?
                 result.append(elem)
             yield tuple(result)
     ```
-- So the function takes in arbitrary number of itreable objects, adds each of their items to the `result` list by calling the `next` function on them, and stops whenever any of the iterable is exhausted. 
-- The caveat here is when any iterable is exhausted, the existing elements in the `result` list are discarded. That's what happened with `3` in the `numbers_iter`.
-- The correct way to do the above using `zip` would be,
+- 그래서 이 함수는 임의의 수의 반복 가능한 객체를 모아 `next` 함수를 호출하여 각각의 항목을 `result` 리스트에 추가하고, 반복 가능한 객체 중 하나가 고갈될 때에 중지합니다.
+- 여기서 주의해야 할 점은 반복 가능한 객체들이 고갈될 때, `result` 리스트에 들어 있는 기존의 요소들이 폐기되는 것입니다. `numbers_iter` 내부의 `3`에 그러한 일이 일어났습니다.
+- `zip`을 사용하여 위와 같은 일을 처리하는 올바른 방법은 다음과 같습니다,
     ```py
     >>> numbers = list(range(7))
     >>> numbers_iter = iter(numbers)
@@ -2058,11 +2058,11 @@ Where did element `3` go from the `numbers` list?
     >>> list(zip(remaining, numbers_iter))
     [(3, 3), (4, 4), (5, 5), (6, 6)]
     ```
-    The first argument of zip should be the one with fewest elements.
+    zip의 첫번째 인자는 가장 적은 요소를 가지고 있어야 합니다.
 
 ---
 
-### ▶ Loop variables leaking out!
+### ▶ 루프 변수가 유출되고 있습니다!
 <!-- Example ID: ccec7bf6-7679-4963-907a-1cd8587be9ea --->
 1\.
 ```py
@@ -2072,17 +2072,17 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 6 : for x inside loop
 6 : x in global
 ```
 
-But `x` was never defined outside the scope of for loop...
+하지만 `x`는 루프의 밖에서 선언된 적이 없습니다...
 
 2\.
 ```py
-# This time let's initialize x first
+# 이번엔 먼저 x를 초기화해봅시다
 x = -1
 for x in range(7):
     if x == 6:
@@ -2090,7 +2090,7 @@ for x in range(7):
 print(x, ': x in global')
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 6 : for x inside loop
 6 : x in global
@@ -2098,7 +2098,7 @@ print(x, ': x in global')
 
 3\.
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2107,7 +2107,7 @@ print(x, ': x in global')
 4
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> x = 1
 >>> print([x for x in range(5)])
@@ -2116,17 +2116,17 @@ print(x, ': x in global')
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- In Python, for-loops use the scope they exist in and leave their defined loop-variable behind. This also applies if we explicitly defined the for-loop variable in the global namespace before. In this case, it will rebind the existing variable.
+- 파이썬에서, for 루프는 루프의 스코프를 사용하고 정의된 루프 변수는 뒤로 남겨둡니다. 이전에 전역 네임스페이스에서 for 루프 변수를 명시적으로 정의한 경우에도 적용됩니다. 이 경우, 기존에 존재하는 변수를 다시 바인딩합니다.
 
-- The differences in the output of Python 2.x and Python 3.x interpreters for list comprehension example can be explained by following change documented in [What’s New In Python 3.0](https://docs.python.org/3/whatsnew/3.0.html) changelog:
+- 파이썬 2.x와 파이썬 3.x의 인터프리터의 출력 결과의 차이는 다음의 [파이썬 3.0의 새로운 기능들](https://docs.python.org/3/whatsnew/3.0.html) 변경 로그에서 확인할 수 있습니다:
 
-    > "List comprehensions no longer support the syntactic form `[... for var in item1, item2, ...]`. Use `[... for var in (item1, item2, ...)]` instead. Also, note that list comprehensions have different semantics: they are closer to syntactic sugar for a generator expression inside a `list()` constructor, and in particular, the loop control variables are no longer leaked into the surrounding scope."
+    > "리스트 컴프리헨션은 이제 `[... for var in item1, item2, ...]` 문법을 지원하지 않습니다. 대신 `[... for var in (item1, item2, ...)]`을 사용하세요. 또한 리스트 컴프리헨션은 다른 의미들을 가지고 있는점에 주목해야합니다: 그들은 `list()` 생성 표현식 생성자의 문법 설탕에 가깝고, 특히 루프 제어 변수들은 더 이상 범위 밖으로 유출되지 않습니다.
 
 ---
 
-### ▶ Beware of default mutable arguments!
+### ▶ 기본 가변인수를 조심하세요!
 <!-- Example ID: 7d42dade-e20d-4a7b-9ed7-16fb58505fe9 --->
 
 ```py
@@ -2135,7 +2135,7 @@ def some_func(default_arg=[]):
     return default_arg
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_func()
 ['some_string']
@@ -2147,9 +2147,9 @@ def some_func(default_arg=[]):
 ['some_string', 'some_string', 'some_string']
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The default mutable arguments of functions in Python aren't really initialized every time you call the function. Instead, the recently assigned value to them is used as the default value. When we explicitly passed `[]` to `some_func` as the argument, the default value of the `default_arg` variable was not used, so the function returned as expected.
+- 파이썬에서 함수의 기본 변경 가능한 인수는 함수가 호출될 때마다 실제로 초기화되지 않습니다. 대신, 최근에 할당된 값이 기본값으로 사용됩니다. `some_func`에 `[]`를 인수로 넘겨줄 때 `default_arg`의 기본값이 사용되지 않아 결과가 예상대로 나오게 됩니다.
 
     ```py
     def some_func(default_arg=[]):
@@ -2157,9 +2157,9 @@ def some_func(default_arg=[]):
         return default_arg
     ```
 
-    **Output:**
+    **출력 결과:**
     ```py
-    >>> some_func.__defaults__ #This will show the default argument values for the function
+    >>> some_func.__defaults__ #이건 함수에 대한 기본 인수값을 보여줍니다
     ([],)
     >>> some_func()
     >>> some_func.__defaults__
@@ -2172,7 +2172,7 @@ def some_func(default_arg=[]):
     (['some_string', 'some_string'],)
     ```
 
-- A common practice to avoid bugs due to mutable arguments is to assign `None` as the default value and later check if any value is passed to the function corresponding to that argument. Example:
+- 변경 가능한 인수로 인한 버그를 피하는 일반적인 방법으로는 기본값으로 `None`을 지정한 후에 해당 인수에 어떠한 값이 들어오는지 확인하는 것입니다. 예시:
 
     ```py
     def some_func(default_arg=None):
@@ -2184,31 +2184,31 @@ def some_func(default_arg=[]):
 
 ---
 
-### ▶ Catching the Exceptions
+### ▶ 여러 예외들을 잡기
 <!-- Example ID: b5ca5e6a-47b9-4f69-9375-cda0f8c6755d --->
 ```py
 some_list = [1, 2, 3]
 try:
-    # This should raise an ``IndexError``
+    # ``IndexError``를 일으킵니다
     print(some_list[4])
 except IndexError, ValueError:
     print("Caught!")
 
 try:
-    # This should raise a ``ValueError``
+    # ``ValueError``를 일으킵니다
     some_list.remove(4)
 except IndexError, ValueError:
     print("Caught again!")
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 Caught!
 
 ValueError: list.remove(x): x not in list
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
   File "<input>", line 3
     except IndexError, ValueError:
@@ -2216,24 +2216,24 @@ ValueError: list.remove(x): x not in list
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
-* To add multiple Exceptions to the except clause, you need to pass them as parenthesized tuple as the first argument. The second argument is an optional name, which when supplied will bind the Exception instance that has been raised. Example,
+* 예외처리 구문에 여러 개의 예외를 처리하려면, 해당 예외들을 튜플로 묶어 첫 번째 인수로 넘겨줘야 합니다. 두 번째 인수는 선택적 이름으로, 주어진 경우 일어난 예외 인스턴스가 바인딩 됩니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
-     # This should raise a ``ValueError``
+     # ``ValueError``를 일으킵니다
      some_list.remove(4)
   except (IndexError, ValueError), e:
      print("Caught again!")
      print(e)
   ```
-  **Output (Python 2.x):**
+  **출력 결과 (Python 2.x):**
   ```
   Caught again!
   list.remove(x): x not in list
   ```
-  **Output (Python 3.x):**
+  **출력 결과 (Python 3.x):**
   ```py
     File "<input>", line 4
       except (IndexError, ValueError), e:
@@ -2241,7 +2241,7 @@ SyntaxError: invalid syntax
   IndentationError: unindent does not match any outer indentation level
   ```
 
-* Separating the exception from the variable with a comma is deprecated and does not work in Python 3; the correct way is to use `as`. Example,
+* 쉼표로 예외에서 변수를 분리하는 방법은 이제는 사용되지 않으며 파이썬 3에서는 작동하지 않습니다; 이 경우 `as`를 사용해야 합니다. 예를 들어,
   ```py
   some_list = [1, 2, 3]
   try:
@@ -2251,7 +2251,7 @@ SyntaxError: invalid syntax
       print("Caught again!")
       print(e)
   ```
-  **Output:**
+  **출력 결과:**
   ```
   Caught again!
   list.remove(x): x not in list
@@ -2259,7 +2259,7 @@ SyntaxError: invalid syntax
 
 ---
 
-### ▶ Same operands, different story!
+### ▶ 같은 피연산자, 다른 이야기!
 <!-- Example ID: ca052cdf-dd2d-4105-b936-65c28adc18a0 --->
 1\.
 ```py
@@ -2268,7 +2268,7 @@ b = a
 a = a + [5, 6, 7, 8]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> a
 [1, 2, 3, 4, 5, 6, 7, 8]
@@ -2283,7 +2283,7 @@ b = a
 a += [5, 6, 7, 8]
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> a
 [1, 2, 3, 4, 5, 6, 7, 8]
@@ -2291,25 +2291,25 @@ a += [5, 6, 7, 8]
 [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-*  `a += b` doesn't always behave the same way as `a = a + b`.  Classes *may* implement the *`op=`* operators differently, and lists do this.
+*  `a += b` 는 항상 `a = a + b`와 같게 동작하지 않습니다. 클래스는 *`op=`* 연산자를 *다르게* 구현할 수 있으며, 리스트는 다음과 같습니다.
 
-* The expression `a = a + [5,6,7,8]` generates a new list and sets `a`'s reference to that new list, leaving `b` unchanged.
+* `a = a + [5,6,7,8]` 표현식은 새로운 리스트를 생성하여 새로운 리스트에 대한 `a`의 참조를 설정하므로, `b`는 바뀌지 않습니다.
 
-* The expression `a += [5,6,7,8]` is actually mapped to an "extend" function that operates on the list such that `a` and `b` still point to the same list that has been modified in-place.
+* `a += [5,6,7,8]` 표현식은 실제로 `a`와 `b`가 여전히 내부에서 수정된 목록을 가리키도록 하는 "확장" 함수에 대치됩니다.
 
 ---
 
 
-### ▶ Be careful with chained operations
+### ▶ 연결된 연산들을 조심하세요
 <!-- Example ID: 07974979-9c86-4720-80bd-467aa19470d9 --->
 ```py
->>> (False == False) in [False] # makes sense
+>>> (False == False) in [False] # 말이 되네요
 False
->>> False == (False in [False]) # makes sense
+>>> False == (False in [False]) # 이것도 말이 됩니다
 False
->>> False == False in [False] # now what?
+>>> False == False in [False] # 이건 뭐죠?
 True
 
 >>> True is False == False
@@ -2325,29 +2325,29 @@ False
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-As per https://docs.python.org/2/reference/expressions.html#not-in
+https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
 
-> Formally, if a, b, c, ..., y, z are expressions and op1, op2, ..., opN are comparison operators, then a op1 b op2 c ... y opN z is equivalent to a op1 b and b op2 c and ... y opN z, except that each expression is evaluated at most once.
+> 형식적으로, a, b, c, ..., y, z가 표현식이고 op1, op2, ..., opN이 비교 연산자라면, 각 식이 한번에 평가된다는 점을 제외하고 a op1 b op2 c ... y opN z는 a op1 b and b op2 c and ... y opN z에 해당합니다. 
 
-While such behavior might seem silly to you in the above examples, it's fantastic with stuff like `a == b == c` and `0 <= x <= 100`.
+위의 예시와 같은 행동들은 멍청해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
 
-* `False is False is False` is equivalent to `(False is False) and (False is False)`
-* `True is False == False` is equivalent to `True is False and False == False` and since the first part of the statement (`True is False`) evaluates to `False`, the overall expression evaluates to `False`.
-* `1 > 0 < 1` is equivalent to `1 > 0 and 0 < 1` which evaluates to `True`.
-* The expression `(1 > 0) < 1` is equivalent to `True < 1` and
+* `False is False is False`는 `(False is False) and (False is False)`와 같습니다.
+* `True is False == False`는 `True is False and False == False`와 같으며 구문의 첫 부분 (`True is False`)가 `False`로 평가되기 때문에 전체 표현식의 결과는 `False`가 됩니다.
+* `1 > 0 < 1`은 `1 > 0 and 0 < 1`과 같아 `True`가 계산됩니다.
+* 표현식 `(1 > 0) < 1`은 `True < 1`과 같으며
   ```py
   >>> int(True)
   1
-  >>> True + 1 #not relevant for this example, but just for fun
+  >>> True + 1 #예제와는 관련이 없지만, 재미를 위해서입니다.
   2
   ```
-  So, `1 < 1` evaluates to `False`
+  즉, `1 < 1`의 결과는 `False`입니다.
 
 ---
 
-### ▶ Name resolution ignoring class scope
+### ▶ 이름 확인은 클래스 범위를 무시합니다
 <!-- Example ID: 03f73d96-151c-4929-b0a8-f74430788324 --->
 1\.
 ```py
@@ -2357,7 +2357,7 @@ class SomeClass:
     y = (x for i in range(10))
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> list(SomeClass.y)[0]
 5
@@ -2371,30 +2371,30 @@ class SomeClass:
     y = [x for i in range(10)]
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 >>> SomeClass.y[0]
 17
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> SomeClass.y[0]
 5
 ```
 
-#### 💡 Explanation
-- Scopes nested inside class definition ignore names bound at the class level.
-- A generator expression has its own scope.
-- Starting from Python 3.X, list comprehensions also have their own scope.
+#### 💡 설명
+- 클래스 정의 내에서 중첩된 범위는 클래스 수준에서 바인딩 된 이름을 무시합니다.
+- 생성 표현식은 자체적인 범위를 갖습니다.
+- 파이썬 3.x부터는 리스트 컴프리헨션 또한 자체적인 범위를 갖습니다.
 
 ---
 
-### ▶ Needles in a Haystack *
+### ▶ 모래밭에서 바늘찾기 *
 
 <!-- Example ID: 52a199b1-989a-4b28-8910-dff562cebba9 --->
 
-I haven't met even a single experience Pythonist till date who has not come across one or more of the following scenarios,
+다음의 시나리오 중 하나 이상을 접해보지 못한 파이써니스트는 한 번도 만나본 적이 없습니다,
 
 1\.
 
@@ -2402,10 +2402,10 @@ I haven't met even a single experience Pythonist till date who has not come acro
 x, y = (0, 1) if True else None, None
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
->>> x, y  # expected (0, 1)
+>>> x, y  # (0, 1)이 예상됩니다
 ((0, 1), None)
 ```
 
@@ -2424,7 +2424,7 @@ t = ()
 print(t)
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 one
@@ -2452,26 +2452,26 @@ ten_words_list = [
 ]
 ```
 
-**Output**
+**출력 결과**
 
 ```py
 >>> len(ten_words_list)
 9
 ```
 
-4\. Not asserting strongly enough
+4\. 충분히 강하게 주장하지 않음
 
 ```py
 a = "python"
 b = "javascript"
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
-# An assert statement with an assertion failure message.
+# 실패 메세지가 있는 assert 구문.
 >>> assert(a == b, "Both languages are different")
-# No AssertionError is raised
+# AssertionError가 일어나지 않습니다
 ```
 
 5\.
@@ -2488,7 +2488,7 @@ some_list = some_list.append(4)
 some_dict = some_dict.update({"key_4": 4})
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> print(some_list)
@@ -2515,7 +2515,7 @@ def similar_recursive_func(a):
         return a
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> some_recursive_func([5, 0])
@@ -2524,22 +2524,22 @@ def similar_recursive_func(a):
 4
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* For 1, the correct statement for expected behavior is `x, y = (0, 1) if True else (None, None)`.
+* 1번에서, 예상되는 동작에 대한 올바른 구문은 `x, y = (0, 1) if True else (None, None)`입니다.
 
-* For 2, the correct statement for expected behavior is `t = ('one',)` or `t = 'one',` (missing comma) otherwise the interpreter considers `t` to be a `str` and iterates over it character by character.
+* 2번에서, 예상되는 동작에 대한 올바른 구문은 `t = ('one',)` 또는 `t = 'one',` (콤마가 없음)입니다. 그렇지 않으면 인터프리터는 `t`를 `str`로 생각해 문자 별로 반복합니다.
 
-* `()` is a special token and denotes empty `tuple`.
+* `()`은 특별한 토큰이며 빈 `tuple`을 의미합니다.
 
-* In 3, as you might have already figured out, there's a missing comma after 5th element (`"that"`) in the list. So by implicit string literal concatenation,
+* 3번에서, 여러분들도 이미 알아 차렷겟지만, 리스트의 5번째 요소 (`"that"`)의 뒤에 콤마가 빠져있습니다. 그래서 암묵적인 문자열 리터럴의 연결에 의해,
 
   ```py
   >>> ten_words_list
   ['some', 'very', 'big', 'list', 'thatconsists', 'of', 'exactly', 'ten', 'words']
   ```
 
-* No `AssertionError` was raised in 4th snippet because instead of asserting the individual expression `a == b`, we're asserting entire tuple. The following snippet will clear things up,
+* 4번째 코드에서 `AssertionError`가 일어나지 않은 이유는 `a == b` 표현식이 아닌 전체 튜플을 비교하기 때문입니다. 다음의 코드에서 이를 해결할 수 있습니다.
 
   ```py
   >>> a = "python"
@@ -2558,40 +2558,40 @@ def similar_recursive_func(a):
   AssertionError: Values aren not equal
   ```
 
-* As for the fifth snippet, most methods that modify the items of sequence/mapping objects like `list.append`, `dict.update`, `list.sort`, etc. modify the objects in-place and return `None`. The rationale behind this is to improve performance by avoiding making a copy of the object if the operation can be done in-place (Referred from [here](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)).
+* 다섯 번째 코드에서, `list.append`, `dict.update`, `list.sort`또는 다른 것들과 같이 아이템의 순서/매핑 객체의 항목을 수정하는 대부분의 메소드입니다. 그 자리에서 객체를 수정한 후 `None`을 반환합니다. 이를 뒷받침하는 근거는 그 자리에서 연산을 시행할 수 있는 경우 객체의 사본을 만드는 것을 피해 성능을 향상하기 위함입니다. ([이것](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)을 참조하였습니다)
 
-* Last one should be fairly obvious, passing mutable object (like  `list` ) results in a call by reference, whereas an immutable object (like `int`)  results in a call by value.
+* 마지막으로, `list`와 같은 가변 객체를 전달은 참조로 호출되는 반면, `int`와 같은 불변 객체는 값으로 호출됩니다.
 
-* Being aware of these nitpicks can save you hours of debugging effort in the long run. 
+* 이런 자잘한 것들까지 알고 있으면 장기적으로 디버깅 시간을 절약할 수 있습니다.
 
 ---
 
 
-### ▶ Splitsies *
+### ▶ 나눠봅시다 *
 <!-- Example ID: ec3168ba-a81a-4482-afb0-691f1cc8d65a --->
 ```py
 >>> 'a'.split()
 ['a']
 
-# is same as
+# 같은 결과입니다
 >>> 'a'.split(' ')
 ['a']
 
-# but
+# 하지만 
 >>> len(''.split())
 0
 
-# isn't the same as
+# 이건 같지 않네요
 >>> len(''.split(' '))
 1
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- It might appear at first that the default separator for split is a single space `' '`, but as per the [docs](https://docs.python.org/2.7/library/stdtypes.html#str.split)
-    >  If sep is not specified or is `None`, a different splitting algorithm is applied: runs of consecutive whitespace are regarded as a single separator, and the result will contain no empty strings at the start or end if the string has leading or trailing whitespace. Consequently, splitting an empty string or a string consisting of just whitespace with a None separator returns `[]`.
-    > If sep is given, consecutive delimiters are not grouped together and are deemed to delimit empty strings (for example, `'1,,2'.split(',')` returns `['1', '', '2']`). Splitting an empty string with a specified separator returns `['']`.
-- Noticing how the leading and trailing whitespaces are handled in the following snippet will make things clear,
+- 처음에는 split의 기본 구분자가 공백 한 칸 `' '`인 것처럼 보이지만, [문서](https://docs.python.org/2.7/library/stdtypes.html#str.split)에 따르면
+    > sep 이 지정되지 않거나 None 이면, 다른 분할 알고리즘이 적용됩니다: 연속된 공백 문자는 단일한 구분자로 간주하고, 문자열이 선행이나 후행 공백을 포함해도 결과는 시작과 끝에 빈 문자열을 포함하지 않습니다. 결과적으로, 빈 문자열이나 공백만으로 구성된 문자열을 None 구분자로 나누면 [] 를 돌려줍니다.
+    > sep 이 주어지면, 연속된 구분자는 묶이지 않고 빈 문자열을 구분하는 것으로 간주합니다 (예를 들어, '1,,2'.split(',') 는 ['1', '', '2'] 를 돌려줍니다). sep 인자는 여러 문자로 구성될 수 있습니다 (예를 들어, '1<>2<>3'.split('<>') 는 ['1', '2', '3'] 를 돌려줍니다). 지정된 구분자로 빈 문자열을 나누면 [''] 를 돌려줍니다.
+- 다음 코드에서 앞뒤의 공백이 어떻게 처리되는지 알게 되면 명확해질 겁니다,
     ```py
     >>> ' a '.split(' ')
     ['', 'a', '']
@@ -2603,7 +2603,7 @@ def similar_recursive_func(a):
 
 ---
 
-### ▶ Wild imports *
+### ▶ 제멋대로 가져오기 *
 <!-- Example ID: 83deb561-bd55-4461-bb5e-77dd7f411e1c --->
 <!-- read-only -->
 
@@ -2618,7 +2618,7 @@ def _another_weird_name_func():
 
 ```
 
-**Output**
+**출력 결과**
 
 ```py
 >>> from module import *
@@ -2630,16 +2630,16 @@ Traceback (most recent call last):
 NameError: name '_another_weird_name_func' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- It is often advisable to not use wildcard imports. The first obvious reason for this is, in wildcard imports, the names with a leading underscore get imported. This may lead to errors during runtime.
-- Had we used `from ... import a, b, c` syntax, the above `NameError` wouldn't have occurred.
+- 와일드카드 import는 자주 사용하지 않는 것이 좋습니다. 와일드카드 import에 대해 명확한 첫 번째 이유는 언더스코어로 시작하는 이름이 import 되기 때문입니다. 이로 인해 런타임 중에 에러가 발생할 수 있습니다.
+- 만약 `from ... import a, b, c` 문법을 사용한다면, `NameError`는 발생하지 않을 것입니다.
     ```py
     >>> from module import some_weird_name_func_, _another_weird_name_func
     >>> _another_weird_name_func()
     works!
     ```
-- If you really want to use wildcard imports, then you'd have to define the list `__all__` in your module that will contain a list of public objects that'll be available when we do wildcard imports.
+- 만약 정말로 와일드카드 import가 사용하고 싶다면, 와일드카드 import를 할 때 사용할 수 있는 공용 객체가 들어 있는 리스트인 `__all__`을 모듈 내에 정의해야 합니다. 
     ```py
     __all__ = ['_another_weird_name_func']
 
@@ -2649,7 +2649,7 @@ NameError: name '_another_weird_name_func' is not defined
     def _another_weird_name_func():
         print("works!")
     ```
-    **Output**
+    **출력 결과**
 
     ```py
     >>> _another_weird_name_func()
@@ -2662,7 +2662,7 @@ NameError: name '_another_weird_name_func' is not defined
 
 ---
 
-### ▶ All sorted? *
+### ▶ 다 정렬되었나요? *
 
 <!-- Example ID: e5ff1eaf-8823-4738-b4ce-b73f7c9d5511 -->
 
@@ -2678,9 +2678,9 @@ True
 False
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- The `sorted` method always returns a list, and comparing lists and tuples always returns `False` in Python. 
+- 파이썬에서 `sorted` 메소드는 항상 리스트를 반환하고, 리스트와 튜플의 비교는 항상 `False`를 반환합니다.
 
 - ```py
   >>> [] == tuple()
@@ -2690,9 +2690,9 @@ False
   (tuple, list)
   ```
 
-- Unlike `sorted`, the `reversed` method returns an iterator. Why? Because sorting requires the iterator to be either modified in-place or use an extra container (a list), whereas reversing can simply work by iterating from the last index to the first.
+- `sorted`와 달리 `reversed` 메소드는 반복자를 반환합니다. 왜 그럴까요? 왜냐하면 정렬은 반복자가 그 자리에서 변경되거나 추가적인 컨테이너(리스트)를 사용해야 하지만, 뒤집는 것은 단순히 끝 인덱스부터 처음까지 반복하면 되기 때문입니다.
 
-- So during comparison `sorted(y) == sorted(y)`, the first call to `sorted()` will consume the iterator `y`, and the next call will just return an empty list.
+- 따라서 `sorted(y) == sorted(y)`를 비교하는 동안에, 처음의 `sorted()`가 호출되면 `y`의 반복자를 소모하고, 다음의 호출에는 빈 리스트가 반환됩니다.
 
   ```py
   >>> x = 7, 8, 9
@@ -2703,7 +2703,7 @@ False
 
 ---
 
-### ▶ Midnight time doesn't exist?
+### ▶ 자정은 존재하지 않나요?
 <!-- Example ID: 1bce8294-5619-4d70-8ce3-fe0bade690d1 --->
 ```py
 from datetime import datetime
@@ -2721,16 +2721,16 @@ if noon_time:
     print("Time at noon is", noon_time)
 ```
 
-**Output (< 3.5):**
+**출력 결과 (< 3.5):**
 
 ```py
 ('Time at noon is', datetime.time(12, 0))
 ```
-The midnight time is not printed.
+자정은 출력되지 않습니다.
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-Before Python 3.5, the boolean value for `datetime.time` object was considered to be `False` if it represented midnight in UTC. It is error-prone when using the `if obj:` syntax to check if the `obj` is null or some equivalent of "empty."
+파이썬 3.5 이전에, `datetime.time` 객체의 불리언 값은 UTC 기준으로 자정을 나타내는 경우 `False`로 간주하였습니다. 이는 `if obj:` 구문을 사용하우 `obj`가 null 또는 "비어있음"인지 확인하는 경우 오류가 발생하기 쉽습니다.
 
 ---
 ---
