@@ -62,7 +62,7 @@
     + [▶ Mutating the immutable!](#-mutating-the-immutable)
     + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
     + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
-    + [▶ Let's see if you can guess this?](#-lets-see-if-you-can-guess-this)
+    + [▶ 여러분이 맞출 수 있는지 한번 볼까요?](#-여러분이-맞출-수-있는지-한번-볼까요)
   * ["미끄러운 비탈길" 단원](#미끄러운-비탈길-단원)
     + [▶ 딕셔너리가 반복 중일 때 수정하기](#-딕셔너리가-반복-중일-때-수정하기)
     + [▶ 완강한 `del` 연산자](#-완강한-del-연산자)
@@ -1772,37 +1772,37 @@ str
 
 ---
 
-### ▶ Let's see if you can guess this?
+### ▶ 여러분이 맞출 수 있는지 한번 볼까요?
 <!-- Example ID: 81aa9fbe-bd63-4283-b56d-6fdd14c9105e --->
 ```py
 a, b = a[b] = {}, 5
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> a
 {5: ({...}, 5)}
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* According to [Python language reference](https://docs.python.org/2/reference/simple_stmts.html#assignment-statements), assignment statements have the form
+* [파이썬 언어 레퍼런스](https://docs.python/org/ko/2/reference/simple_stmts.html#assignment-statements)에 따르면, 대입문의 구조는 다음과 같은 형태를 보입니다.
   ```
   (target_list "=")+ (expression_list | yield_expression)
   ```
-  and
+  그리고
   
-> An assignment statement evaluates the expression list (remember that this can be a single expression or a comma-separated list, the latter yielding a tuple) and assigns the single resulting object to each of the target lists, from left to right.
+> 대입문은 표현식 목록 (이것이 하나의 표현식일 수도, 쉼표로 분리된 목록일 수도 있는데, 후자의 경우는 튜플이 만들어진다는 것을 기억하라) 의 값을 구하고, 왼쪽에서 오른쪽으로, 하나의 결과 객체를 타깃 목록의 각각에 대입한다.
 
-* The `+` in `(target_list "=")+` means there can be **one or more** target lists. In this case, target lists are `a, b` and `a[b]` (note the expression list is exactly one, which in our case is `{}, 5`).
+* `(target_list "=")+`의 `+`는 **하나 이상의** 타깃 목록이 있을 수 있음을 의미합니다. 예제의 경우 타깃 목록은 `a, b`, `a[b]` 입니다. (표현식 목록은 정확하게 하나이며 예제의 경우 `{}, 5` 입니다.)
 
-* After the expression list is evaluated, its value is unpacked to the target lists from **left to right**. So, in our case, first the `{}, 5` tuple is unpacked to `a, b` and we now have `a = {}` and `b = 5`.
+* 표현식 목록을 평가한 후 해당 값은 **왼쪽에서 오른쪽으로** 타깃 목록에 풀어지게 됩니다. 예제의 경우 먼저 `{}, 5`의 튜플이 `a, b`로 풀리고 `a = {}`, `b = 5`가 됩니다.
 
-* `a` is now assigned to `{}`, which is a mutable object.
+* `a`는 이제 변경 가능한 객체인 `{}`에 할당됩니다.
 
-* The second target list is `a[b]` (you may expect this to throw an error because both `a` and `b` have not been defined in the statements before. But remember, we just assigned `a` to `{}` and `b` to `5`).
+* 두 번째 타깃 목록은 `a[b]`입니다. (여러분은 `a`와 `b`가 구문 이전에 정의되지 않아 에러가 발생할 거라 예상할 수 있습니다. 하지만 우리는 방금 `a`에 `{}`, `b`에 `5`를 대입한 사실을 기억하세요)
 
-* Now, we are setting the key `5` in the dictionary to the tuple `({}, 5)` creating a circular reference (the `{...}` in the output refers to the same object that `a` is already referencing). Another simpler example of circular reference could be
+* 이제 딕셔너리에 있는 키 `5`를 튜플 `({}, 5)`로 설정하여 순환 참조를 생성합니다. (출력의 `{...}`는 `a`가 이미 참조하고 있는 객체를 가리킵니다.) 순화 참조의 다른 간단한 예는 다음과 같습니다.
   ```py
   >>> some_list = some_list[0] = [0]
   >>> some_list
@@ -1814,14 +1814,14 @@ a, b = a[b] = {}, 5
   >>> some_list[0][0][0][0][0][0] == some_list
   True
   ```
-  Similar is the case in our example (`a[b][0]` is the same object as `a`)
+  우리의 예제에서도 이것과 비슷합니다. (`a[b][0]`은 `a`와 같은 객체입니다.)
 
-* So to sum it up, you can break the example down to
+* 요약하자면, 예제를 다음과 같이 나눌 수 있습니다.
   ```py
   a, b = {}, 5
   a[b] = a, b
   ```
-  And the circular reference can be justified by the fact that `a[b][0]` is the same object as `a`
+  그리고 순환 참조는 `a[b][0]`이 `a`와 동일한 객체라는 사실에 의해 정당화 될 수 있습니다.
   ```py
   >>> a[b][0] is a
   True
