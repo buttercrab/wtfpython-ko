@@ -49,8 +49,8 @@
     + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
     + [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
     + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
-    + [▶ The surprising comma](#-the-surprising-comma)
-    + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
+    + [▶ 놀라운 컴마](#-놀라운-컴마)
+    + [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
     + [▶ not knot!](#-not-knot)
     + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
     + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
@@ -1121,9 +1121,9 @@ SyntaxError: invalid syntax
 
 ---
 
-### ▶ Strings and the backslashes
+### ▶ 문자열과 백슬래시
 <!-- Example ID: 6ae622c3-6d99-4041-9b33-507bd1a4407b --->
-**Output:**
+**출력 결과:**
 ```py
 >>> print("\"")
 "
@@ -1141,13 +1141,15 @@ SyntaxError: EOL while scanning string literal
 True
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
+- 보통 파이썬 문자열에서 백슬래시는 특별한 의미의 문자(작은 따옴표나 큰 따옴표, 그리고 백슬래시 그 자체)를 이스케이프하는데 사용됩니다.
 - In a usual python string, the backslash is used to escape characters that may have a special meaning (like single-quote, double-quote, and the backslash itself).
     ```py
     >>> 'wt\"f'
     'wt"f'
     ```
+- 원시 문자열 리터럴(raw string literal, 접두사 `r`로 나타난다)에서는 백슬래시들이 그대로 출력되지만 그 특성도 그대로 적용됩니다.
 - In a raw string literal (as indicated by the prefix `r`),  the backslashes pass themselves as is along with the behavior of escaping the following character.
     ```py
     >>> r'wt\"f' == 'wt\\"f'
@@ -1160,6 +1162,7 @@ True
     >>> print(r"\\n")
     '\\\\n'
     ```
+- 즉, 이는 파서가 원시 문자열에서 백슬래시와 만나면 그 뒤에 문자가 나오기를 예상한다는 것입니다. 그리고 이러한 경우(`print(r"\")`)에서는 백슬래시가 뒤의 따옴표에서 이스케이프하여 파서는 끝나는 따옴표를 찾지 못합니다(따라서 `SyntaxError`이 발생합니다). 이 이유로 원시 문자열의 끝에서 백슬래시를 사용할 수 없습니다.
 - This means when a parser encounters a backslash in a raw string, it expects another character following it. And in our case (`print(r"\")`), the backslash escaped the trailing quote, leaving the parser without a terminating quote (hence the `SyntaxError`). That's why backslashes don't work at the end of a raw string.
 
 ---
