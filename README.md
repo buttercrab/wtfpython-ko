@@ -1089,9 +1089,9 @@ True
 
 ---
 
-### ▶ The surprising comma
+### ▶ 놀라운 콤마
 <!-- Example ID: 31a819c8-ed73-4dcc-84eb-91bedbb51e58 --->
-**Output (< 3.6):**
+**출력 결과 (< 3.6):**
 
 ```py
 >>> def f(x, y,):
@@ -1113,11 +1113,11 @@ SyntaxError: invalid syntax
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- Trailing comma is not always legal in formal parameters list of a Python function.
--  In Python, the argument list is defined partially with leading commas and partially with trailing commas. This conflict causes situations where a comma is trapped in the middle, and no rule accepts it.
--  **Note:** The trailing comma problem is [fixed in Python 3.6](https://bugs.python.org/issue9232). The remarks in [this](https://bugs.python.org/issue9232#msg248399) post discuss in brief different usages of trailing commas in Python.
+- 파이썬 함수의 정규 파라미터 리스트에 컴마를 남기는 것이 항상 허용되는 것은 아닙니다.
+- 파이썬에서 전달인자 리스트는 선행 컴마(leading commas)들과 후행 컴마(trailing commas)들로 부분적으로 정의되어 있습니다. 이러한 충돌이 컴마가 가운데에 끼게되는 현상을 만들게 되고 결국 아무 규칙에도 맞지 않게 됩니다. 
+- **참고:** 후행 컴마 문제는 [파이썬 3.6에서 고쳐졌습니다](https://bugs.python.org/issue9232). 이 [포스트](https://bugs.python.org/issue9232#msg248399)에서는 파이썬에서의 후행 컴마들의 다양한 사용법들이 간결하게 논의하고 있습니다.
 
 ---
 
