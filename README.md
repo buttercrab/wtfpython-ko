@@ -49,8 +49,8 @@
     + [▶ 닭이 먼저일까, 달걀이 먼저일까 *](#-닭이-먼저일까-달걀이-먼저일까-)
     + [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
     + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
-    + [▶ The surprising comma](#-the-surprising-comma)
-    + [▶ Strings and the backslashes](#-strings-and-the-backslashes)
+    + [▶ 놀라운 콤마](#-놀라운-콤마)
+    + [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
     + [▶ not knot!](#-not-knot)
     + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
     + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
@@ -1089,9 +1089,9 @@ True
 
 ---
 
-### ▶ The surprising comma
+### ▶ 놀라운 콤마
 <!-- Example ID: 31a819c8-ed73-4dcc-84eb-91bedbb51e58 --->
-**Output (< 3.6):**
+**출력 결과 (< 3.6):**
 
 ```py
 >>> def f(x, y,):
@@ -1113,17 +1113,17 @@ SyntaxError: invalid syntax
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- Trailing comma is not always legal in formal parameters list of a Python function.
--  In Python, the argument list is defined partially with leading commas and partially with trailing commas. This conflict causes situations where a comma is trapped in the middle, and no rule accepts it.
--  **Note:** The trailing comma problem is [fixed in Python 3.6](https://bugs.python.org/issue9232). The remarks in [this](https://bugs.python.org/issue9232#msg248399) post discuss in brief different usages of trailing commas in Python.
+- 파이썬 함수의 정규 파라미터 리스트에 콤마를 남기는 것이 항상 허용되는 것은 아닙니다.
+- 파이썬에서 전달인자 리스트는 선행 콤마(leading commas)들과 후행 콤마(trailing commas)들로 부분적으로 정의되어 있습니다. 이러한 충돌이 콤마가 가운데에 끼게되는 현상을 만들게 되고 결국 아무 규칙에도 맞지 않게 됩니다. 
+- **참고:** 후행 콤마 문제는 [파이썬 3.6에서 고쳐졌습니다](https://bugs.python.org/issue9232). 이 [포스트](https://bugs.python.org/issue9232#msg248399)에서는 파이썬에서의 후행 콤마들의 다양한 사용법들이 간결하게 논의하고 있습니다.
 
 ---
 
-### ▶ Strings and the backslashes
+### ▶ 문자열과 백슬래시
 <!-- Example ID: 6ae622c3-6d99-4041-9b33-507bd1a4407b --->
-**Output:**
+**출력 결과:**
 ```py
 >>> print("\"")
 "
@@ -1141,14 +1141,14 @@ SyntaxError: EOL while scanning string literal
 True
 ```
 
-#### 💡 Explanation
+#### 💡 설명
 
-- In a usual python string, the backslash is used to escape characters that may have a special meaning (like single-quote, double-quote, and the backslash itself).
+- 보통 파이썬 문자열에서 백슬래시는 특별한 의미의 문자(작은 따옴표나 큰 따옴표, 그리고 백슬래시 그 자체)를 이스케이프하는데 사용됩니다.
     ```py
     >>> 'wt\"f'
     'wt"f'
     ```
-- In a raw string literal (as indicated by the prefix `r`),  the backslashes pass themselves as is along with the behavior of escaping the following character.
+- 원시 문자열 리터럴(raw string literal, 접두사 `r`로 나타난다)에서는 백슬래시들이 그대로 출력되지만 그 특성도 그대로 적용됩니다.
     ```py
     >>> r'wt\"f' == 'wt\\"f'
     True
@@ -1160,7 +1160,7 @@ True
     >>> print(r"\\n")
     '\\\\n'
     ```
-- This means when a parser encounters a backslash in a raw string, it expects another character following it. And in our case (`print(r"\")`), the backslash escaped the trailing quote, leaving the parser without a terminating quote (hence the `SyntaxError`). That's why backslashes don't work at the end of a raw string.
+- 즉, 이는 파서가 원시 문자열에서 백슬래시와 만나면 그 뒤에 문자가 나오기를 예상한다는 것입니다. 그리고 이러한 경우(`print(r"\")`)에서는 백슬래시가 뒤의 따옴표에서 이스케이프하여 파서는 끝나는 따옴표를 찾지 못합니다(따라서 `SyntaxError`이 발생합니다). 이 이유로 원시 문자열의 끝에서 백슬래시를 사용할 수 없습니다.
 
 ---
 
