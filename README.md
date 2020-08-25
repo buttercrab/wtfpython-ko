@@ -61,7 +61,7 @@
     + [▶ Nan-reflexivity *](#-nan-reflexivity-)
     + [▶ 불변을 변형하기!](#-불변을-변형하기)
     + [▶ 외부 범위에서 사라지는 변수](#-외부-범위에서-사라지는-변수)
-    + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
+    + [▶ 미스테리한 키 타입 형 변환](#-미스테리한-키-타입-형-변환)
     + [▶ 여러분이 맞출 수 있는지 한번 볼까요?](#-여러분이-맞출-수-있는지-한번-볼까요)
   * ["미끄러운 비탈길" 단원](#미끄러운-비탈길-단원)
     + [▶ 딕셔너리가 반복 중일 때 수정하기](#-딕셔너리가-반복-중일-때-수정하기)
@@ -1716,7 +1716,7 @@ NameError: name 'e' is not defined
 ---
 
 
-### ▶ The mysterious key type conversion
+### ▶ 미스테리한 키 타입 형 변환
 <!-- Example ID: 00f42dd0-b9ef-408d-9e39-1bc209ce3f36 --->
 ```py
 class SomeClass(str):
@@ -1725,24 +1725,24 @@ class SomeClass(str):
 some_dict = {'s': 42}
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> type(list(some_dict.keys())[0])
 str
 >>> s = SomeClass('s')
 >>> some_dict[s] = 40
->>> some_dict # expected: Two different keys-value pairs
+>>> some_dict # 예상: 두개의 다른 key-value 쌍
 {'s': 40}
 >>> type(list(some_dict.keys())[0])
 str
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Both the object `s` and the string `"s"` hash to the same value because `SomeClass` inherits the `__hash__` method of `str` class.
-* `SomeClass("s") == "s"` evaluates to `True` because `SomeClass` also inherits `__eq__` method from `str` class.
-* Since both the objects hash to the same value and are equal, they are represented by the same key in the dictionary.
-* For the desired behavior, we can redefine the `__eq__` method in `SomeClass`
+* `SomeClass`는 `str` 클래스의 `__hash__` 메소드를 상속받기 때문에 객체 `s`와 문자열 `"s"`는 같은 값을 갖게 됩니다.
+* `SomeClass`은 `str` 클래스의 `__eq__` 메소드도 상속받기 때문에 `SomeClass("s") == "s"`의 결과는 `True`가 됩니다.
+* 두 객체는 같은 값으로 해싱되어 동일하기 때문에 딕셔너리에서 같은 키로 표현됩니다.
+* 원하는 동작을 위해 `SomeClass`의 `__eq__` 메소드를 다시 정의할 수 있습니다.
   ```py
   class SomeClass(str):
     def __eq__(self, other):
@@ -1752,14 +1752,14 @@ str
             and super().__eq__(other)
         )
 
-    # When we define a custom __eq__, Python stops automatically inheriting the
-    # __hash__ method, so we need to define it as well
+    # 수정된 __eq__를 정의할 때 파이썬은 자동으로 __hash__ 메소드를
+    # 상속받는 것을 중단합니다. 그래서 정의해줄 필요가 있습니다.
     __hash__ = str.__hash__
 
   some_dict = {'s':42}
   ```
 
-  **Output:**
+  **출력 결과:**
   ```py
   >>> s = SomeClass('s')
   >>> some_dict[s] = 40
