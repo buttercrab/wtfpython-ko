@@ -59,8 +59,8 @@
     + [▶ yielding None](#-yielding-none)
     + [▶ Yielding from... return! *](#-yielding-from-return-)
     + [▶ Nan-reflexivity *](#-nan-reflexivity-)
-    + [▶ Mutating the immutable!](#-mutating-the-immutable)
-    + [▶ The disappearing variable from outer scope](#-the-disappearing-variable-from-outer-scope)
+    + [▶ 불변을 변형하기!](#-불변을-변형하기)
+    + [▶ 외부 범위에서 사라지는 변수](#-외부-범위에서-사라지는-변수)
     + [▶ The mysterious key type conversion](#-the-mysterious-key-type-conversion)
     + [▶ 여러분이 맞출 수 있는지 한번 볼까요?](#-여러분이-맞출-수-있는지-한번-볼까요)
   * ["미끄러운 비탈길" 단원](#미끄러운-비탈길-단원)
@@ -1597,22 +1597,22 @@ True
 
 ---
 
-### ▶ Mutating the immutable!
+### ▶ 불변을 변형하기!
 
 <!-- Example ID: 15a9e782-1695-43ea-817a-a9208f6bb33d --->
 
-This might seem trivial if you know how references work in Python.
+여러분이 파이썬에서 참조가 어떻게 작동하는지 안다면 이건 사소해 보일 수 있습니다.
 
 ```py
 some_tuple = ("A", "tuple", "with", "values")
 another_tuple = ([1, 2], [3, 4], [5, 6])
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> some_tuple[2] = "change this"
 TypeError: 'tuple' object does not support item assignment
->>> another_tuple[2].append(1000) #This throws no error
+>>> another_tuple[2].append(1000) #이건 에러를 만들지 않습니다
 >>> another_tuple
 ([1, 2], [3, 4], [5, 6, 1000])
 >>> another_tuple[2] += [99, 999]
@@ -1621,20 +1621,20 @@ TypeError: 'tuple' object does not support item assignment
 ([1, 2], [3, 4], [5, 6, 1000, 99, 999])
 ```
 
-But I thought tuples were immutable...
+하지만 저는 튜플이 변경 불가능하다 생각했습니다...
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Quoting from https://docs.python.org/2/reference/datamodel.html
+* https://docs.python.org/ko/2/reference/datamodel.html 을 인용하면
 
-    > Immutable sequences
-        An object of an immutable sequence type cannot change once it is created. (If the object contains references to other objects, these other objects may be mutable and may be modified; however, the collection of objects directly referenced by an immutable object cannot change.)
+    > 불변 시퀸스
+        불변 시퀀스 형의 객체는 일단 만들어진 후에는 변경될 수 없다. (만약 다른 객체로의 참조를 포함하면, 그 객체는 가변일 수 있고, 변경될 수 있다; 하지만, 불변 객체로부터 참조되는 객체의 집합 자체는 변경될 수 없다.)
 
-* `+=` operator changes the list in-place. The item assignment doesn't work, but when the exception occurs, the item has already been changed in place.
+* `+=` 연산자는 리스트를 그 자리에서 변경합니다. 그 항목 할당이 동작하지 않지만, 예외 발생 시 그 항목은 이미 그 자리에서 변경되었습니다.
 
 ---
 
-### ▶ The disappearing variable from outer scope
+### ▶ 외부 범위에서 사라지는 변수
 <!-- Example ID: 7f1e71b6-cb3e-44fb-aa47-87ef1b7decc8 --->
 
 ```py
@@ -1645,30 +1645,30 @@ except Exception as e:
     pass
 ```
 
-**Output (Python 2.x):**
+**출력 결과 (Python 2.x):**
 ```py
 >>> print(e)
-# prints nothing
+# 아무것도 출력하지 않습니다
 ```
 
-**Output (Python 3.x):**
+**출력 결과 (Python 3.x):**
 ```py
 >>> print(e)
 NameError: name 'e' is not defined
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Source: https://docs.python.org/3/reference/compound_stmts.html#except
+* 출처: https://docs.python.org/ko/3/reference/compound_stmts.html#except
 
-  When an exception has been assigned using `as` target, it is cleared at the end of the `except` clause. This is as if
+  예외가 `as target`을 사용해서 대입될 때, `except`절 끝에서 삭제됩니다. 이것은 마치
 
   ```py
   except E as N:
       foo
   ```
 
-  was translated into
+  가 이렇게 변환되는 것과 같습니다
 
   ```py
   except E as N:
@@ -1678,11 +1678,11 @@ NameError: name 'e' is not defined
           del N
   ```
 
-  This means the exception must be assigned to a different name to be able to refer to it after the except clause. Exceptions are cleared because, with the traceback attached to them, they form a reference cycle with the stack frame, keeping all locals in that frame alive until the next garbage collection occurs.
+  이것은 except 절 후에 참조하려면 예외를 다른 이름에 대입해야 한다는 뜻입니다. 예외를 제거하는 이유는, 그것에 첨부된 트레이스백으로 인해, 스택 프레임과 참조 순환을 형성해서 다음 가비지 수거가 일어나기 전까지 그 프레임의 모든 지역 변수들을 잡아두기 때문입니다.
 
-* The clauses are not scoped in Python. Everything in the example is present in the same scope, and the variable `e` got removed due to the execution of the `except` clause. The same is not the case with functions that have their separate inner-scopes. The example below illustrates this:
+* 해당 절들은 파이썬에서 범위가 정해지지 않았습니다. 예시의 모든 것이 동일한 범위에 존재하며 `except` 절의 실행으로 `e` 변수가 삭제되었습니다. 별도의 내부 범위를 가지고 있는 함수들도 마찬가지인 데 다음의 예시가 보여줍니다:
 
-     ```py
+     ```pys
      def f(x):
          del(x)
          print(x)
@@ -1691,7 +1691,7 @@ NameError: name 'e' is not defined
      y = [5, 4, 3]
      ```
 
-     **Output:**
+     **출력 결과:**
      ```py
      >>>f(x)
      UnboundLocalError: local variable 'x' referenced before assignment
@@ -1703,14 +1703,14 @@ NameError: name 'e' is not defined
      [5, 4, 3]
      ```
 
-* In Python 2.x, the variable name `e` gets assigned to `Exception()` instance, so when you try to print, it prints nothing.
+* 파이썬 2.x에서는 `e` 변수가 `Exception()` 인스턴스에 할당되므로 출력하려 할 때 아무것도 출력하지 않습니다.
 
-    **Output (Python 2.x):**
+    **출력 결과 (Python 2.x):**
     ```py
     >>> e
     Exception()
     >>> print e
-    # Nothing is printed!
+    # 아무것도 출력되지 않았습니다!
     ```
 
 ---
