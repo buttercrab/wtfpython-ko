@@ -58,7 +58,7 @@
     + [▶ Non-reflexive class method *](#-non-reflexive-class-method-)
     + [▶ yielding None](#-yielding-none)
     + [▶ Yielding from... return! *](#-yielding-from-return-)
-    + [▶ Nan-reflexivity *](#-nan-reflexivity-)
+    + [▶ Nan-재귀성 *](#-nan-재귀성-)
     + [▶ 불변을 변형하기!](#-불변을-변형하기)
     + [▶ 외부 범위에서 사라지는 변수](#-외부-범위에서-사라지는-변수)
     + [▶ 미스테리한 키 타입 형 변환](#-미스테리한-키-타입-형-변환)
@@ -1521,7 +1521,7 @@ The same result, this didn't work either.
 
 ---
 
-### ▶ Nan-reflexivity *
+### ▶ Nan-재귀성 *
 
 <!-- Example ID: 59bee91a-36e0-47a4-8c7d-aa89bf1d3976 --->
 
@@ -1530,11 +1530,11 @@ The same result, this didn't work either.
 ```py
 a = float('inf')
 b = float('nan')
-c = float('-iNf')  # These strings are case-insensitive
+c = float('-iNf')  # 이 문자열은 대소문자를 구분하지 않습니다
 d = float('nan')
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> a
@@ -1549,7 +1549,7 @@ ValueError: could not convert string to float: some_other_string
 True
 >>> None == None # None == None
 True
->>> b == d # but nan!=nan
+>>> b == d # 하지만 nan!=nan 입니다
 False
 >>> 50 / a
 0.0
@@ -1564,21 +1564,21 @@ nan
 ```py
 >>> x = float('nan')
 >>> y = x / x
->>> y is y # identity holds
+>>> y is y # 정체성은 유지됩니다
 True
->>> y == y # equality fails of y
+>>> y == y # y와 같은 값은 아닙니다
 False
->>> [y] == [y] # but the equality succeeds for the list containing y
+>>> [y] == [y] # 하지만 y를 리스트로 감싸면 같은 값이 됩니다
 True
 ```
 
 
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- `'inf'` and `'nan'` are special strings (case-insensitive), which, when explicitly typecast-ed to `float` type, are used to represent mathematical "infinity" and "not a number" respectively.
+- `'inf'`와 `'nan'`은 대소문자를 구분하지 않는 특수한 문자열로, 명시적으로 `float` 타입으로 형 변환할 때 수학적 "무한대"와 "숫자가 아님"을 표현할 때 사용합니다.
 
-- Since according to IEEE standards ` NaN != NaN`, obeying this rule breaks the reflexivity assumption of a collection element in Python i.e. if `x` is a part of a collection like `list`, the implementations like comparison are based on the assumption that `x == x`.  Because of this assumption, the identity is compared first (since it's faster) while comparing two elements, and the values are compared only when the identities mismatch. The following snippet will make things clearer,
+- IEEE 표준 `NaN != NaN`을 따르면 파이썬에서 컬렉션 요소들의 재귀성 가정이 깨지게 됩니다. 만약 `x`가 `list`와 같은 컬렉션의 일부면 비교와 같은 구현들은 `x == x`라는 가정에 기반합니다. 이런 가정 때문에 두 요소를 비교할 때 정체성을 먼저 비교하고 (속도가 더 빠르기 때문입니다) 정체성이 일치하지 않을 때만 값을 비교합니다. 다음의 코드가 이것들을 더 확실하게 만들어 줄 겁니다,
 
   ```py
   >>> x = float('nan')
@@ -1591,9 +1591,9 @@ True
   (False, False)
   ```
 
-  Since the identities of `x` and `y` are different, the values are considered, which are also different; hence the comparison returns `False` this time.
+  `x`와 `y`의 정체성이 다르기 때문에 값이 고려되고, 비교 결과 `False`가 반환됩니다.
 
-- Interesting read: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
+- 흥미로운 읽을거리: [Reflexivity, and other pillars of civilization](https://bertrandmeyer.com/2010/02/06/reflexivity-and-other-pillars-of-civilization/)
 
 ---
 
