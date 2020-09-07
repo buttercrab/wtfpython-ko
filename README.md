@@ -51,7 +51,7 @@
     + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
     + [▶ 놀라운 콤마](#-놀라운-콤마)
     + [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
-    + [▶ not knot!](#-매듭이-아니야)
+    + [▶ 매듭이 아니야!](#-매듭이-아니야)
     + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
     + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
     + [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
