@@ -51,7 +51,7 @@
     + [▶ 참 거짓의 반복 *](#-참-거짓의-반복-)
     + [▶ 놀라운 콤마](#-놀라운-콤마)
     + [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
-    + [▶ not knot!](#-not-knot)
+    + [▶ 매듭이 아니야!](#-매듭이-아니야)
     + [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
     + [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
     + [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
@@ -1164,14 +1164,14 @@ True
 
 ---
 
-### ▶ not knot!
+### ▶ 매듭이 아니야!
 <!-- Example ID: 7034deb1-7443-417d-94ee-29a800524de8 --->
 ```py
 x = True
 y = False
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> not x == y
 True
@@ -1182,12 +1182,12 @@ True
 SyntaxError: invalid syntax
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-* Operator precedence affects how an expression is evaluated, and `==` operator has higher precedence than `not` operator in Python.
-* So `not x == y` is equivalent to `not (x == y)` which is equivalent to `not (True == False)` finally evaluating to `True`.
-* But `x == not y` raises a `SyntaxError` because it can be thought of being equivalent to `(x == not) y` and not `x == (not y)` which you might have expected at first sight.
-* The parser expected the `not` token to be a part of the `not in` operator (because both `==` and `not in` operators have the same precedence), but after not being able to find an `in` token following the `not` token, it raises a `SyntaxError`.
+* 연산자 우선순위는 표현식이 실행되는 것에 영향을 주고 파이썬에서는 `==` 연산자는 `not` 연산자보다 우선순위가 높습니다. 
+* 그래서 `not x == y`는 `not (x == y)`와 같고 이는 `not (True == False)`와 같게 되므로 최종적으로 `True`가 됩니다.
+* 하지만 `x == not y`는 `SyntaxError`를 발생시키게 됩니다. 왜냐하면 이는 보통 생각하는 `x == (not y)`가 아니라 `(x == not) y`로 해석되기 때문입니다. 
+* 파서는 `not` 토큰이 `not in` 연산자의 일부라고 예상하지만 (왜냐하면 `==`와 `not in` 연산자가 같은 연산자 우선순위를 가지고 있기 때문입니다) `not` 뒤에 `in` 토큰을 찾을 수 없기 때문에 `SyntaxError`를 발생시킵니다.
 
 ---
 
