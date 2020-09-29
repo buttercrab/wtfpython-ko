@@ -1432,7 +1432,7 @@ def some_func(val):
     return "something"
 ```
 
-**Output (<= 3.7.x):**
+**출력 결과 (<= 3.7.x):**
 
 ```py
 >>> [x for x in some_iterable]
@@ -1447,10 +1447,11 @@ def some_func(val):
 ['a', 'something', 'b', 'something']
 ```
 
-#### 💡 Explanation:
-- This is a bug in CPython's handling of `yield` in generators and comprehensions.
-- Source and explanation can be found here: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
-- Related bug report: http://bugs.python.org/issue10544
+#### 💡 설명:
+- 이것은 CPython에서 제너레이터와 컴프리헨션에서 `yield`를 처리할 때 생기는 버그입니다.
+- 소스와 설명은 여기서 찾아볼 수 있습니다: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
+- 관련된 버그 리포트: http://bugs.python.org/issue10544
+- 파이썬 3.8 이상의 버전에서는 리스트 컴프리헨션의 내부에 `yield`를 허용하지 않고 `SyntaxError`를 발생시킵니다.
 - Python 3.8+ no longer allows `yield` inside list comprehension and will throw a `SyntaxError`.
 
 ---
@@ -1468,14 +1469,14 @@ def some_func(x):
         yield from range(x)
 ```
 
-**Output (> 3.3):**
+**출력 결과 (> 3.3):**
 
 ```py
 >>> list(some_func(3))
 []
 ```
 
-Where did the `"wtf"` go? Is it due to some special effect of `yield from`? Let's validate that,
+`"wtf"`이 어디로 갓나요? `yield from`의 특수한 효과 때문일까요? 확인해봅시다.
 
 2\.
 
@@ -1488,7 +1489,7 @@ def some_func(x):
           yield i
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> list(some_func(3))
@@ -1496,16 +1497,18 @@ def some_func(x):
 ```
 
 The same result, this didn't work either.
+같은 결과입니다. 이것도 효과가 없습니다.
 
-#### 💡 Explanation:
+#### 💡 설명:
 
 + From Python 3.3 onwards, it became possible to use `return` statement with values inside generators (See [PEP380](https://www.python.org/dev/peps/pep-0380/)). The [official docs](https://www.python.org/dev/peps/pep-0380/#enhancements-to-stopiteration) say that,
++ 파이썬 3.3 이후의 버전부터, 내부의 제너레이터와 함께 `return`문을 사용할 수 있게 되었습니다 (이것을 참고하세요 [PEP380](https://www.python.org/dev/peps/pep-0380/)). [공식 문서](https://www.python.org/dev/peps/pep-0380/#enhancements-to-stopiteration)에서도 말하고 있습니다.
 
-> "... `return expr` in a generator causes `StopIteration(expr)` to be raised upon exit from the generator."
+> "... 제너레이터 내부의 `return expr`는 제너레이터가 종료될 때 `StopIteration(expr)`을 발생시킵니다."
 
-+ In the case of `some_func(3)`, `StopIteration` is raised at the beginning because of `return` statement. The `StopIteration` exception is automatically caught inside the `list(...)` wrapper and the `for` loop. Therefore, the above two snippets result in an empty list.
++ `some_func(3)`의 경우, `return`문으로 인해 처음부터 `StopIteration`이 발생합니다. `StopIteration` 예외는 자동으로 `list(...)` 래퍼와 `for` 루프의 내부에 잡히게 됩니다. 따라서 위의 두 코드의 결과는 빈 리스트가 됩니다.
 
-+ To get `["wtf"]` from the generator `some_func` we need to catch the `StopIteration` exception,
++ 제너레이터의 `some_func`에서 `["wtf"]`을 얻으려면 `StopIteration` 예외를 잡아야 합니다.
 
   ```py
   try:
