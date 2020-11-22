@@ -53,7 +53,7 @@
     - [▶ 놀라운 콤마](#-놀라운-콤마)
     - [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
     - [▶ 매듭이 아니야!](#-매듭이-아니야)
-    - [▶ Half triple-quoted strings](#-half-triple-quoted-strings)
+    - [▶ 반쪽 3중 따옴표 문자열](#-반쪽-3중-따옴표-문자열)
     - [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
     - [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
     - [▶ Non-reflexive class method \*](#-non-reflexive-class-method-)
@@ -1281,15 +1281,14 @@ SyntaxError: EOF while scanning triple-quoted string literal
 
 ---
 
-### ▶ What's wrong with booleans?
+### ▶ 불린에는 어떤 문제가 있을까?
 
 <!-- Example ID: 0bba5fa7-9e6d-4cd2-8b94-952d061af5dd --->
 
 1\.
 
 ```py
-# A simple example to count the number of booleans and
-# integers in an iterable of mixed data types.
+# 다양한 데이터 타입 속 불린의 개수와 정수의 개수를 세는 간단한 예제입니다.
 mixed_list = [False, 1.0, "some_string", 3, True, [], False]
 integers_found_so_far = 0
 booleans_found_so_far = 0
@@ -1301,7 +1300,7 @@ for item in mixed_list:
         booleans_found_so_far += 1
 ```
 
-**Output:**
+**출력:**
 
 ```py
 >>> integers_found_so_far
@@ -1330,23 +1329,23 @@ def tell_truth():
         print("I have lost faith in truth!")
 ```
 
-**Output (< 3.x):**
+**출력 (< 3.x):**
 
 ```py
 >>> tell_truth()
 I have lost faith in truth!
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- `bool` is a subclass of `int` in Python
+- 파이썬에서 `bool`은 `int`의 서브클래스입니다.
   ```py
   >>> issubclass(bool, int)
   True
   >>> issubclass(int, bool)
   False
   ```
-- And thus, `True` and `False` are instances of `int`
+- 추가로, `True`와 `False`는 `int`의 인스턴스입니다.
 
   ```py
   >>> isinstance(True, int)
@@ -1355,7 +1354,7 @@ I have lost faith in truth!
   True
   ```
 
-- The integer value of `True` is `1` and that of `False` is `0`.
+- `True`의 정수 값은 `1`이고 `False`의 정수 값은 `0`입니다.
 
   ```py
   >>> int(True)
@@ -1364,11 +1363,11 @@ I have lost faith in truth!
   0
   ```
 
-- See this StackOverflow [answer](https://stackoverflow.com/a/8169049/4354153) for the rationale behind it.
+- 스택오버플로우 [답변](https://stackoverflow.com/a/8169049/4354153)을 통해 이러한 현상이 발생하는 이유에 대해서 알아보세요.
 
-- Initially, Python used to have no `bool` type (people used 0 for false and non-zero value like 1 for true). `True`, `False`, and a `bool` type was added in 2.x versions, but, for backward compatibility, `True` and `False` couldn't be made constants. They just were built-in variables, and it was possible to reassign them
+- 초기에, 파이썬은 `bool` 타입이 없었습니다. (사람들은 0을 거짓으로 쓰고 1과 같은 0이 아닌 수를 참으로 사용했습니다) `True` 그리고 `False`, `bool` 타입은 2.x 버전에서 추가되었지만 호환성을 위해 `True`와 `False`는 상수로 만들어질 수 없었습니다. 이들은 내장 변수이고 다시 할당하는 것이 가능했습니다.
 
-- Python 3 was backward-incompatible, the issue was finally fixed, and thus the last snippet won't work with Python 3.x!
+- 파이썬 3은 호환이 안되기 때문에, 문제가 해결되었고 마지막 코드는 파이썬 3.x 에서는 작동하지 않습니다!
 
 ---
 
