@@ -37,17 +37,19 @@
   - ["머리가 아플수도 있어요!" 단원](#머리가-아플수도-있어요-단원)
     - [▶ 먼저 처음 것들부터 \*](#-먼저-처음-것들부터-)
     - [▶ 문자열은 가끔 헷갈려요](#-문자열은-가끔-헷갈려요)
+    - [▶ 연결된 연산들을 조심하세요](#-연결된-연산들을-조심하세요)
+    - [▶ `is` 연산자를 안 쓰는 방법](#-is-연산자를-안-쓰는-방법)
     - [▶ 해시 브라우니](#-해시-브라우니)
     - [▶ 깊이 들어가면 우리는 다 똑같아.](#-깊이-들어가면-우리는-다-똑같아)
     - [▶ 질서 속의 무질서 \*](#-질서-속의-무질서-)
     - [▶ 계속 시도해 보세요... \*](#-계속-시도해-보세요-)
     - [▶ 무엇을 위해서(for)?](#-무엇을-위해서for)
     - [▶ 실행되는 시간의 차이](#-실행되는-시간의-차이)
-    - [▶ `is` 연산자를 안 쓰는 방법](#-is-연산자를-안-쓰는-방법)
     - [▶ `is not ...` 은 `is (not ...)`이 아니다](#-is-not--은-is-not-이-아니다)
     - [▶ X가 첫 번째 시도에서 승리하는 틱택토!](#-x가-첫-번째-시도에서-승리하는-틱택토)
     - [▶ 달라붙는 출력 함수](#-달라붙는-출력-함수)
     - [▶ 닭이 먼저일까, 달걀이 먼저일까 \*](#-닭이-먼저일까-달걀이-먼저일까-)
+    - [▶ Methods equality and identity](#-methods-equality-and-identity)
     - [▶ 서브 클래스의 관계](#-서브-클래스의-관계)
     - [▶ 참 거짓의 반복 \*](#-참-거짓의-반복-)
     - [▶ 놀라운 콤마](#-놀라운-콤마)
@@ -56,7 +58,6 @@
     - [▶ 반쪽 3중 따옴표 문자열](#-반쪽-3중-따옴표-문자열)
     - [▶ 불린의 문제점이 뭐야?](#-불린의-문제점이-뭐야-)
     - [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
-    - [▶ Non-reflexive class method \*](#-non-reflexive-class-method-)
     - [▶ yielding None](#-yielding-none)
     - [▶ Yielding from... return! \*](#-yielding-from-return-)
     - [▶ Nan-재귀성 \*](#-nan-재귀성-)
@@ -74,7 +75,6 @@
     - [▶ 기본 가변인수를 조심하세요!](#-기본-가변인수를-조심하세요)
     - [▶ 여러 예외들을 잡기](#-여러-예외들을-잡기)
     - [▶ 같은 피연산자, 다른 이야기!](#-같은-피연산자-다른-이야기)
-    - [▶ 연결된 연산들을 조심하세요](#-연결된-연산들을-조심하세요)
     - [▶ 이름 확인은 클래스 범위를 무시합니다](#-이름-확인은-클래스-범위를-무시합니다)
     - [▶ 모래밭에서 바늘찾기 \*](#-모래밭에서-바늘찾기-)
     - [▶ 나눠봅시다 \*](#-나눠봅시다-)
@@ -98,6 +98,8 @@
   - ["기타 등등" 단원](#기타-등등-단원)
     - [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
     - [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
+    - [▶ Slowing down `dict` lookups \*](#-slowing-down-dict-lookups-)
+    - [▶ Bloating instance `dict`s \*](#-bloating-instance-dicts-)
     - [▶ 사소한 것들 \*](#-사소한-것들-)
 - [기여하기](#기여하기)
 - [감사의 말](#감사의-말)
@@ -152,7 +154,7 @@
 - 결과를 읽고,
   - 예상한 결과와 실제 결과가 맞는지 확인해 보세요.
   - 결과와 그 작동원리에 대한 정확한 원리를 알고 있나요?
-  * 만약 아니라면 (상관없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfPython)에 이슈를 작성해주세요).
+  * 만약 아니라면 (상관없어요), 큰 숨을 한 번 들이마시고, 설명을 읽어보세요 (그래도 이해하지 못했다면, [여기](https://github.com/satwikkansal/wtfpython/issues/new)에 이슈를 작성해주세요).
   * 알고 있다면, 자신을 한번 토닥여주고 다음 예제로 넘어가세요.
 
 추신: [pypi 패키지](https://pypi.python.org/pypi/wtfpython)를 사용하면 command line에서도 이 문서를 읽을 수 있습니다.
@@ -181,6 +183,7 @@ $ wtfpython
 # 파이썬 3.8+
 
 >>> a = "wtf_walrus"
+'wtf_walrus'
 >>> a
 'wtf_walrus'
 
@@ -364,6 +367,180 @@ False
 
 ---
 
+### ▶ 연결된 연산들을 조심하세요
+
+<!-- Example ID: 07974979-9c86-4720-80bd-467aa19470d9 --->
+
+```py
+>>> (False == False) in [False] # 말이 되네요
+False
+>>> False == (False in [False]) # 이것도 말이 됩니다
+False
+>>> False == False in [False] # 이건 뭐죠?
+True
+
+>>> True is False == False
+False
+>>> False is False is False
+True
+
+>>> 1 > 0 < 1
+True
+>>> (1 > 0) < 1
+False
+>>> 1 > (0 < 1)
+False
+```
+
+#### 💡 설명:
+
+https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
+
+> 형식적으로, a, b, c, ..., y, z가 표현식이고 op1, op2, ..., opN이 비교 연산자라면, 각 식이 한번에 평가된다는 점을 제외하고 a op1 b op2 c ... y opN z는 a op1 b and b op2 c and ... y opN z에 해당합니다.
+
+위의 예시와 같은 행동들은 멍청해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
+
+- `False is False is False`는 `(False is False) and (False is False)`와 같습니다.
+- `True is False == False`는 `True is False and False == False`와 같으며 구문의 첫 부분 (`True is False`)가 `False`로 평가되기 때문에 전체 표현식의 결과는 `False`가 됩니다.
+- `1 > 0 < 1`은 `1 > 0 and 0 < 1`과 같아 `True`가 계산됩니다.
+- 표현식 `(1 > 0) < 1`은 `True < 1`과 같으며
+  ```py
+  >>> int(True)
+  1
+  >>> True + 1 #예제와는 관련이 없지만, 재미를 위해서입니다.
+  2
+  ```
+  즉, `1 < 1`의 결과는 `False`입니다.
+
+---
+
+### ▶ `is` 연산자를 안 쓰는 방법
+
+<!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
+
+아래 예제는 인터넷에서 매우 유명한 예제로 퍼져있습니다.
+
+1\.
+
+```py
+>>> a = 256
+>>> b = 256
+>>> a is b
+True
+
+>>> a = 257
+>>> b = 257
+>>> a is b
+False
+```
+
+2\.
+
+```py
+>>> a = []
+>>> b = []
+>>> a is b
+False
+
+>>> a = tuple()
+>>> b = tuple()
+>>> a is b
+True
+```
+
+3\.
+**출력 결과**
+
+```py
+>>> a, b = 257, 257
+>>> a is b
+True
+```
+
+**출력 결과 (파이썬 3.7.x)**
+
+```py
+>>> a, b = 257, 257
+>> a is b
+False
+```
+
+#### 💡 설명:
+
+**`is`와 `==`의 차이점**
+
+- `is` 연산자는 연산자 양쪽이 같은 객체를 참조하고 있는지를 확인합니다. (즉, 둘이 진짜로 같은지를 확인합니다).
+- `==` 연산자는 양쪽의 값을 비교하여 이 둘이 같은지를 확인합니다.
+- 그래서 `is`는 참조의 동등을, `==`는 값의 동등을 확인합니다. 다음 예제로 정리해보면,
+  ```py
+  >>> class A: pass
+  >>> A() is A() # 이 둘은 메모리상에 다른 곳에 있는 두 빈 객체입니다.
+  False
+  ```
+
+**`256`은 존재하는 객체이지만 `257`은 아닙니다**
+
+파이썬을 시작하게 되면, `-5`부터 `256`까지의 수들은 할당됩니다. 이 수들은 많이 사용되기 때문에 미리 준비하는 것입니다.
+
+https://docs.python.org/3/c-api/long.html 에서 인용한 글입니다.
+
+> 현 구현은 -5부터 256까지의 정수들을 담는 배열을 만듭니다. 만약 이 범위 안에 있는 정수를 만들게 되면 이미 존재하는 객체의 레퍼런스를 반환합니다. 그래서 1의 값을 바꾸는 것이 가능할 것입니다. 아마도 이 경우는 파이썬의 행동은 정의되지 않을 것입니다. :-)
+
+```py
+>>> id(256)
+10922528
+>>> a = 256
+>>> b = 256
+>>> id(a)
+10922528
+>>> id(b)
+10922528
+>>> id(257)
+140084850247312
+>>> x = 257
+>>> y = 257
+>>> id(x)
+140084850247440
+>>> id(y)
+140084850247344
+```
+
+여기서 인터프리터는 `y = 257`을 실행할 때 위에서 벌써 `257`을 가지는 정수를 만들었다는 것을 알 정도로 똑똑하지 않아서 메모리에 새로운 객체를 만들게 됩니다.
+
+빈 튜플과 같이 다른 **변하지 않는** 객체에 대해서도 비슷한 최적화가 적용됩니다. 배열은 변할 수 있어서, `[] is []`는 항상 `False`를 반환하고 `() is ()`는 항상 `True`를 반환합니다. 이는 두 번째 예제를 성명합니다. 이제 세 번쨰로 넘어가볼까요?
+
+**같은 줄에서 같은 값으로 초기화할 때 `a`와 `b` 둘 다 같은 객체를 참조합니다.**
+
+**출력 결과**
+
+```py
+>>> a, b = 257, 257
+>>> id(a)
+140640774013296
+>>> id(b)
+140640774013296
+>>> a = 257
+>>> b = 257
+>>> id(a)
+140640774013392
+>>> id(b)
+140640774013488
+```
+
+- a와 b가 같은 줄에서 `257`로 할당될 때, 파이썬 인터프리터는 새로운 객체를 만듦과 동시에 두 번째 변수가 참조하게 됩니다. 이것을 다른 줄에서 한다면, 인터프리터는 `257`이 이미 있는지 알지 못합니다.
+
+- 이 현상은 컴파일러 최적화이고 특별히 인터랙티브 환경에서만 적용됩니다. 인터프리터에 두 줄을 입력하게 되면, 각각 컴파일되며, 각각 최적화됩니다. 만약 이를 `.py`파일에서 시도한다면, 한 번에 컴파일되기 때문에 이 현상을 보지 못합니다. 이 최적화는 정수에만 국한된 것이 아니라 문자열("문자열은 가끔 헷갈려요"를 확인해보세요.)과 실수와 같이 변하지 않는 자료 구조에도 적용됩니다.
+
+  ```py
+  >>> a, b = 257.0, 257.0
+  >>> a is b
+  True
+  ```
+
+- 왜 파이썬 3.7에서는 작동되지 않나요? 간단히 말하자면 컴파일러 최적화는 구현하기 나름이기 때문입니다. (즉, 버전이나 운영체제 등에 따라 바뀔 수 있어요) 아직 이 문제를 일으킨 정확한 이유를 찾지 못했지만, 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인해보세요.
+
+---
+
 ### ▶ [해시 브라우니](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%8A%A4)
 
 <!-- Example ID: eb17db53-49fd-4b61-85d6-345c5ca213ff --->
@@ -398,17 +575,37 @@ complex
 
 #### 💡 설명
 
-- 파이썬 딕셔너리(dictionary)는 두 키가 같은지 판별하기 위해 해시값을 사용합니다.
-- 파이썬에서 같은 값을 같는 고정된 객체는 항상 같은 해시값을 가집니다.
+- Uniqueness of keys in a Python dictionary is by _equivalence_, not identity. So even though `5`, `5.0`, and `5 + 0j` are distinct objects of different types, since they're equal, they can't both be in the same `dict` (or `set`). As soon as you insert any one of them, attempting to look up any distinct but equivalent key will succeed with the original mapped value (rather than failing with a `KeyError`):
+  ```py
+  >>> 5 == 5.0 == 5 + 0j
+  True
+  >>> 5 is not 5.0 is not 5 + 0j
+  True
+  >>> some_dict = {}
+  >>> some_dict[5.0] = "Ruby"
+  >>> 5.0 in some_dict
+  True
+  >>> (5 in some_dict) and (5 + 0j in some_dict)
+  True
+  ```
+- This applies when setting an item as well. So when you do `some_dict[5] = "Python"`, Python finds the existing item with equivalent key `5.0 -> "Ruby"`, overwrites its value in place, and leaves the original key alone.
+  ```py
+  >>> some_dict
+  {5.0: 'Ruby'}
+  >>> some_dict[5] = "Python"
+  >>> some_dict
+  {5.0: 'Python'}
+  ```
+- So how can we update the key to `5` (instead of `5.0`)? We can't actually do this update in place, but what we can do is first delete the key (`del some_dict[5.0]`), and then set it (`some_dict[5]`) to get the integer `5` as the key instead of floating `5.0`, though this should be needed in rare cases.
+
+- How did Python find `5` in a dictionary containing `5.0`? Python does this in constant time without having to scan through every item by using hash functions. When Python looks up a key `foo` in a dict, it first computes `hash(foo)` (which runs in constant-time). Since in Python it is required that objects that compare equal also have the same hash value ([docs](https://docs.python.org/3/reference/datamodel.html#object.__hash__) here), `5`, `5.0`, and `5 + 0j` have the same hash value.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **참고:** 다른 값을 가지고 있는 객체도 같은 해시값을 가질 수 있습니다. ([해시 충돌](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EC%B6%A9%EB%8F%8C)이라고 알려져 있습니다)
-- `some_dict[5] = "Python"`이 실행되면, 파이썬은 `5`와 `5.0`을 같은 키로 인식하므로 기존 값인 "Ruby"가 "Python"로 덮여 쓰입니다.
-- 이 스택 오버플로우 [답변](https://stackoverflow.com/a/32211042/4354153)이 이유를 설명합니다.
+  **Note:** The inverse is not necessarily true: Objects with equal hash values may themselves be unequal. (This causes what's known as a [hash collision](<https://en.wikipedia.org/wiki/Collision_(computer_science)>), and degrades the constant-time performance that hashing usually provides.)
 
 ---
 
@@ -765,133 +962,6 @@ array_4 = [400, 500, 600]
 
 ---
 
-### ▶ `is` 연산자를 안 쓰는 방법
-
-<!-- Example ID: 230fa2ac-ab36-4ad1-b675-5f5a1c1a6217 --->
-
-아래 예제는 인터넷에서 매우 유명한 예제로 퍼져있습니다.
-
-1\.
-
-```py
->>> a = 256
->>> b = 256
->>> a is b
-True
-
->>> a = 257
->>> b = 257
->>> a is b
-False
-```
-
-2\.
-
-```py
->>> a = []
->>> b = []
->>> a is b
-False
-
->>> a = tuple()
->>> b = tuple()
->>> a is b
-True
-```
-
-3\.
-**출력 결과**
-
-```py
->>> a, b = 257, 257
->>> a is b
-True
-```
-
-**출력 결과 (파이썬 3.7.x)**
-
-```py
->>> a, b = 257, 257
->> a is b
-False
-```
-
-#### 💡 설명:
-
-**`is`와 `==`의 차이점**
-
-- `is` 연산자는 연산자 양쪽이 같은 객체를 참조하고 있는지를 확인합니다. (즉, 둘이 진짜로 같은지를 확인합니다).
-- `==` 연산자는 양쪽의 값을 비교하여 이 둘이 같은지를 확인합니다.
-- 그래서 `is`는 참조의 동등을, `==`는 값의 동등을 확인합니다. 다음 예제로 정리해보면,
-  ```py
-  >>> class A: pass
-  >>> A() is A() # 이 둘은 메모리상에 다른 곳에 있는 두 빈 객체입니다.
-  False
-  ```
-
-**`256`은 존재하는 객체이지만 `257`은 아닙니다**
-
-파이썬을 시작하게 되면, `-5`부터 `256`까지의 수들은 할당됩니다. 이 수들은 많이 사용되기 때문에 미리 준비하는 것입니다.
-
-https://docs.python.org/3/c-api/long.html 에서 인용한 글입니다.
-
-> 현 구현은 -5부터 256까지의 정수들을 담는 배열을 만듭니다. 만약 이 범위 안에 있는 정수를 만들게 되면 이미 존재하는 객체의 레퍼런스를 반환합니다. 그래서 1의 값을 바꾸는 것이 가능할 것입니다. 아마도 이 경우는 파이썬의 행동은 정의되지 않을 것입니다. :-)
-
-```py
->>> id(256)
-10922528
->>> a = 256
->>> b = 256
->>> id(a)
-10922528
->>> id(b)
-10922528
->>> id(257)
-140084850247312
->>> x = 257
->>> y = 257
->>> id(x)
-140084850247440
->>> id(y)
-140084850247344
-```
-
-여기서 인터프리터는 `y = 257`을 실행할 때 위에서 벌써 `257`을 가지는 정수를 만들었다는 것을 알 정도로 똑똑하지 않아서 메모리에 새로운 객체를 만들게 됩니다.
-
-빈 튜플과 같이 다른 **변하지 않는** 객체에 대해서도 비슷한 최적화가 적용됩니다. 배열은 변할 수 있어서, `[] is []`는 항상 `False`를 반환하고 `() is ()`는 항상 `True`를 반환합니다. 이는 두 번째 예제를 성명합니다. 이제 세 번쨰로 넘어가볼까요?
-
-**같은 줄에서 같은 값으로 초기화할 때 `a`와 `b` 둘 다 같은 객체를 참조합니다.**
-
-**출력 결과**
-
-```py
->>> a, b = 257, 257
->>> id(a)
-140640774013296
->>> id(b)
-140640774013296
->>> a = 257
->>> b = 257
->>> id(a)
-140640774013392
->>> id(b)
-140640774013488
-```
-
-- a와 b가 같은 줄에서 `257`로 할당될 때, 파이썬 인터프리터는 새로운 객체를 만듦과 동시에 두 번째 변수가 참조하게 됩니다. 이것을 다른 줄에서 한다면, 인터프리터는 `257`이 이미 있는지 알지 못합니다.
-
-- 이 현상은 컴파일러 최적화이고 특별히 인터랙티브 환경에서만 적용됩니다. 인터프리터에 두 줄을 입력하게 되면, 각각 컴파일되며, 각각 최적화됩니다. 만약 이를 `.py`파일에서 시도한다면, 한 번에 컴파일되기 때문에 이 현상을 보지 못합니다. 이 최적화는 정수에만 국한된 것이 아니라 문자열("문자열은 가끔 헷갈려요"를 확인해보세요.)과 실수와 같이 변하지 않는 자료 구조에도 적용됩니다.
-
-  ```py
-  >>> a, b = 257.0, 257.0
-  >>> a is b
-  True
-  ```
-
-- 왜 파이썬 3.7에서는 작동되지 않나요? 간단히 말하자면 컴파일러 최적화는 구현하기 나름이기 때문입니다. (즉, 버전이나 운영체제 등에 따라 바뀔 수 있어요) 아직 이 문제를 일으킨 정확한 이유를 찾지 못했지만, 이 [이슈](https://github.com/satwikkansal/wtfpython/issues/100)를 확인해보세요.
-
----
-
 ### ▶ `is not ...` 은 `is (not ...)`이 아니다
 
 <!-- Example ID: b26fb1ed-0c7d-4b9c-8c6d-94a58a055c0d --->
@@ -907,6 +977,7 @@ False
 
 - `is not` 은 단일 이진 연산자이며, 이는 `is`와 `not`을 따로 사용하는 것과는 다른 기능을 합니다.
 - `is not` 연산자는 양쪽의 변수가 동일한 객체를 가리키면 `False`를, 아니면 `True`로 나타납니다.
+- In the example, `(not None)` evaluates to `True` since the value `None` is `False` in a boolean context, so the expression becomes `'something' is True`.
 
 ---
 
@@ -1098,6 +1169,125 @@ False
 
 ---
 
+### ▶ Methods equality and identity
+
+<!-- Example ID: 94802911-48fe-4242-defa-728ae893fa32 --->
+
+1.
+
+```py
+class SomeClass:
+    def method(self):
+        pass
+
+    @classmethod
+    def classm(cls):
+        pass
+
+    @staticmethod
+    def staticm():
+        pass
+```
+
+**Output:**
+
+```py
+>>> print(SomeClass.method is SomeClass.method)
+True
+>>> print(SomeClass.classm is SomeClass.classm)
+False
+>>> print(SomeClass.classm == SomeClass.classm)
+True
+>>> print(SomeClass.staticm is SomeClass.staticm)
+True
+```
+
+Accessing `classm` twice, we get an equal object, but not the _same_ one? Let's see what happens
+with instances of `SomeClass`:
+
+2.
+
+```py
+o1 = SomeClass()
+o2 = SomeClass()
+```
+
+**Output:**
+
+```py
+>>> print(o1.method == o2.method)
+False
+>>> print(o1.method == o1.method)
+True
+>>> print(o1.method is o1.method)
+False
+>>> print(o1.classm is o1.classm)
+False
+>>> print(o1.classm == o1.classm == o2.classm == SomeClass.classm)
+True
+>>> print(o1.staticm is o1.staticm is o2.staticm is SomeClass.staticm)
+True
+```
+
+Accessing` classm` or `method` twice, creates equal but not _same_ objects for the same instance of `SomeClass`.
+
+#### 💡 Explanation
+
+- Functions are [descriptors](https://docs.python.org/3/howto/descriptor.html). Whenever a function is accessed as an
+  attribute, the descriptor is invoked, creating a method object which "binds" the function with the object owning the
+  attribute. If called, the method calls the function, implicitly passing the bound object as the first argument
+  (this is how we get `self` as the first argument, despite not passing it explicitly).
+
+```py
+>>> o1.method
+<bound method SomeClass.method of <__main__.SomeClass object at ...>>
+```
+
+- Accessing the attribute multiple times creates a method object every time! Therefore `o1.method is o1.method` is
+  never truthy. Accessing functions as class attributes (as opposed to instance) does not create methods, however; so
+  `SomeClass.method is SomeClass.method` is truthy.
+
+```py
+>>> SomeClass.method
+<function SomeClass.method at ...>
+```
+
+- `classmethod` transforms functions into class methods. Class methods are descriptors that, when accessed, create
+  a method object which binds the _class_ (type) of the object, instead of the object itself.
+
+```py
+>>> o1.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+- Unlike functions, `classmethod`s will create a method also when accessed as class attributes (in which case they
+  bind the class, not to the type of it). So `SomeClass.classm is SomeClass.classm` is falsy.
+
+```py
+>>> SomeClass.classm
+<bound method SomeClass.classm of <class '__main__.SomeClass'>>
+```
+
+- A method object compares equal when both the functions are equal, and the bound objects are the same. So
+  `o1.method == o1.method` is truthy, although not the same object in memory.
+- `staticmethod` transforms functions into a "no-op" descriptor, which returns the function as-is. No method
+  objects are ever created, so comparison with `is` is truthy.
+
+```py
+>>> o1.staticm
+<function SomeClass.staticm at ...>
+>>> SomeClass.staticm
+<function SomeClass.staticm at ...>
+```
+
+- Having to create new "method" objects every time Python calls instance methods and having to modify the arguments
+  every time in order to insert `self` affected performance badly.
+  CPython 3.7 [solved it](https://bugs.python.org/issue26110) by introducing new opcodes that deal with calling methods
+  without creating the temporary method objects. This is used only when the accessed function is actually called, so the
+  snippets here are not affected, and still generate methods :)
+
+---
+
 ### ▶ 참 거짓의 반복 \*
 
 <!-- Example ID: dfe6d845-e452-48fe-a2da-0ed3869a8042 -->
@@ -1197,7 +1387,7 @@ True
 
 - 보통 파이썬 문자열에서 백슬래시는 특별한 의미의 문자(작은 따옴표나 큰 따옴표, 그리고 백슬래시 그 자체)를 이스케이프하는데 사용됩니다.
   ```py
-  >>> 'wt\"f'
+  >>> "wt\"f"
   'wt"f'
   ```
 - 원시 문자열 리터럴(raw string literal, 접두사 `r`로 나타난다)에서는 백슬래시들이 그대로 출력되지만 그 특성도 그대로 적용됩니다.
@@ -1211,7 +1401,7 @@ True
   >>> print("\n")
 
   >>> print(r"\\n")
-  '\\\\n'
+  '\\n'
   ```
 
 - 즉, 이는 파서가 원시 문자열에서 백슬래시와 만나면 그 뒤에 문자가 나오기를 예상한다는 것입니다. 그리고 이러한 경우(`print(r"\")`)에서는 백슬래시가 뒤의 따옴표에서 이스케이프하여 파서는 끝나는 따옴표를 찾지 못합니다(따라서 `SyntaxError`이 발생합니다). 이 이유로 원시 문자열의 끝에서 백슬래시를 사용할 수 없습니다.
@@ -1270,7 +1460,7 @@ SyntaxError: EOF while scanning triple-quoted string literal
 
 #### 💡 설명:
 
-- 파이썬은 암묵적 [문자열 리터럴 병합 연산](https://docs.python.org/2/reference/lexical_analysis.html#string-literal-concatenation) 연산을 지원합니다, 예시로,
+- 파이썬은 암묵적 [문자열 리터럴 병합 연산](https://docs.python.org/3/reference/lexical_analysis.html#string-literal-concatenation) 연산을 지원합니다, 예시로,
   ```
   >>> print("wtf" "python")
   wtfpython
@@ -1446,48 +1636,6 @@ True
 
 ---
 
-### ▶ Non-reflexive class method \*
-
-<!-- Example ID: 3649771a-f733-413c-8060-3f9f167b83fd -->
-
-```py
-class SomeClass:
-        def instance_method(self):
-                pass
-
-        @classmethod
-        def class_method(cls):
-                pass
-```
-
-**Output:**
-
-```py
->>> SomeClass.instance_method is SomeClass.instance_method
-True
->>> SomeClass.class_method is SomeClass.class_method
-False
->>> id(SomeClass.class_method) == id(SomeClass.class_method)
-True
-```
-
-#### 💡 Explanation:
-
-- The reason `SomeClass.class_method is SomeClass.class_method` is `False` is due to the `@classmethod` decorator.
-
-  ```py
-  >>> SomeClass.instance_method
-  <function __main__.SomeClass.instance_method(self)>
-  >>> SomeClass.class_method
-  <bound method SomeClass.class_method of <class '__main__.SomeClass'>
-  ```
-
-  A new bound method every time `SomeClass.class_method` is accessed.
-
-- `id(SomeClass.class_method) == id(SomeClass.class_method)` returned `True` because the second allocation of memory for `class_method` happened at the same location of first deallocation (See Deep Down, we're all the same example for more detailed explanation).
-
----
-
 ### ▶ yielding None
 
 <!-- Example ID: 5a40c241-2c30-40d0-8ba9-cf7e097b3b53 --->
@@ -1518,7 +1666,7 @@ def some_func(val):
 
 - 이것은 CPython에서 제너레이터와 컴프리헨션에서 `yield`를 처리할 때 생기는 버그입니다.
 - 소스와 설명은 여기서 찾아볼 수 있습니다: https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
-- 관련된 버그 리포트: http://bugs.python.org/issue10544
+- 관련된 버그 리포트: https://bugs.python.org/issue10544
 - 파이썬 3.8 이상의 버전에서는 리스트 컴프리헨션의 내부에 `yield`를 허용하지 않고 `SyntaxError`를 발생시킵니다.
 
 ---
@@ -1693,11 +1841,11 @@ TypeError: 'tuple' object does not support item assignment
 
 #### 💡 설명:
 
-- https://docs.python.org/ko/2/reference/datamodel.html 을 인용하면
+- https://docs.python.org/ko/3/reference/datamodel.html 을 인용하면
 
   > 불변 시퀸스
-
-        불변 시퀀스 형의 객체는 일단 만들어진 후에는 변경될 수 없다. (만약 다른 객체로의 참조를 포함하면, 그 객체는 가변일 수 있고, 변경될 수 있다; 하지만, 불변 객체로부터 참조되는 객체의 집합 자체는 변경될 수 없다.)
+  >
+  > 불변 시퀀스 형의 객체는 일단 만들어진 후에는 변경될 수 없다. (만약 다른 객체로의 참조를 포함하면, 그 객체는 가변일 수 있고, 변경될 수 있다; 하지만, 불변 객체로부터 참조되는 객체의 집합 자체는 변경될 수 없다.)
 
 - `+=` 연산자는 리스트를 그 자리에서 변경합니다. 그 항목 할당이 동작하지 않지만, 예외 발생 시 그 항목은 이미 그 자리에서 변경되었습니다.
 
@@ -1950,7 +2098,7 @@ for i in x:
 - 8번 반복되는 이유는 더 많은 키를 소유하기 위해 딕셔너리가 크기를 조정하는 지점이기 때문입니다. (우리는 8개의 삭제 항목들이 있으므로, 크기의 조정이 필요합니다) 이는 실제 구현의 세부사항입니다.
 - 삭제된 키를 처리하는 과정과 크기의 조정이 이루어지는 시점은 Python의 구현에 따라 다를 수 있습니다.
 - 따라서, 파이썬 2.7 - 3.5 이외의 버전의 경우, 실행 횟수가 8과 다를 수 있습니다. (하지만 횟수가 어떻던 간에, 실행할 때 마다 동일한 결과입니다) [여기](https://github.com/satwikkansal/wtfpython/issues/53) 또는 StackOverflow의 [이 스레드](https://stackoverflow.com/questions/44763802/bug-in-python-dict)에서 이에 관한 토론을 찾을 수 있습니다.
-- 파이썬 3.8 이상에서는 이것을 시도할 경우 `RuntimeError: dictionary keys changed during iteration` 예외를 보여줍니다.
+- 파이썬 3.7.6 이상에서는 이것을 시도할 경우 `RuntimeError: dictionary keys changed during iteration` 예외를 보여줍니다.
 
 ---
 
@@ -2007,6 +2155,8 @@ Deleted!
 
 <!-- Example ID: 75c03015-7be9-4289-9e22-4f5fdda056f7 --->
 
+1\.
+
 ```py
 a = 1
 def some_func():
@@ -2017,6 +2167,23 @@ def another_func():
     return a
 ```
 
+2\.
+
+```py
+def some_closure_func():
+    a = 1
+    def some_inner_func():
+        return a
+    return some_inner_func()
+
+def another_closure_func():
+    a = 1
+    def another_inner_func():
+        a += 1
+        return a
+    return another_inner_func()
+```
+
 **출력 결과:**
 
 ```py
@@ -2024,12 +2191,16 @@ def another_func():
 1
 >>> another_func()
 UnboundLocalError: local variable 'a' referenced before assignment
+
+>>> some_closure_func()
+1
+>>> another_closure_func()
+UnboundLocalError: local variable 'a' referenced before assignment
 ```
 
 #### 💡 설명:
 
 - 범위 내의 변수에 할당하면, 해당 범위의 로컬 변수가 됩니다. 그래서 `a`는 `another_func`의 범위에 국한되지만 이전과 같은 범위에서 초기화 되지 않아 에러가 발생합니다.
-- 짧지만 멋진 [이 가이드](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)를 읽고 네임스페이스와 범위 결정이 파이썬에서 작동하는 방법에 대해 알아보세요.
 - `another_func`에서 외부 범위의 `a`를 변경하려면, `global` 키워드를 사용하세요.
 
   ```py
@@ -2045,6 +2216,30 @@ UnboundLocalError: local variable 'a' referenced before assignment
   >>> another_func()
   2
   ```
+
+- In `another_closure_func`, `a` becomes local to the scope of `another_inner_func`, but it has not been initialized previously in the same scope, which is why it throws an error.
+- To modify the outer scope variable `a` in `another_inner_func`, use the `nonlocal` keyword. The nonlocal statement is used to refer to variables defined in the nearest outer (excluding the global) scope.
+
+  ```py
+  def another_func():
+      a = 1
+      def another_inner_func():
+          nonlocal a
+          a += 1
+          return a
+      return another_inner_func()
+  ```
+
+  **Output:**
+
+  ```py
+  >>> another_func()
+  2
+  ```
+
+- The keywords `global` and `nonlocal` tell the python interpreter to not delcare new variables and look them up in the corresponding outer scopes.
+
+- 짧지만 멋진 [이 가이드](http://sebastianraschka.com/Articles/2014_python_scope_and_namespaces.html)를 읽고 네임스페이스와 범위 결정이 파이썬에서 작동하는 방법에 대해 알아보세요.
 
 ---
 
@@ -2289,7 +2484,7 @@ def some_func(default_arg=[]):
 
   ```py
   def some_func(default_arg=None):
-      if not default_arg:
+      if default_arg is None:
           default_arg = []
       default_arg.append("some_string")
       return default_arg
@@ -2429,53 +2624,6 @@ a += [5, 6, 7, 8]
 - `a = a + [5,6,7,8]` 표현식은 새로운 리스트를 생성하여 새로운 리스트에 대한 `a`의 참조를 설정하므로, `b`는 바뀌지 않습니다.
 
 - `a += [5,6,7,8]` 표현식은 실제로 `a`와 `b`가 여전히 내부에서 수정된 목록을 가리키도록 하는 "확장" 함수에 대치됩니다.
-
----
-
-### ▶ 연결된 연산들을 조심하세요
-
-<!-- Example ID: 07974979-9c86-4720-80bd-467aa19470d9 --->
-
-```py
->>> (False == False) in [False] # 말이 되네요
-False
->>> False == (False in [False]) # 이것도 말이 됩니다
-False
->>> False == False in [False] # 이건 뭐죠?
-True
-
->>> True is False == False
-False
->>> False is False is False
-True
-
->>> 1 > 0 < 1
-True
->>> (1 > 0) < 1
-False
->>> 1 > (0 < 1)
-False
-```
-
-#### 💡 설명:
-
-https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
-
-> 형식적으로, a, b, c, ..., y, z가 표현식이고 op1, op2, ..., opN이 비교 연산자라면, 각 식이 한번에 평가된다는 점을 제외하고 a op1 b op2 c ... y opN z는 a op1 b and b op2 c and ... y opN z에 해당합니다.
-
-위의 예시와 같은 행동들은 멍청해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
-
-- `False is False is False`는 `(False is False) and (False is False)`와 같습니다.
-- `True is False == False`는 `True is False and False == False`와 같으며 구문의 첫 부분 (`True is False`)가 `False`로 평가되기 때문에 전체 표현식의 결과는 `False`가 됩니다.
-- `1 > 0 < 1`은 `1 > 0 and 0 < 1`과 같아 `True`가 계산됩니다.
-- 표현식 `(1 > 0) < 1`은 `True < 1`과 같으며
-  ```py
-  >>> int(True)
-  1
-  >>> True + 1 #예제와는 관련이 없지만, 재미를 위해서입니다.
-  2
-  ```
-  즉, `1 < 1`의 결과는 `False`입니다.
 
 ---
 
@@ -2648,11 +2796,11 @@ def some_recursive_func(a):
     return a
 
 def similar_recursive_func(a):
-        if a == 0:
-                return a
-        a -= 1
-        similar_recursive_func(a)
+    if a == 0:
         return a
+    a -= 1
+    similar_recursive_func(a)
+    return a
 ```
 
 **출력 결과:**
@@ -2698,7 +2846,7 @@ def similar_recursive_func(a):
   AssertionError: Values aren not equal
   ```
 
-- 다섯 번째 코드에서, `list.append`, `dict.update`, `list.sort`또는 다른 것들과 같이 아이템의 순서/매핑 객체의 항목을 수정하는 대부분의 메소드입니다. 그 자리에서 객체를 수정한 후 `None`을 반환합니다. 이를 뒷받침하는 근거는 그 자리에서 연산을 시행할 수 있는 경우 객체의 사본을 만드는 것을 피해 성능을 향상하기 위함입니다. ([이것](http://docs.python.org/2/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)을 참조하였습니다)
+- 다섯 번째 코드에서, `list.append`, `dict.update`, `list.sort`또는 다른 것들과 같이 아이템의 순서/매핑 객체의 항목을 수정하는 대부분의 메소드입니다. 그 자리에서 객체를 수정한 후 `None`을 반환합니다. 이를 뒷받침하는 근거는 그 자리에서 연산을 시행할 수 있는 경우 객체의 사본을 만드는 것을 피해 성능을 향상하기 위함입니다. ([이것](http://docs.python.org/3/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list)을 참조하였습니다)
 
 - 마지막으로, `list`와 같은 가변 객체를 전달은 참조로 호출되는 반면, `int`와 같은 불변 객체는 값으로 호출됩니다.
 
@@ -2903,7 +3051,7 @@ import antigravity
 #### 💡 설명:
 
 - `antigravity` 모듈은 파이썬 개발자들이 추가한 몇 안 되는 이스터에그입니다.
-- `import antigravity` 는 파이썬에 대한 [고전 XKCD 만화](http://xkcd.com/353)을 웹 브라우저에 띄워줍니다.
+- `import antigravity` 는 파이썬에 대한 [고전 XKCD 만화](https://xkcd.com/353)을 웹 브라우저에 띄워줍니다.
 - 더 많은 것이 그 안에 있는데, **또 다른 이스터에그가 이스터에그 안에 있습니다**. [코드](https://github.com/python/cpython/blob/master/Lib/antigravity.py#L7-L17)를 보게 된다면, [XKCD의 geohashing 알고리즘](https://xkcd.com/426)을 구현하는 함수가 정의되어 있습니다.
 
 ---
@@ -3269,11 +3417,12 @@ class A(object):
 **출력 결과:**
 
 ```py
+>>> A().__variable
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 AttributeError: 'A' object has no attribute '__variable'
 
->>> >>> A().some_func()
+>>> A().some_func()
 'Some value'
 ```
 
@@ -3531,6 +3680,110 @@ def convert_list_to_string(l, iters):
 
 ---
 
+### ▶ Slowing down `dict` lookups \*
+
+<!-- Example ID: c9c26ce6-df0c-47f7-af0b-966b9386d4c3 --->
+
+```py
+some_dict = {str(i): 1 for i in range(1_000_000)}
+another_dict = {str(i): 1 for i in range(1_000_000)}
+```
+
+**Output:**
+
+```py
+>>> %timeit some_dict['5']
+28.6 ns ± 0.115 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+>>> some_dict[1] = 1
+>>> %timeit some_dict['5']
+37.2 ns ± 0.265 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+
+>>> %timeit another_dict['5']
+28.5 ns ± 0.142 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+>>> another_dict[1]  # Trying to access a key that doesn't exist
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 1
+>>> %timeit another_dict['5']
+38.5 ns ± 0.0913 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
+```
+
+Why are same lookups becoming slower?
+
+#### 💡 Explanation:
+
+- CPython has a generic dictionary lookup function that handles all types of keys (`str`, `int`, any object ...), and a specialized one for the common case of dictionaries composed of `str`-only keys.
+- The specialized function (named `lookdict_unicode` in CPython's [source](https://github.com/python/cpython/blob/522691c46e2ae51faaad5bbbce7d959dd61770df/Objects/dictobject.c#L841)) knows all existing keys (including the looked-up key) are strings, and uses the faster & simpler string comparison to compare keys, instead of calling the `__eq__` method.
+- The first time a `dict` instance is accessed with a non-`str` key, it's modified so future lookups use the generic function.
+- This process is not reversible for the particular `dict` instance, and the key doesn't even have to exist in the dictionary. That's why attempting a failed lookup has the same effect.
+
+### ▶ Bloating instance `dict`s \*
+
+<!-- Example ID: fe706ab4-1615-c0ba-a078-76c98cbe3f48 --->
+
+```py
+import sys
+
+class SomeClass:
+    def __init__(self):
+        self.some_attr1 = 1
+        self.some_attr2 = 2
+        self.some_attr3 = 3
+        self.some_attr4 = 4
+
+
+def dict_size(o):
+    return sys.getsizeof(o.__dict__)
+
+```
+
+**Output:** (Python 3.8, other Python 3 versions may vary a little)
+
+```py
+>>> o1 = SomeClass()
+>>> o2 = SomeClass()
+>>> dict_size(o1)
+104
+>>> dict_size(o2)
+104
+>>> del o1.some_attr1
+>>> o3 = SomeClass()
+>>> dict_size(o3)
+232
+>>> dict_size(o1)
+232
+```
+
+Let's try again... In a new interpreter:
+
+```py
+>>> o1 = SomeClass()
+>>> o2 = SomeClass()
+>>> dict_size(o1)
+104  # as expected
+>>> o1.some_attr5 = 5
+>>> o1.some_attr6 = 6
+>>> dict_size(o1)
+360
+>>> dict_size(o2)
+272
+>>> o3 = SomeClass()
+>>> dict_size(o3)
+232
+```
+
+What makes those dictionaries become bloated? And why are newly created objects bloated as well?
+
+#### 💡 Explanation:
+
+- CPython is able to reuse the same "keys" object in multiple dictionaries. This was added in [PEP 412](https://www.python.org/dev/peps/pep-0412/) with the motivation to reduce memory usage, specifically in dictionaries of instances - where keys (instance attributes) tend to be common to all instances.
+- This optimization is entirely seamless for instance dictionaries, but it is disabled if certain assumptions are broken.
+- Key-sharing dictionaries do not support deletion; if an instance attribute is deleted, the dictionary is "unshared", and key-sharing is disabled for all future instances of the same class.
+- Additionaly, if the dictionary keys have be resized (because new keys are inserted), they are kept shared _only_ if they are used by a exactly single dictionary (this allows adding many attributes in the `__init__` of the very first created instance, without causing an "unshare"). If multiple instances exist when a resize happens, key-sharing is disabled for all future instances of the same class: CPython can't tell if your instances are using the same set of attributes anymore, and decides to bail out on attempting to share their keys.
+- A small tip, if you aim to lower your program's memory footprint: don't delete instance attributes, and make sure to initialize all attributes in your `__init__`!
+
+---
+
 ### ▶ 사소한 것들 \*
 
 <!-- Example ID: f885cb82-f1e4-4daa-9ff3-972b14cb1324 --->
@@ -3607,7 +3860,7 @@ def convert_list_to_string(l, iters):
   ```py
   >>> some_string = "wtfpython"
   >>> f'{some_string=}'
-  "string='wtfpython'"
+  "some_string='wtfpython'"
   ```
 
 - 파이썬은 함수들의 지역 변수 저장소에 2바이트를 사용합니다. 이론적으로, 이것은 함수에서 65536개의 변수만 정의될 수 있는 것을 의미합니다. 하지만 파이썬에는 2^16개 이상의 변수 이름들을 저장하는 데 사용할 수 있는 유용한 해결책이 내장되어 있습니다. 다음 코드는 65536개 이상의 지역 변수가 정의되었을 때 스택에서 발생하는 상황을 보여줍니다. (주의: 이 코드는 약 2^18줄의 텍스트를 출력하므로, 준비하십시오!):
@@ -3624,7 +3877,7 @@ def convert_list_to_string(l, iters):
   print(dis.dis(f))
   ```
 
-- 여러 파이썬 스레드들이 동시에 _파이썬 코드_ 를 실행하지 않습니다. (예, 제대로 들으셨습니다!) 여러 개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있지만 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것뿐입니다. 파이썬의 쓰레드는 IO-bound 작업에 적합하지만, CPU-bound 작업에서 병렬화를 달성하려면 [multiprocessing](https://docs.python.org/2/library/multiprocessing.html) 모듈을 사용하는 것이 좋을 수 있습니다.
+- 여러 파이썬 스레드들이 동시에 _파이썬 코드_ 를 실행하지 않습니다. (예, 제대로 들으셨습니다!) 여러 개의 스레드를 생성하여 파이썬 코드를 동시에 실행하도록 하는 것이 직관적으로 보일 수 있지만 파이썬의 [Global Interpreter Lock](https://wiki.python.org/moin/GlobalInterpreterLock) 때문에 당신이 만들고 실행시키는 스레드들은 같은 코어를 차례대로 동작하게 하는 것뿐입니다. 파이썬의 쓰레드는 IO-bound 작업에 적합하지만, CPU-bound 작업에서 병렬화를 달성하려면 [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) 모듈을 사용하는 것이 좋을 수 있습니다.
 
 - 때때로, `print` 메소드는 값을 바로 출력하지 못할 수 있습니다. 예를 들어,
 
@@ -3636,7 +3889,7 @@ def convert_list_to_string(l, iters):
   time.sleep(3)
   ```
 
-  출력 버퍼가 `\n` 에 도달한 후 또는 프로그램의 실행이 끝날 때 출력 버퍼가 플러시 되기 때문에 `end` 인자로 인하여 10초 뒤에 `wtfpython` 을 출력합니다. `flush=True` 인자를 전달하여 버퍼를 강제로 플러시 할 수도 있습니다.
+  출력 버퍼가 `\n` 에 도달한 후 또는 프로그램의 실행이 끝날 때 출력 버퍼가 플러시 되기 때문에 `end` 인자로 인하여 3초 뒤에 `wtfpython` 을 출력합니다. `flush=True` 인자를 전달하여 버퍼를 강제로 플러시 할 수도 있습니다.
 
 - 범위를 벗어난 리스트 슬라이싱은 에러를 던지지 않습니다.
 
@@ -3657,7 +3910,7 @@ def convert_list_to_string(l, iters):
   True
   ```
 
-- 파이썬 3 에서 `int('١٢٣٤٥٦٧٨٩')` 는 `123456789` 을 반환합니다. 파이썬에서, 십진수 문자들에는 숫자 문자들과 십진법 숫자들을 형성하는데 사용될 수 있는 모든 문자가 포함됩니다, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. 이 동작과 관련된 [interesting story](http://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) 입니다.
+- 파이썬 3 에서 `int('١٢٣٤٥٦٧٨٩')` 는 `123456789` 을 반환합니다. 파이썬에서, 십진수 문자들에는 숫자 문자들과 십진법 숫자들을 형성하는데 사용될 수 있는 모든 문자가 포함됩니다, e.g. U+0660, ARABIC-INDIC DIGIT ZERO. 이 동작과 관련된 [interesting story](https://chris.improbable.org/2014/8/25/adventures-in-unicode-digits/) 입니다.
 
 - 파이썬 3 이상에서는 더 나은 가독성을 위해 밑줄로 숫자 리터럴을 분리할 수 있습니다.
 
@@ -3679,8 +3932,6 @@ def convert_list_to_string(l, iters):
       return result
   ```
   이 동작은 원래 문자열에서 길이가 0인 슬라이스들에 빈 substring(`''`)이 일치하기 때문입니다.
-
-**여기까지입니다!**
 
 ---
 
@@ -3715,6 +3966,7 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 - https://github.com/cosmologicon/pywat#the-undocumented-converse-implication-operator
 - https://www.codementor.io/satwikkansal/python-practices-for-efficient-code-performance-memory-and-usability-aze6oiq65
 - https://github.com/wemake-services/wemake-python-styleguide/search?q=wtfpython&type=Issues
+- WFTPython discussion threads on [Hacker News](https://news.ycombinator.com/item?id=21862073) and [Reddit](https://www.reddit.com/r/programming/comments/edsh3q/what_the_fck_python_30_exploring_and/).
 
 # 🎓 License
 
@@ -3729,9 +3981,10 @@ wtfpython에 기여할 수 있는 몇 가지 방법이 있어요,
 
 만약 wtfpython이 마음에 드셨다면, 친구들에게 빠르게 공유하기 위한 퀵 링크들을 사용할 수 있어요.
 
-[Twitter](https://twitter.com/intent/tweet?url=https://github.com/buttercrab/wtfpython-ko&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hastags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/buttercrab&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fbuttercrab%2Fwtfpython-ko&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)
+[Twitter](https://twitter.com/intent/tweet?url=https://github.com/satwikkansal/wtfpython&text=If%20you%20really%20think%20you%20know%20Python,%20think%20once%20more!%20Check%20out%20wtfpython&hashtags=python,wtfpython) | [Linkedin](https://www.linkedin.com/shareArticle?url=https://github.com/satwikkansal&title=What%20the%20f*ck%20Python!&summary=If%20you%20really%20thing%20you%20know%20Python,%20think%20once%20more!) | [Facebook](https://www.facebook.com/dialog/share?app_id=536779657179021&display=page&href=https%3A%2F%2Fgithub.com%2Fsatwikkansal%2Fwtfpython&quote=If%20you%20really%20think%20you%20know%20Python%2C%20think%20once%20more!)
 
-## 비슷한 것들을 찾고 있나요?
+## Need a pdf version?
 
-만약 이것과 비슷한 내용에 대해 흥미를 느낀다면, 여러분의 이메일을 공유할 수 있어요.
-_추신: 각주로, 저에게 [밥을 사주는 것](https://ko-fi.com/satwikkansal) 또는 [나무를 심는 것](https://teamtrees.org/)을 고려해보세요._
+I've received a few requests for the pdf (and epub) version of wtfpython. You can add your details [here](https://satwikkansal.xyz/wtfpython-pdf/) to get them as soon as they are finished.
+
+**That's all folks!** For upcoming content like this, you can add your email [here](https://www.satwikkansal.xyz/content-like-wtfpython/).
