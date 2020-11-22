@@ -54,7 +54,7 @@
     - [▶ 문자열과 백슬래시](#-문자열과-백슬래시)
     - [▶ 매듭이 아니야!](#-매듭이-아니야)
     - [▶ 반쪽 3중 따옴표 문자열](#-반쪽-3중-따옴표-문자열)
-    - [▶ What's wrong with booleans?](#-whats-wrong-with-booleans)
+    - [▶ 불린의 문제점이 뭐야?](#-불린의-문제점이-뭐야-)
     - [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
     - [▶ Non-reflexive class method \*](#-non-reflexive-class-method-)
     - [▶ yielding None](#-yielding-none)
@@ -1281,7 +1281,7 @@ SyntaxError: EOF while scanning triple-quoted string literal
 
 ---
 
-### ▶ 불린에는 어떤 문제가 있을까?
+### ▶ 불린의 문제점이 뭐야?
 
 <!-- Example ID: 0bba5fa7-9e6d-4cd2-8b94-952d061af5dd --->
 
