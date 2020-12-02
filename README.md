@@ -398,7 +398,7 @@ https://docs.python.org/2/reference/expressions.html#not-in 에 따라서
 
 > 형식적으로, a, b, c, ..., y, z가 표현식이고 op1, op2, ..., opN이 비교 연산자라면, 각 식이 한번에 평가된다는 점을 제외하고 a op1 b op2 c ... y opN z는 a op1 b and b op2 c and ... y opN z에 해당합니다.
 
-위의 예시와 같은 행동들은 멍청해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
+위의 예시와 같은 결과들은 이상해 보일지도 모르지만, `a == b == c`나 `0 <= x <= 100`와 같은 표현들은 환상적입니다.
 
 - `False is False is False`는 `(False is False) and (False is False)`와 같습니다.
 - `True is False == False`는 `True is False and False == False`와 같으며 구문의 첫 부분 (`True is False`)가 `False`로 평가되기 때문에 전체 표현식의 결과는 `False`가 됩니다.
@@ -484,7 +484,7 @@ False
 
 https://docs.python.org/3/c-api/long.html 에서 인용한 글입니다.
 
-> 현 구현은 -5부터 256까지의 정수들을 담는 배열을 만듭니다. 만약 이 범위 안에 있는 정수를 만들게 되면 이미 존재하는 객체의 레퍼런스를 반환합니다. 그래서 1의 값을 바꾸는 것이 가능할 것입니다. 아마도 이 경우는 파이썬의 행동은 정의되지 않을 것입니다. :-)
+> 현 구현은 -5부터 256까지의 정수들을 담는 배열을 만듭니다. 만약 이 범위 안에 있는 정수를 만들게 되면 이미 존재하는 객체의 참조를 반환합니다. 그래서 1의 값을 바꾸는 것이 가능할 것입니다. 아마도 이 경우는 파이썬의 행동은 정의되지 않을 것입니다. :-)
 
 ```py
 >>> id(256)
@@ -1490,7 +1490,7 @@ for item in mixed_list:
         booleans_found_so_far += 1
 ```
 
-**출력:**
+**출력 결과:**
 
 ```py
 >>> integers_found_so_far
