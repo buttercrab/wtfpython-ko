@@ -57,7 +57,7 @@
     - [▶ 매듭이 아니야!](#-매듭이-아니야)
     - [▶ 반쪽 3중 따옴표 문자열](#-반쪽-3중-따옴표-문자열)
     - [▶ 불린의 문제점이 뭐야?](#-불린의-문제점이-뭐야-)
-    - [▶ Class attributes and instance attributes](#-class-attributes-and-instance-attributes)
+    - [▶ 클래스 속성과 인스턴스 속성](#-클래스-속성과-인스턴스-속성)
     - [▶ yielding None](#-yielding-none)
     - [▶ Yielding from... return! \*](#-yielding-from-return-)
     - [▶ Nan-재귀성 \*](#-nan-재귀성-)
@@ -1561,7 +1561,7 @@ I have lost faith in truth!
 
 ---
 
-### ▶ Class attributes and instance attributes
+### ▶ 클래스 속성과 인스턴스 속성
 
 <!-- Example ID: 6f332208-33bd-482d-8106-42863b739ed9 --->
 
@@ -1587,7 +1587,7 @@ class C(A):
 >>> A.x, B.x, C.x
 (1, 2, 1)
 >>> A.x = 3
->>> A.x, B.x, C.x # C.x changed, but B.x didn't
+>>> A.x, B.x, C.x # C.x 는 바뀌었지만, B.x 는 바뀌지 않았습니다.
 (3, 2, 3)
 >>> a = A()
 >>> a.x, A.x
@@ -1629,10 +1629,10 @@ True
 True
 ```
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- Class variables and variables in class instances are internally handled as dictionaries of a class object. If a variable name is not found in the dictionary of the current class, the parent classes are searched for it.
-- The `+=` operator modifies the mutable object in-place without creating a new object. So changing the attribute of one instance affects the other instances and the class attribute as well.
+- 클래스 변수들과 클래스 인스턴스 안에 있는 변수들은 내부에서 클래스 객체의 딕셔너리들로 처리됩니다. 현재 클래스의 딕셔너리에 변수 이름이 없는 경우, 부모 클래스에서 해당 이름을 검색합니다.
+- '+=' 연산자는 새로운 객체를 생성하지 않고 그 자리에서 가변 객체를 수정합니다. 따라서, 한 인스턴스의 속성을 바꾸는 것은 다른 인스턴스들과 클래스 속성에도 영향을 미칩니다.
 
 ---
 
