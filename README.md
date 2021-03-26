@@ -120,7 +120,7 @@
 > # 마법 같은 일을 기대하세요...
 > ```
 >
-> **결과 (유효한 파이썬 버전들):**
+> **출력 결과 (유효한 파이썬 버전들):**
 >
 > ```py
 > >>> 입력
@@ -137,7 +137,7 @@
 > # 설명을 도울 예제
 > ```
 >
-> **결과 (유효한 파이썬 버전들):**
+> **출력 결과 (유효한 파이썬 버전들):**
 >
 > ```py
 > >>> 입력 # 놀라운 결과의 이해를 돕기 위한 예제
@@ -1189,7 +1189,7 @@ class SomeClass:
         pass
 ```
 
-**Output:**
+**출력 결과:*
 
 ```py
 >>> print(SomeClass.method is SomeClass.method)
@@ -1202,8 +1202,8 @@ True
 True
 ```
 
-Accessing `classm` twice, we get an equal object, but not the _same_ one? Let's see what happens
-with instances of `SomeClass`:
+`classm`을 두 번 접근했을 때, 동등한 객체이지만 _같지는_ 않은 객체가 되네요?
+`SomeClass`의 인스턴스는 어떻게 되는지 한 번 볼까요?:
 
 2.
 
@@ -1212,7 +1212,7 @@ o1 = SomeClass()
 o2 = SomeClass()
 ```
 
-**Output:**
+**출력 결과:**
 
 ```py
 >>> print(o1.method == o2.method)
@@ -1229,14 +1229,15 @@ True
 True
 ```
 
-Accessing` classm` or `method` twice, creates equal but not _same_ objects for the same instance of `SomeClass`.
+`SomeClass`의 같은 인스턴스는 `classm`와 `method`를 두 번 접근했을 때, 동등하지만 _같지는_ 않은 객체를 생성합니다.
 
-#### 💡 Explanation
+#### 💡 설명
 
 - Functions are [descriptors](https://docs.python.org/3/howto/descriptor.html). Whenever a function is accessed as an
   attribute, the descriptor is invoked, creating a method object which "binds" the function with the object owning the
   attribute. If called, the method calls the function, implicitly passing the bound object as the first argument
   (this is how we get `self` as the first argument, despite not passing it explicitly).
+- 함수는 [디스크립터](https://docs.python.org/ko/3/howto/descriptor.html) 입니다. 함수가 속성으로 접근되었을 때, 디스크립터가 호출되고, 
 
 ```py
 >>> o1.method
