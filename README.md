@@ -575,7 +575,7 @@ complex
 
 #### 💡 설명
 
-- Uniqueness of keys in a Python dictionary is by _equivalence_, not identity. So even though `5`, `5.0`, and `5 + 0j` are distinct objects of different types, since they're equal, they can't both be in the same `dict` (or `set`). As soon as you insert any one of them, attempting to look up any distinct but equivalent key will succeed with the original mapped value (rather than failing with a `KeyError`):
+- 파이썬 딕셔너리 키의 유일성은 키가 서로 동일한지가 아니라, 동등한 값으로 결정됩니다. 그래서 `5`, `5.0`, 그리고 `5 + 0j`가 서로 다른 타입이더라도 같은 값을 가지기 때문에 같은 딕셔너리나 집합안에 있을 수 없습니다. 그 중 하나를 삽입하게 되면 (`KeyError`을 발생시키는 것이 아닌) 동등한 원소를 발견하는 것을 성공하게 됩니다.
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
@@ -588,7 +588,7 @@ complex
   >>> (5 in some_dict) and (5 + 0j in some_dict)
   True
   ```
-- This applies when setting an item as well. So when you do `some_dict[5] = "Python"`, Python finds the existing item with equivalent key `5.0 -> "Ruby"`, overwrites its value in place, and leaves the original key alone.
+- 이는 한 원소의 값을 지정할 때도 적용됩니다. 그래서 `some_dict[5] = "Python"`을 하게 되면, 파이썬은 동등한 키인 `5.0 -> "Ruby"`를 찾게 되고, 그 값을 덮어쓰게 됩니다. 
   ```py
   >>> some_dict
   {5.0: 'Ruby'}
@@ -596,16 +596,16 @@ complex
   >>> some_dict
   {5.0: 'Python'}
   ```
-- So how can we update the key to `5` (instead of `5.0`)? We can't actually do this update in place, but what we can do is first delete the key (`del some_dict[5.0]`), and then set it (`some_dict[5]`) to get the integer `5` as the key instead of floating `5.0`, though this should be needed in rare cases.
+- 그러면 우리는 어떻게 (`5.0` 대신) `5`인 키를 업데이트 할 수 있을까요? 이는 값을 업데이트 하는 것으로는 할 수 없지만, 먼저 키를 지우고 (`del some_dict[5.0]`), 다시 실수 `5.0` 대신 정수 `5`설정하는 (`some_dict[5]`) 것을 통해 할 수 있습니다. 이런 경우는 드물긴 하겠네요.
 
-- How did Python find `5` in a dictionary containing `5.0`? Python does this in constant time without having to scan through every item by using hash functions. When Python looks up a key `foo` in a dict, it first computes `hash(foo)` (which runs in constant-time). Since in Python it is required that objects that compare equal also have the same hash value ([docs](https://docs.python.org/3/reference/datamodel.html#object.__hash__) here), `5`, `5.0`, and `5 + 0j` have the same hash value.
+- 파이썬은 `5.0`을 포함하고 있는 딕셔너리에서 어떻게 `5`를 찾았을까요? 파이썬은 모든 원소를 보지 않고 해시 함수를 이용해 상수 시간에 해결합니다. 파이썬이 `foo`라는 키를 딕셔너리에서 찾을 때, 먼저 `hash(foo)`를 계산합니다. (이는 상수시간에 계산됩니다). 파이썬에서는 동등한 값은 같은 해시값을 가지므로 ([관련 문서](https://docs.python.org/ko/3/reference/datamodel.html#object.__hash__)), `5`, `5.0`, 그리고 `5 + 0j`는 같은 해시 값을 가지게 됩니다. 
   ```py
   >>> 5 == 5.0 == 5 + 0j
   True
   >>> hash(5) == hash(5.0) == hash(5 + 0j)
   True
   ```
-  **Note:** The inverse is not necessarily true: Objects with equal hash values may themselves be unequal. (This causes what's known as a [hash collision](<https://en.wikipedia.org/wiki/Collision_(computer_science)>), and degrades the constant-time performance that hashing usually provides.)
+  **관련 정보:** 반대는 참이 아닐 수가 있습니다: 해시 값이 같은 두 객체는 동등하지 않을 수 있습니다. (이는 [해시 충돌](https://ko.wikipedia.org/wiki/%ED%95%B4%EC%8B%9C_%EC%B6%A9%EB%8F%8C)이라고 알려져 있고 해싱의 상수 시간의 성능을 저하시킬 수 있습니다. )
 
 ---
 
