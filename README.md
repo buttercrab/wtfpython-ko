@@ -1169,7 +1169,7 @@ False
 
 ---
 
-### ▶ Methods equality and identity
+### ▶ 메소드의 같음과 동일함
 
 <!-- Example ID: 94802911-48fe-4242-defa-728ae893fa32 --->
 
@@ -1205,6 +1205,8 @@ True
 `classm`을 두 번 접근했을 때, 동등한 객체이지만 _같지는_ 않은 객체가 되네요?
 `SomeClass`의 인스턴스는 어떻게 되는지 한 번 볼까요?:
 
+> 여기서 동등하다는 것은 메모리 상 같은 위치에 있다는 것이고, 같다는 것은 단순하게 값이 같다는 의미입니다. 
+
 2.
 
 ```py
@@ -1233,46 +1235,39 @@ True
 
 #### 💡 설명
 
-- Functions are [descriptors](https://docs.python.org/3/howto/descriptor.html). Whenever a function is accessed as an
-  attribute, the descriptor is invoked, creating a method object which "binds" the function with the object owning the
-  attribute. If called, the method calls the function, implicitly passing the bound object as the first argument
-  (this is how we get `self` as the first argument, despite not passing it explicitly).
-- 함수는 [디스크립터](https://docs.python.org/ko/3/howto/descriptor.html) 입니다. 함수가 속성으로 접근되었을 때, 디스크립터가 호출되고, 
+- 함수는 [디스크립터](https://docs.python.org/ko/3/howto/descriptor.html) 입니다. 함수가 속성으로 접근되었을 때, 디스크립터가 호출되고, 객체를 가지고 속성으로 가지고 있는 함수를 "바인딩" 하는 메소드 객체를 생성합니다. 만약 호출되면 메소드는 그 함수를 호출하고, 내부적으로 바인드된 객체를 첫 번째 인자로 넘겨줍니다. (이 원리로 인해 직접적으로 넘기지 않고 `self`를 첫 번째 인자로 받을 수 있는 것입니다.)
 
 ```py
 >>> o1.method
 <bound method SomeClass.method of <__main__.SomeClass object at ...>>
 ```
 
-- Accessing the attribute multiple times creates a method object every time! Therefore `o1.method is o1.method` is
-  never truthy. Accessing functions as class attributes (as opposed to instance) does not create methods, however; so
-  `SomeClass.method is SomeClass.method` is truthy.
+- 속성에 접근하게 되면 메소드 오브젝트를 매번 만들게 됩니다! 그래서 `o1.method is o2.method`는 참일 수가 없는 것이죠. (인스턴스와 반대되게) 함수를 클래스 속성으로 접근하게 되면 메소드를 생성하지 않게 됩니다. 그래서 `SomeClass.method is SomeClass.method`는 항상 참입니다. 
 
 ```py
 >>> SomeClass.method
 <function SomeClass.method at ...>
 ```
 
-- `classmethod` transforms functions into class methods. Class methods are descriptors that, when accessed, create
-  a method object which binds the _class_ (type) of the object, instead of the object itself.
+- `classmethod`는 함수를 클래스 메소드로 변환시킵니다. 클래스 메소드는 디스크립터로 접근되었을때, 오브젝트 대신에 오브젝트의 _class_ (타입)을 바인드한 메소드 오브젝트를 생성하게 됩니다.
 
 ```py
 >>> o1.classm
 <bound method SomeClass.classm of <class '__main__.SomeClass'>>
 ```
 
-- Unlike functions, `classmethod`s will create a method also when accessed as class attributes (in which case they
-  bind the class, not to the type of it). So `SomeClass.classm is SomeClass.classm` is falsy.
+- 함수와는 달리, `classmethods`는 클래스 속성으로 접근할 때 (타입이 아닌 클래스를 바인드 합니다) 새로운 메소드를 생성합니다. 
+그래서 `SomeClass.classm is SomeClass.classm`는 거짓입니다.
 
 ```py
 >>> SomeClass.classm
 <bound method SomeClass.classm of <class '__main__.SomeClass'>>
 ```
 
-- A method object compares equal when both the functions are equal, and the bound objects are the same. So
-  `o1.method == o1.method` is truthy, although not the same object in memory.
-- `staticmethod` transforms functions into a "no-op" descriptor, which returns the function as-is. No method
-  objects are ever created, so comparison with `is` is truthy.
+- 메소드 객체가 같다는 것은 두 함수가 같고 바인드 되어 있는 객체가 같음을 의미합니다.
+그래서 메모리상 같은 객체가 아님에도 `o1.method == o1.method`는 같습니다.
+- `staticmethod`는 함수를 그래도 반환하는 아무 일도 하지 않는 디스크립터로 변환시킵니다.
+어떠한 객체도 생성되지 않으며, `is`로 비교하는 것은 참이 됩니다.
 
 ```py
 >>> o1.staticm
@@ -1281,11 +1276,9 @@ True
 <function SomeClass.staticm at ...>
 ```
 
-- Having to create new "method" objects every time Python calls instance methods and having to modify the arguments
-  every time in order to insert `self` affected performance badly.
-  CPython 3.7 [solved it](https://bugs.python.org/issue26110) by introducing new opcodes that deal with calling methods
-  without creating the temporary method objects. This is used only when the accessed function is actually called, so the
-  snippets here are not affected, and still generate methods :)
+- 파이썬에서 인스턴스 메소드를 호출할 때마다 인자들을 매번 변경하고 맨 앞에 `self`를 넣어주면서 새로운 "메소드" 객체를 만드는 것은 속도에 나쁘게 영향을 끼치게 됩니다.
+CPython 3.7은 임시 메소드 객체를 만들지 않고 해결하는 새로운 명령코드를 만들어서 이 문제를 [해결했습니다.](https://bugs.python.org/issue26110).
+이 방법은 함수가 실제로 호출 될 때 사용되므로, 여기 있는 코드들에 영향을 끼치지 않고 여전히 메소드를 생성합니다 :)
 
 ---
 
