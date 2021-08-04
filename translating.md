@@ -10,6 +10,7 @@
 | 문자열            | string                |
 | 변수              | variable              |
 | 상수              | constant              |
+| 속성              | attribute             |
 | 쉘                | shell                 |
 | 스크립트          | script                |
 | 식별자            | identifier            |
