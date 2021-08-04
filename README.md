@@ -3451,14 +3451,14 @@ Let's increase the number of iterations by a factor of 10.
 
 ---
 
-### ▶ Slowing down `dict` lookups *
+### ▶ `dict` 검색 속도 느려지게 하기 *
 <!-- Example ID: c9c26ce6-df0c-47f7-af0b-966b9386d4c3 --->
 ```py
 some_dict = {str(i): 1 for i in range(1_000_000)}
 another_dict = {str(i): 1 for i in range(1_000_000)}
 ```
 
-**Output:**
+**출력 결과:**
 ```py
 >>> %timeit some_dict['5']
 28.6 ns ± 0.115 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
@@ -3468,20 +3468,20 @@ another_dict = {str(i): 1 for i in range(1_000_000)}
 
 >>> %timeit another_dict['5']
 28.5 ns ± 0.142 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
->>> another_dict[1]  # Trying to access a key that doesn't exist
+>>> another_dict[1] # 존재하지 않는 키에 접근을 해볼까요
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 KeyError: 1
 >>> %timeit another_dict['5']
 38.5 ns ± 0.0913 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)
 ```
-Why are same lookups becoming slower?
+왜 같은 검색의 속도가 느려질까요?
 
-#### 💡 Explanation:
-+ CPython has a generic dictionary lookup function that handles all types of keys (`str`, `int`, any object ...), and a specialized one for the common case of dictionaries composed of `str`-only keys.
-+ The specialized function (named `lookdict_unicode` in CPython's [source](https://github.com/python/cpython/blob/522691c46e2ae51faaad5bbbce7d959dd61770df/Objects/dictobject.c#L841)) knows all existing keys (including the looked-up key) are strings, and uses the faster & simpler string comparison to compare keys, instead of calling the `__eq__` method.
-+ The first time a `dict` instance is accessed with a non-`str` key, it's modified so future lookups use the generic function.
-+ This process is not reversible for the particular `dict` instance, and the key doesn't even have to exist in the dictionary. That's why attempting a failed lookup has the same effect.
+#### 💡 설명:
++ CPython은 모든 타입의 키 (`str`, `int`, 모든 오브젝트 ...)에 대해 일반적인 딕셔너리 검색 합수가 있고 흔한 경우인 `str` 키로만 이루어져 있는 딕셔너리에 대한 함수가 있습니다.
++ (CPython에서 이름이 `lookdict_unicode` [소스](https://github.com/python/cpython/blob/522691c46e2ae51faaad5bbbce7d959dd61770df/Objects/dictobject.c#L841)) 함수는 (검색하려는 키를 포함해서) 모든 키가 문자열 인것을 알고, `__eq__` 메소드를 호출하는 대신 빠르고 간단한 문자열 비교를 사용합니다.
++ `dict` 인스턴스가 처음으로 `str`이 아닌 키로 접근되었을 때, 추후 검색은 일반적인 함수를 사용하도록 수정됩니다.
++ 이 과정은 특정 `dict` 인스턴스에 대해서 되돌릴 수 없으며, 키가 딕셔너리 안에 없어도 작동합니다. 그래서 실패한 검색도 같은 효과를 가지게 된 것입니다.
 
 
 ### ▶ Bloating instance `dict`s *
