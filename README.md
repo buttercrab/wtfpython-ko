@@ -99,7 +99,7 @@
     - [▶ `+=` 가 더 빨라요](#--가-더-빨라요)
     - [▶ 거대한 문자열을 만들어봐요!](#-거대한-문자열을-만들어봐요)
     - [▶ Slowing down `dict` lookups \*](#-slowing-down-dict-lookups-)
-    - [▶ Bloating instance `dict`s \*](#-bloating-instance-dicts-)
+    - [▶ `dict` 검색 속도 느려지게 하기 \*](#-dict-검색-속도-느려지게-하기-)
     - [▶ 사소한 것들 \*](#-사소한-것들-)
 - [기여하기](#기여하기)
 - [감사의 말](#감사의-말)
@@ -3712,7 +3712,7 @@ KeyError: 1
 + `dict` 인스턴스가 처음으로 `str`이 아닌 키로 접근되었을 때, 추후 검색은 일반적인 함수를 사용하도록 수정됩니다.
 + 이 과정은 특정 `dict` 인스턴스에 대해서 되돌릴 수 없으며, 키가 딕셔너리 안에 없어도 작동합니다. 그래서 실패한 검색도 같은 효과를 가지게 된 것입니다.
 
-### ▶ Bloating instance `dict`s \*
+### ▶ `dict` 인스턴스 부풀리기 \*
 
 <!-- Example ID: fe706ab4-1615-c0ba-a078-76c98cbe3f48 --->
 
@@ -3732,7 +3732,7 @@ def dict_size(o):
 
 ```
 
-**Output:** (Python 3.8, other Python 3 versions may vary a little)
+**출력 결과:** (파이썬 3.8, 다른 파이썬 3 버전은 조금 다를 수 있습니다.)
 
 ```py
 >>> o1 = SomeClass()
@@ -3749,13 +3749,13 @@ def dict_size(o):
 232
 ```
 
-Let's try again... In a new interpreter:
+새로운 인터프리터에서 다시 시도해볼까요?:
 
 ```py
 >>> o1 = SomeClass()
 >>> o2 = SomeClass()
 >>> dict_size(o1)
-104  # as expected
+104  # 예상한 대로 나왔네요
 >>> o1.some_attr5 = 5
 >>> o1.some_attr6 = 6
 >>> dict_size(o1)
@@ -3767,15 +3767,17 @@ Let's try again... In a new interpreter:
 232
 ```
 
-What makes those dictionaries become bloated? And why are newly created objects bloated as well?
+무엇이 이 딕셔너리들을 부풀리게 했을까요? 그리고 왜 새롭게 생성된 객체도 부풀려질까요?
 
-#### 💡 Explanation:
+#### 💡 설명:
 
-- CPython is able to reuse the same "keys" object in multiple dictionaries. This was added in [PEP 412](https://www.python.org/dev/peps/pep-0412/) with the motivation to reduce memory usage, specifically in dictionaries of instances - where keys (instance attributes) tend to be common to all instances.
-- This optimization is entirely seamless for instance dictionaries, but it is disabled if certain assumptions are broken.
-- Key-sharing dictionaries do not support deletion; if an instance attribute is deleted, the dictionary is "unshared", and key-sharing is disabled for all future instances of the same class.
-- Additionaly, if the dictionary keys have be resized (because new keys are inserted), they are kept shared _only_ if they are used by a exactly single dictionary (this allows adding many attributes in the `__init__` of the very first created instance, without causing an "unshare"). If multiple instances exist when a resize happens, key-sharing is disabled for all future instances of the same class: CPython can't tell if your instances are using the same set of attributes anymore, and decides to bail out on attempting to share their keys.
-- A small tip, if you aim to lower your program's memory footprint: don't delete instance attributes, and make sure to initialize all attributes in your `__init__`!
+- CPython은 다양한 딕셔너리에서 같은 "키" 객체를 재사용할 수 있습니다.
+이것은 특별히 키(인스턴스 속성)들이 주로 모든 인스턴스에서 비슷한 딕셔너리의 인스턴스의 메모리 사용량을 줄이기 위해서 [PEP 412](https://www.python.org/dev/peps/pep-0412/)에서 추가되었습니다.
+- 이 최적화는 인스턴스 딕셔너리에는 원활히 적용되는데, 몇 몇 가정이 만족되지 않게 되면 작동하지 않습니다.
+- 키를 공유하는 딕셔너리는 삭제를 지원하지 않습니다; 만약 어떤 인스턴스 속성이 삭제되었을 때, 그 딕셔너리는 "비공유"가 되고, 후의 그 클래스 인스턴스는 키를 공유하지 않게 됩니다.
+- 추가로, (새로운 키가 삽입되어서) 딕셔너리의 키들의 크기가 조정되었다면, 그 키가 그 딕셔너리에서만 사용되었을 경우에만 계속 공유된 상태를 유지합니다 (이것은 `__init__`에서 인스턴스를 처음 만들 때 "비공유" 상태가 되지 않고 많은 속성을 추가할 수 있게 합니다).
+만약 크기가 조정될 때 다양한 인스턴스가 존재하면, 키를 더 이상 공유하지 않게 되고 후의 그 클래스의 모든 인스턴스에 대해서 공유하지 않게 됩니다: CPython은 그 인스턴스가 같은 속성의 집합을 사용하는지 알 수 없게 되므로, 키를 공유하는 시도를 하지 않게 됩니다.
+- 작은 팁으로, 만약 프로그램의 메모리 공간을 줄이고 싶다면: 인스턴스 속성을 지우지 말고, 꼭 모든 속성을 `__init__`에서 초기화 하세요!
 
 ---
 
